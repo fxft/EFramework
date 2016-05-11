@@ -23,6 +23,7 @@ AS_INT( NSSTRING )
 AS_INT( NSARRAY )
 AS_INT( NSDICTIONARY )
 AS_INT( NSDATE )
+AS_INT( RLMARRAY )
 
 + (NSUInteger)typeOf:(const char *)attr;
 + (NSUInteger)typeOfAttribute:(const char *)attr;

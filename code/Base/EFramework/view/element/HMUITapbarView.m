@@ -436,6 +436,25 @@ DEF_SIGNAL(TAPNOSELECTED);
             }
         }
             break;
+        case UITapbarStyleFitWidth:{
+            CGFloat width = 0;
+            space = 0;
+            
+            if (self.direction==UITapbarDirectionVertical){
+                width = (bound.height-indentation-tail)/(_subItems.count);
+            }else{
+                width = (bound.width-indentation-tail)/(_subItems.count);
+            }
+            
+            for (UIView *sub in _subItems) {
+                if (self.direction==UITapbarDirectionVertical) {
+                     sub.height = width;
+                }else{
+                     sub.width = width;
+                }
+            }
+        }
+            break;
         case UITapbarStyleCanFlexible:{
             CGFloat actionSpace = 0;
             

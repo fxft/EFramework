@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04381EBD1CE31CAC001EC0F5 /* TabbarSubNormalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04381EB81CE31CAC001EC0F5 /* TabbarSubNormalController.m */; };
+		04381EBE1CE31CAC001EC0F5 /* TabbarBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 04381EBA1CE31CAC001EC0F5 /* TabbarBoard.m */; };
+		04381EBF1CE31CAC001EC0F5 /* TabbarSubController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04381EBC1CE31CAC001EC0F5 /* TabbarSubController.m */; };
 		049B628E1CE1AF78002F6DA2 /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 049B62891CE1AF78002F6DA2 /* AFNetworking.framework */; };
 		049B628F1CE1AF78002F6DA2 /* AFNetworking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 049B62891CE1AF78002F6DA2 /* AFNetworking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		049B62901CE1AF78002F6DA2 /* EFWKLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 049B628A1CE1AF78002F6DA2 /* EFWKLib.framework */; };
@@ -94,6 +97,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		04381EB71CE31CAC001EC0F5 /* TabbarSubNormalController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabbarSubNormalController.h; sourceTree = "<group>"; };
+		04381EB81CE31CAC001EC0F5 /* TabbarSubNormalController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabbarSubNormalController.m; sourceTree = "<group>"; };
+		04381EB91CE31CAC001EC0F5 /* TabbarBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabbarBoard.h; sourceTree = "<group>"; };
+		04381EBA1CE31CAC001EC0F5 /* TabbarBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabbarBoard.m; sourceTree = "<group>"; };
+		04381EBB1CE31CAC001EC0F5 /* TabbarSubController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabbarSubController.h; sourceTree = "<group>"; };
+		04381EBC1CE31CAC001EC0F5 /* TabbarSubController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabbarSubController.m; sourceTree = "<group>"; };
 		049B62891CE1AF78002F6DA2 /* AFNetworking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AFNetworking.framework; path = ../../../comm/EF/Frameworks/Public/AFNetworking.framework; sourceTree = "<group>"; };
 		049B628A1CE1AF78002F6DA2 /* EFWKLib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EFWKLib.framework; path = ../../../comm/EF/Frameworks/Public/EFWKLib.framework; sourceTree = "<group>"; };
 		049B628B1CE1AF78002F6DA2 /* FMDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FMDB.framework; path = ../../../comm/EF/Frameworks/Public/FMDB.framework; sourceTree = "<group>"; };
@@ -182,6 +191,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04381EAC1CE2D0A4001EC0F5 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				04381EB61CE31CAC001EC0F5 /* TabbarController */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		04381EB61CE31CAC001EC0F5 /* TabbarController */ = {
+			isa = PBXGroup;
+			children = (
+				04381EB71CE31CAC001EC0F5 /* TabbarSubNormalController.h */,
+				04381EB81CE31CAC001EC0F5 /* TabbarSubNormalController.m */,
+				04381EB91CE31CAC001EC0F5 /* TabbarBoard.h */,
+				04381EBA1CE31CAC001EC0F5 /* TabbarBoard.m */,
+				04381EBB1CE31CAC001EC0F5 /* TabbarSubController.h */,
+				04381EBC1CE31CAC001EC0F5 /* TabbarSubController.m */,
+			);
+			name = TabbarController;
+			path = For_iPhone/Controllers/TabbarController;
+			sourceTree = "<group>";
+		};
 		049B62B31CE1BE3B002F6DA2 /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
@@ -287,6 +318,7 @@
 		04F30F161C09D91800EEFAF1 /* For_iPhone */ = {
 			isa = PBXGroup;
 			children = (
+				04381EAC1CE2D0A4001EC0F5 /* Controllers */,
 				049B62B31CE1BE3B002F6DA2 /* Foundation */,
 				04F30F171C09D91800EEFAF1 /* MainBoard.h */,
 				04F30F181C09D91800EEFAF1 /* MainBoard.m */,
@@ -403,11 +435,14 @@
 			files = (
 				049B62B21CE1B409002F6DA2 /* ListBoard.m in Sources */,
 				04F30EFE1C09D91800EEFAF1 /* AppDelegate.m in Sources */,
+				04381EBD1CE31CAC001EC0F5 /* TabbarSubNormalController.m in Sources */,
 				04F30F071C09D91800EEFAF1 /* ZXingBoard.m in Sources */,
 				049B62B91CE1F568002F6DA2 /* Sandbox.m in Sources */,
 				04F30F191C09D91800EEFAF1 /* MainBoard.m in Sources */,
+				04381EBF1CE31CAC001EC0F5 /* TabbarSubController.m in Sources */,
 				049B62B61CE1BE5F002F6DA2 /* SystemInfo.m in Sources */,
 				04F30EFB1C09D91800EEFAF1 /* main.m in Sources */,
+				04381EBE1CE31CAC001EC0F5 /* TabbarBoard.m in Sources */,
 				04F30F0C1C09D91800EEFAF1 /* UserCenter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

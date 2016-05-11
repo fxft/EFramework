@@ -115,7 +115,7 @@
     
     
     subBoards = [NSMutableArray arrayWithCapacity:0];
-    
+    [subBoards addObject:@{@"title":@"tabbar controller",@"subtitle":@"标签栏控件",@"map":@"Button",@"open":@"present",@"url":URLFOR_controller(@"TabbarBoard")}];
     
     [self.boards addObject:@{@"title":@"Controllers",@"subtitle":@"常规控制器介绍",@"map":@"Controllers",@"open":@"open",@"url":URLFOR_controllerWithNav(@"ListBoard"),@"boards":subBoards}];
     

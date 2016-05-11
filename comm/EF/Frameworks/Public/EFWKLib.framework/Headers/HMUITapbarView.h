@@ -37,6 +37,7 @@ typedef enum : NSUInteger {
     UITapbarStyleFitOrign=0,//自动调整间隔 indent tail无效
     UITapbarStyleFitSpace,//自动调整间隔 indent tail有效
     UITapbarStyleFitSize,//自动调整大小 indent tail 有效
+    UITapbarStyleFitWidth,//自动调整宽度，需要自行设置高度 indent tail 有效
     UITapbarStyleCanFlexible,//不支持滚动 addFlexible addspace addspace with width
     UITapbarStyleCenter,//居中，indent tail 无效 addspace有效
     UITapbarStyleCustom,//自定义位置 配合 indent tail addspace 超出后支持滚动
