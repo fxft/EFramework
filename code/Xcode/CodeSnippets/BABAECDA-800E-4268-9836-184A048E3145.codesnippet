@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>waxclass</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>waxClass{"&lt;#SimpleMapController#&gt;", &lt;#UIViewController#&gt;, protocols={"&lt;#MKMapViewDelegate#&gt;"}}</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>BABAECDA-800E-4268-9836-184A048E3145</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Plain</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>luaClass</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>luaClass</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

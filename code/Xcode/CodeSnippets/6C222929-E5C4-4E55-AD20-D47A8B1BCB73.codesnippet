@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ONTAPBARVIEW</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>ClassImplementation</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>ON_TapBar(signal){
+    HMUITapbarView *tapview = signal.source;
+    
+    if ([signal is:[HMUITapbarView TAPNOSELECTED]]) {
+        
+    }else if ([signal is:[HMUITapbarView TAPCHANGED]]){
+        
+    }
+}</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>6C222929-E5C4-4E55-AD20-D47A8B1BCB73</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>tapbar view call back</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>ONTAPBARVIEW</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

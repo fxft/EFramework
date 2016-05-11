@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>makebounds</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>CodeBlock</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>make.top.mas_equalTo(&lt;#self.view.mas_top#&gt;).offset(0);
+make.left.mas_equalTo(&lt;#self.view.mas_left#&gt;).offset(0);
+make.bottom.mas_equalTo(&lt;#self.view.mas_bottom#&gt;).offset(0);
+make.right.mas_equalTo(&lt;#self.view.mas_right#&gt;).offset(0);</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>51960656-E853-479B-B3A7-724AD28D26F0</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>set bounds to superView's bounds</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>AutolayoutMakeFillSuperView</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

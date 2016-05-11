@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>modelmanagerNoitification</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>ClassImplementation</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>ON_NOTIFICATION3(&lt;#SEModelManager#&gt;, &lt;#LOCATION#&gt;, noti){
+    NSDictionary *dic = noti.object;
+    NSString *step = [dic valueForKey:MODELOBJECTKEY_STEP];
+    &lt;#NSObject#&gt; *object = [dic valueForKey:MODELOBJECTKEY_OBJECT];
+    if ([step is:MODELKEY_LOADING]) {
+        
+        return;
+    }else if ([step is:MODELKEY_SUCCEED]){
+        
+    }else if ([step is:MODELKEY_FAILED]){
+        
+    }else if ([step is:MODELKEY_TIMEOUT]){
+        
+    }
+}</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>FFA15256-5B3C-43FB-8FFE-F00BFFAB625C</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>modelmanagerNoitification</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>modelmanagerNoitification</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

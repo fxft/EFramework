@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>tableRefreshEnd</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>CodeBlock</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>if (self.tableView.mj_footer.isRefreshing) {
+        [self.tableView.mj_footer endRefreshing];
+    }else if (self.tableView.mj_header.isRefreshing) {
+        [self.tableView.mj_header endRefreshing];
+    }
+    
+    if ([cargolist.total integerValue]&lt;=self.list.count) {
+        [self.tableView.mj_footer noticeNoMoreData];
+    }else{
+        self.tableView.mj_footer.hidden = NO;
+        [self.tableView.mj_footer resetNoMoreData];
+    }</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>98E7340D-6B58-4074-85D0-DF8F2C9247BF</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>tableRefreshEnd</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>tableRefreshEnd</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

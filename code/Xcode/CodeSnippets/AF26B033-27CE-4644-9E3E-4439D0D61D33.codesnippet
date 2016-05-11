@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ModelIMP</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>TopLevel</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>@implementation &lt;#model#&gt;
+
+@synthesize SimNo;
+
+- (void)dealloc
+{
+    self.SimNo = nil;
+    HM_SUPER_DEALLOC();
+}
+@end</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>AF26B033-27CE-4644-9E3E-4439D0D61D33</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>ModelIMP</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>ModelIMP</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

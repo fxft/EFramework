@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ONWEBVIEW</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>ClassImplementation</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>ON_WebView(signal){
+    HMUIWebView *webview = signal.source;
+    
+    if ([signal is:[HMUIWebView WILL_START]]) {
+        
+    }else if ([signal is:[HMUIWebView DID_START]]){
+        
+    }else if ([signal is:[HMUIWebView DID_LOAD_FINISH]]){
+        
+    }else if ([signal is:[HMUIWebView DID_LOAD_FAILED]]){
+        
+    }else if ([signal is:[HMUIWebView DID_LOAD_CANCELLED]]){
+        
+    }else if ([signal is:[HMUIWebView DID_SCROLLDOWN]]){
+        
+    }else if ([signal is:[HMUIWebView DID_SCROLLUP]]){
+        
+    }else if ([signal is:[HMUIWebView DID_SCROLL]]){
+        
+    }else if ([signal is:[HMUIWebView DID_SCROLLEND]]){
+        
+    }else if ([signal is:[HMUIWebView DID_LOADING_PERSENT]]){
+        
+    }
+}</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>ABCCC43A-BAC6-41B3-8751-30AC604C99DE</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>web view call back</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>ONWEBVIEW</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

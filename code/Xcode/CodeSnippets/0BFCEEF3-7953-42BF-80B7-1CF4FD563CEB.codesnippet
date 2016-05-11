@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ONWEBVIEW</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>ClassImplementation</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>ON_WebView(signal){
+    
+    HMUIWebView *webView = signal.source;
+    
+    if ([signal is:[HMUIWebView DID_START]]) {
+        
+    }else if ([signal is:[HMUIWebView WILL_START]]){
+        
+    }else if ([signal is:[HMUIWebView DID_LOAD_FINISH]]){
+        
+    }else if ([signal is:[HMUIWebView DID_LOAD_FAILED]]){
+        
+    }else if ([signal is:[HMUIWebView DID_LOAD_CANCELLED]]){
+        
+    }else if ([signal is:[HMUIWebView DID_SCROLLDOWN]]){
+        
+    }else if ([signal is:[HMUIWebView DID_SCROLLUP]]){
+        
+    }
+    
+}</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>0BFCEEF3-7953-42BF-80B7-1CF4FD563CEB</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>Web View listener</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>ONWEBVIEW</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

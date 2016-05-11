@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ONMAPVIEWCALLBACK</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>ClassImplementation</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>ON_MapView(signal){
+    if ([signal is:[MSOMapView LOADED]]) {/*map view had add to supview*/
+        
+        //        self.map.centerLocationFirst = YES;
+        //        self.map.showsUserLocation = YES;
+        
+    }else if ([signal is:[MSOMapView VIEWFORANNOTATION]] ) {
+        /*called when annotations add to map view.
+         signal.inputValue is MSOAnnotationView object
+         */
+        MSOAnnotationView * anView = signal.inputValue;
+        if ([anView.annotation isKindOfClass:[MSOPointAnnotation class]]) {
+            NSString *imageName = ((MSOPointAnnotation*)(anView.annotation)).iconId;
+            UIImage *image = [UIImage imageNamed:imageName];
+            [anView setCalloutViewUserInterface:YES];
+            anView.canShowCallout  = YES;
+            anView.image = image;
+            anView.remark.text = ((MSOPointAnnotation*)(anView.annotation)).tagString;
+            anView.clipsToBounds = NO;
+            
+        }
+        
+    }else if ([signal is:[MSOMapView ANNOVIEWRELOAD]] ) {
+        
+    }else if ([signal is:[MSOMapView SELECTANNOTATIONVIEW]]){
+        /*called when annotation celected.
+         signal.inputValue is MSOAnnotationView object
+         */
+        
+        MSOAnnotationView *pointV= signal.inputValue;
+        
+    }else if ([signal is:[MSOMapView VIEWFORCALLOUT]] ) {
+        /*called when annotation allow to show callout view.
+         signal.inputValue is MSOAnnotationView object.
+         make sure callout.frame and signal.returnValue be set.
+         */
+        HMMapCalloutView *cell = [HMMapCalloutView spawnWithType:CALLOUTVIEWTYPE_SUBTITLEFULL];
+        cell.clipsToBounds = YES;
+        MSOAnnotationView *pointV= signal.inputValue;
+        
+        //        cell.title.numberOfLines = 1;
+        cell.title.text = ((MSOPointAnnotation*)(pointV.annotation)).title;
+        cell.subtitle.text = ((MSOPointAnnotation*)(pointV.annotation)).subtitle;
+        cell.title.textColor = RGB(130, 130, 130);
+        cell.subtitle.textColor = RGB(198, 138, 74);
+        
+        if ([((MSOPointAnnotation*)(pointV.annotation)).data isEqual:@"123"]) {
+            [cell resetView];
+        }
+        
+        signal.returnValue = cell;
+    }else if([signal is:[MSOMapView VIEWFORCALLOUTRESET]]){
+        /*called when callout view added to the annotationview.
+         signal.inputValue is MSOAnnotationView object.
+         you can deal with annotationview.calloutViewCell.
+         */
+        
+        MSOAnnotationView *pointV= signal.inputValue;
+        if ([((MSOPointAnnotation*)(pointV.annotation)).data isEqual:@"12"]) {
+            [pointV.calloutViewCell mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.mas_equalTo(10);
+                make.left.mas_equalTo(8);
+                make.height.mas_equalTo(40);
+                make.width.mas_equalTo(100);
+            }];
+        }
+        
+        
+    }else if ([signal is:[MSOMapView VIEWFOROVERLAY]]){
+        
+        MSOPolylineView *polylineView = (id)signal.inputValue;
+        polylineView.strokeColor = RGB(125, 188, 16);
+        
+    }
+    
+}</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>11A4109C-E13C-446F-987E-2EB0E7092560</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>map view call back</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>ONMAPVIEWCALLBACK</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

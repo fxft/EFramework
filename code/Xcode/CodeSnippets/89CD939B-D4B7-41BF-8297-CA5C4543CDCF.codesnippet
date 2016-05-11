@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ONWEBAPI</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>ClassImplementation</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>ON_WebAPI(dlg){
+    if (dlg.sending) {
+        
+        
+    }else if (dlg.progressed){
+        // 必须在发送web Api 时指定 setWebProcess:YES
+        //          dlg.ownRequest.downloadPercent;
+        //          dlg.ownRequest.uploadPercent;
+        
+    }else if (dlg.succeed){
+        NSDictionary *dic = [dlg.output objectForKey:[HMWebAPI params]];
+        
+        
+    }else if (dlg.failed){
+        if (dlg.timeout) {
+            [self showFailureTip:@"操作失败" detail:@"链接超时" timeOut:2.f];
+            return;
+        }
+        
+        [self showFailureTip:@"网络链接失败" detail:@"数据不存在或网络错误" timeOut:3.f];
+    }else if (dlg.cancelled){
+        [self showFailureTip:@"操作失败" detail:@"链接已取消" timeOut:2.f];
+    }
+}</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>89CD939B-D4B7-41BF-8297-CA5C4543CDCF</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>ONWEBAPI</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>ONWEBAPI</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

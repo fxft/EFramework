@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>tabbarCreate</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>CodeBlock</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>HMUITapbarView *tab = [[HMUITapbarView alloc]init];
+    tab.space = 5;
+    tab.backgroundColor = [UIColor whiteColor];
+    tab.defaultColor = [UIColor md_grey_500];
+    tab.slideStyle = UITapbarSlideStyleBottom;
+    tab.eventReceiver = self;
+    [tab addItemWithTitle:@"精选" imageName:nil size:CGSizeMake(50, 35)];
+    [tab addSpace];
+    [tab addItemWithTitle:@"最新" imageName:nil size:CGSizeMake(50, 35)];
+    [tab addSpace];
+    [tab addItemWithTitle:@"分类" imageName:nil size:CGSizeMake(50, 35)];
+    
+    [self.view addSubview:tab];
+    
+    [tab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(0);
+        make.bottom.mas_equalTo(self.view.mas_bottom).offset(0);
+        make.width.mas_equalTo(self.view.mas_width);
+        make.height.mas_equalTo(44);
+    }];</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>519FE41C-FBD2-4D2A-8E52-9B2EA2222528</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>tabbarCreate</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>tabbarCreate</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

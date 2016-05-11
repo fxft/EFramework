@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>login</key>
+	<dict>
+		<key>ok</key>
+		<false/>
+		<key>mock</key>
+		<false/>
+		<key>des</key>
+		<string></string>
+		<key>input</key>
+		<string>{
+    &quot;username&quot;:&quot;13489188888&quot;,
+    &quot;platform&quot;:&quot;android&quot;,
+    &quot;password&quot;:&quot;xxxx&quot;,
+    &quot;force&quot;:&quot;0&quot;,
+    &quot;app&quot;:&quot;driver&quot;,
+    &quot;uuid&quot;:&quot;adkalsjdfl&quot;
+}</string>
+		<key>output</key>
+		<string>{
+        &quot;userid&quot;:&quot;001&quot;
+    }</string>
+	</dict>
+</dict>
+</plist>

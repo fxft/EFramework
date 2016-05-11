@@ -1,0 +1,6 @@
+framework module EFWKLib {
+  umbrella header "EFWKLib.h"
+
+  export *
+  module * { export * }
+}
