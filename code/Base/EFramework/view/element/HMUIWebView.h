@@ -55,7 +55,7 @@ AS_SIGNAL( DID_LOADING_PERSENT ) // 加载的进度 0-1
 @property (nonatomic, HM_WEAK) NSString *	file;
 @property (nonatomic, HM_WEAK) NSString *	resource;
 @property (nonatomic, HM_WEAK) NSString *	url;
-@property (nonatomic, HM_WEAK) id<HMUIWebViewProgressDelegate,UIWebViewDelegate> delegate;
+//@property (nonatomic, HM_WEAK) id<HMUIWebViewProgressDelegate,UIWebViewDelegate> delegate;
 
 @property (nonatomic, assign) int resourceCount;
 @property (nonatomic, assign) int resourceCompletedCount;

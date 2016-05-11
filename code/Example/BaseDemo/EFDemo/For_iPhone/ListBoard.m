@@ -112,20 +112,26 @@ ON_Button(signal){
     NSString *open = [city valueForKey:@"open"];
     NSArray *boards = [city valueForKey:@"boards"];
     
+    void (^complete)(BOOL viewLoaded, UIViewController* toBoard)=^(BOOL viewLoaded, UIViewController *toBoard){
+        if (!viewLoaded) {
+            [toBoard.myTopBoard setTitle:[city valueForKey:@"title"]];
+            
+            if ([toBoard.myTopBoard respondsToSelector:@selector(boards)]) {
+                [toBoard.myTopBoard setValue:boards forKey:@"boards"];
+            }
+        }
+    };
+    
     UIViewController *vc = nil;
     if ([open isEqualToString:@"open"]) {
-        vc = [self open:url name:map animate:YES];
+        vc = [self open:url name:map animate:YES complete:complete];
     }else if ([open isEqualToString:@"push"]) {
-        vc = [self pushToPath:url map:map animated:YES];
+        vc = [self pushToPath:url map:map animated:YES complete:complete];
     }else if ([open isEqualToString:@"present"]) {
-        vc = [self presentToPath:url map:map animated:YES];
+        vc = [self presentToPath:url map:map animated:YES complete:complete];
     }
     
-    [vc.myTopBoard setTitle:[city valueForKey:@"title"]];
     
-    if ([vc.myTopBoard respondsToSelector:@selector(boards)]) {
-        [vc.myTopBoard setValue:boards forKey:@"boards"];
-    }
     
 }
 

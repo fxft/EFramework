@@ -60,7 +60,7 @@ DEF_SIGNAL( DID_LOADING_PERSENT )	// 加载进度 0-1
 
 @synthesize resourceCount;
 @synthesize resourceCompletedCount;
-@synthesize delegate;
+//@synthesize delegate=_delegate;
 
 - (void)initSelfDefault
 {
@@ -210,8 +210,10 @@ DEF_SIGNAL( DID_LOADING_PERSENT )	// 加载进度 0-1
     NSURLRequest *request = initialRequest;
     
     INFO(request.URL,@"\n",request.allHTTPHeaderFields,@"\n",[request.HTTPBody asNSString]);
-    [super webView:view identifierForInitialRequest:initialRequest fromDataSource:dataSource];
-    return [NSNumber numberWithInt:resourceCount++];
+    resourceCount++;
+    return [super webView:view identifierForInitialRequest:initialRequest fromDataSource:dataSource];
+    
+//    return [NSNumber numberWithInt:resourceCount++];
 }
 
 - (void)webView:(id)view resource:(id)resource didFailLoadingWithError:(id)error fromDataSource:(id)dataSource {
@@ -245,7 +247,7 @@ DEF_SIGNAL( DID_LOADING_PERSENT )	// 加载进度 0-1
         return NO;
     }
     
-    //	INFO( @"Loading url '%@'", self.loadingURL );
+//    	INFO( @"Loading url '%@'", self.loadingURL );
     
     HMSignal * signal = [self sendSignal:HMUIWebView.WILL_START];
     if ( nil == signal.returnValue )

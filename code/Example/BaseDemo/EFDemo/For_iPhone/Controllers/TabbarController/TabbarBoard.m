@@ -125,7 +125,12 @@
 //        make.right.mas_equalTo(self.tabBar.mas_right).offset(0);
 //    }];
 
-    self.tab.frame = CGRectMake(0, -5, self.tabBar.width, 54);
+//    self.tab.frame = CGRectMake(0, -5, self.tabBar.width, 54);
+    self.tab.sd_layout
+    .leftSpaceToView(self.tabBar, 0)
+    .bottomSpaceToView(self.tabBar, 0)
+    .rightSpaceToView(self.tabBar, 0)
+    .heightIs(54);
     
     [effectview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(49);

@@ -13,6 +13,7 @@
 #import <Ono/Ono.h>/*xml库*/
 #import <UITableView_FDTemplateLayoutCell/UITableView+FDTemplateLayoutCell.h>/*表格高度自适应*/
 //#import <StreamingKit/StreamingKit.h>/*音乐播放库*/
+#import <SDAutoLayout/UIView+SDAutoLayout.h>
 
 //#import "HMMapSearchAPI.h"
 

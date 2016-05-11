@@ -122,6 +122,34 @@
     
     
     subBoards = [NSMutableArray arrayWithCapacity:0];
+    [subBoards addObject:@{@"title":@"AFNetworking",@"subtitle":@"网络加载库",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/AFNetworking/AFNetworking",@"source":@"AFNetworking"}}];
+    
+    [subBoards addObject:@{@"title":@"JHChainableAnimations",@"subtitle":@"动画库",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/jhurray/JHChainableAnimations",@"source":@"JHChainableAnimations"}}];
+    
+    [subBoards addObject:@{@"title":@"SDWebImage",@"subtitle":@"图片加载库",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/rs/SDWebImage",@"source":@"SDWebImage"}}];
+    
+    [subBoards addObject:@{@"title":@"ZipArchive",@"subtitle":@"压缩库",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/mattconnolly/ZipArchive",@"source":@"ZipArchive"}}];
+    
+    [subBoards addObject:@{@"title":@"Realm",@"subtitle":@"Realm数据库",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/realm/realm-cocoa",@"source":@"Realm"}}];
+    
+    [subBoards addObject:@{@"title":@"FMDB",@"subtitle":@"sqlite数据库",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/ccgus/fmdb",@"source":@"FMDB"}}];
+    
+    [subBoards addObject:@{@"title":@"Ono",@"subtitle":@"html、xml解析库",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/mattt/Ono",@"source":@"Ono"}}];
+    
+    [subBoards addObject:@{@"title":@"Masonry",@"subtitle":@"autolayout库",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/cloudkite/Masonry",@"source":@"Masonry"}}];
+    
+    [subBoards addObject:@{@"title":@"SDAutoLayout",@"subtitle":@"autolayout效率库",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/gsdios/SDAutoLayout",@"source":@"SDAutoLayout"}}];
+    
+    [subBoards addObject:@{@"title":@"MJRefresh",@"subtitle":@"下拉刷新库",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/CoderMJLee/MJRefresh",@"source":@"MJRefresh"}}];
+    
+    [subBoards addObject:@{@"title":@"CocoaAsyncSocket",@"subtitle":@"TCP、UDP库",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/robbiehanson/CocoaAsyncSocket",@"source":@"CocoaAsyncSocket"}}];
+    
+    [subBoards addObject:@{@"title":@"GPUImage",@"subtitle":@"图像处理库",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/BradLarson/GPUImage",@"source":@"GPUImage"}}];
+    
+    [subBoards addObject:@{@"title":@"GPUImageFilter",@"subtitle":@"GPUImage图像滤镜处理样例",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/sealband/GPUImageFilter",@"source":@"GPUImageFilter"}}];
+    
+    
+    [subBoards addObject:@{@"title":@"MBProgressHUD",@"subtitle":@"提示框库",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/matej/MBProgressHUD",@"source":@"MBProgressHUD"}}];
     
     
     [self.boards addObject:@{@"title":@"ThirdPart",@"subtitle":@"第三方框架介绍",@"map":@"ThirdPart",@"open":@"open",@"url":URLFOR_controllerWithNav(@"ListBoard"),@"boards":subBoards}];
