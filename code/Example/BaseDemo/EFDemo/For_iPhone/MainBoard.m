@@ -109,7 +109,7 @@
     
     
     subBoards = [NSMutableArray arrayWithCapacity:0];
-    [subBoards addObject:@{@"title":@"按钮",@"subtitle":@"按钮控件",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"Button")}];
+    [subBoards addObject:@{@"title":@"按钮",@"subtitle":@"按钮控件",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ButtonBoard")}];
     
     [self.boards addObject:@{@"title":@"Elements",@"subtitle":@"常规控件介绍",@"map":@"Elements",@"open":@"open",@"url":URLFOR_controllerWithNav(@"ListBoard"),@"boards":subBoards}];
     

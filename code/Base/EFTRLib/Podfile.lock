@@ -11,6 +11,13 @@ PODS:
   - Masonry (1.0.0)
   - MJRefresh (3.1.0)
   - Ono (1.2.2)
+  - Realm (0.102.0):
+    - Realm/Headers (= 0.102.0)
+  - Realm/Headers (0.102.0)
+  - SDAutoLayout (1.53)
+  - SDWebImage (3.7.6):
+    - SDWebImage/Core (= 3.7.6)
+  - SDWebImage/Core (3.7.6)
   - UITableView+FDTemplateLayoutCell (1.4)
   - ZipArchive (1.4.0)
 
@@ -21,6 +28,9 @@ DEPENDENCIES:
   - Masonry (~> 1.0.0)
   - MJRefresh (~> 3.1.0)
   - Ono (~> 1.2.2)
+  - Realm (~> 0.102.0)
+  - SDAutoLayout (~> 1.53)
+  - SDWebImage (~> 3.7.6)
   - UITableView+FDTemplateLayoutCell (~> 1.4)
   - ZipArchive (~> 1.4.0)
 
@@ -31,7 +41,12 @@ SPEC CHECKSUMS:
   Masonry: b529bb169217897b6354d4b56b1fada6d475b13d
   MJRefresh: 743e6404967d1c2c688472ea3ecfde247d872db4
   Ono: 80b1c686777d3f6d5d5ce6fcac8a74afef4ca197
+  Realm: 5d219f9037e3ec2019c599b8227bfc95433cb10e
+  SDAutoLayout: ea6e2ae9fbb438aa2feb0c4363dba9297e98638a
+  SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
   UITableView+FDTemplateLayoutCell: 234e1582bcc4e18461af91155123bb96538ed030
   ZipArchive: e25a4373192673e3229ac8d6e9f64a3e5713c966
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: 64ea08fc13f3efc7fedc583477dccde242e1e3d6
+
+COCOAPODS: 1.0.0

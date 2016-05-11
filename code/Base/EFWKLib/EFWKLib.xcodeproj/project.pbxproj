@@ -272,7 +272,7 @@
 		04B1CA111C06C31100D6F7D3 /* UIView+HMViewStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B1C9021C06C30300D6F7D3 /* UIView+HMViewStyle.m */; };
 		04EF9DF81BEC4C8900961759 /* EFWKLib.h in Headers */ = {isa = PBXBuildFile; fileRef = 04EF9DF71BEC4C8900961759 /* EFWKLib.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		04EFA0371BEC551200961759 /* PrefixHeader.pch in Headers */ = {isa = PBXBuildFile; fileRef = 04EFA0361BEC551200961759 /* PrefixHeader.pch */; settings = {ATTRIBUTES = (Public, ); }; };
-		B8CD9E1E3D250570EC50BB75 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6975682AF0EAA67032486B3 /* Pods.framework */; };
+		322ED9089B66D788D35BB01F /* Pods_EFWKLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F68DE62E5817ABE8CE48F3AB /* Pods_EFWKLib.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -544,9 +544,10 @@
 		04EF9DF71BEC4C8900961759 /* EFWKLib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EFWKLib.h; sourceTree = "<group>"; };
 		04EF9DF91BEC4C8900961759 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04EFA0361BEC551200961759 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
-		C8B5D01E5B35ADB754E8559A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		711FB5AECD6D2EF0D2C85948 /* Pods-EFWKLib.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EFWKLib.release.xcconfig"; path = "Pods/Target Support Files/Pods-EFWKLib/Pods-EFWKLib.release.xcconfig"; sourceTree = "<group>"; };
+		C88D86592376491DC03E7992 /* Pods-EFWKLib.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EFWKLib.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EFWKLib/Pods-EFWKLib.debug.xcconfig"; sourceTree = "<group>"; };
+		F68DE62E5817ABE8CE48F3AB /* Pods_EFWKLib.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EFWKLib.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6975682AF0EAA67032486B3 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F7C1B8A28F816DE54FE96D7F /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -554,7 +555,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B8CD9E1E3D250570EC50BB75 /* Pods.framework in Frameworks */,
+				322ED9089B66D788D35BB01F /* Pods_EFWKLib.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1006,8 +1007,8 @@
 				041312421BEC85F00038A49E /* commit.sh */,
 				04EF9DF61BEC4C8900961759 /* EFWKLib */,
 				04EF9DF51BEC4C8900961759 /* Products */,
-				14ED15463D481C9A496AA2CA /* Pods */,
 				0F3700F1DCF559D8E56E1406 /* Frameworks */,
+				DB3DE17667533791795967A9 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1034,15 +1035,16 @@
 			isa = PBXGroup;
 			children = (
 				F6975682AF0EAA67032486B3 /* Pods.framework */,
+				F68DE62E5817ABE8CE48F3AB /* Pods_EFWKLib.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		14ED15463D481C9A496AA2CA /* Pods */ = {
+		DB3DE17667533791795967A9 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				F7C1B8A28F816DE54FE96D7F /* Pods.debug.xcconfig */,
-				C8B5D01E5B35ADB754E8559A /* Pods.release.xcconfig */,
+				C88D86592376491DC03E7992 /* Pods-EFWKLib.debug.xcconfig */,
+				711FB5AECD6D2EF0D2C85948 /* Pods-EFWKLib.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -1199,13 +1201,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 04EF9DFC1BEC4C8900961759 /* Build configuration list for PBXNativeTarget "EFWKLib" */;
 			buildPhases = (
-				A4B3B27AB5BC7F14221BC60B /* Check Pods Manifest.lock */,
+				30E6D6C815A0AA44E82CF5D3 /* 📦 Check Pods Manifest.lock */,
 				04EF9DEF1BEC4C8900961759 /* Sources */,
 				04EF9DF01BEC4C8900961759 /* Frameworks */,
 				04EF9DF11BEC4C8900961759 /* Headers */,
 				04EF9DF21BEC4C8900961759 /* Resources */,
-				6D9356434ED1558D620595E7 /* Copy Pods Resources */,
 				041312441BEC869B0038A49E /* ShellScript */,
+				DBA0D5FB818764F58FDDF9E0 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1271,33 +1273,34 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/commit.sh\"";
 		};
-		6D9356434ED1558D620595E7 /* Copy Pods Resources */ = {
+		30E6D6C815A0AA44E82CF5D3 /* 📦 Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
-		};
-		A4B3B27AB5BC7F14221BC60B /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
+			name = "📦 Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		DBA0D5FB818764F58FDDF9E0 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EFWKLib/Pods-EFWKLib-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1533,7 +1536,7 @@
 		};
 		04EF9DFD1BEC4C8900961759 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F7C1B8A28F816DE54FE96D7F /* Pods.debug.xcconfig */;
+			baseConfigurationReference = C88D86592376491DC03E7992 /* Pods-EFWKLib.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = NO;
 				DEFINES_MODULE = YES;
@@ -1563,7 +1566,7 @@
 		};
 		04EF9DFE1BEC4C8900961759 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C8B5D01E5B35ADB754E8559A /* Pods.release.xcconfig */;
+			baseConfigurationReference = 711FB5AECD6D2EF0D2C85948 /* Pods-EFWKLib.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = NO;
 				DEFINES_MODULE = YES;

@@ -1,6 +1,0 @@
-framework module EFTRLib {
-  umbrella header "EFTRLib.h"
-
-  export *
-  module * { export * }
-}

@@ -1,6 +1,7 @@
 platform :ios , '8.0'
 use_frameworks!
 
+target 'EFTRLib' do
 pod 'CocoaAsyncSocket', '~> 7.4.3'
 pod 'Masonry', '~> 1.0.0'#autolayout 工具库 0.6.2
 pod 'MJRefresh', '~> 3.1.0'#下拉刷新2.4.9
@@ -23,3 +24,8 @@ pod 'GPUImage', '~> 0.1.7'#图片滤镜、效果库
 #pod 'CardIO', '~> 5.3.1'#银行卡扫描
 #pod 'TTTAttributedLabel', '~> 1.13.4'
 
+pod 'Realm', '~> 0.102.0'#非关系型数据库
+pod 'SDAutoLayout', '~> 1.53'
+pod 'SDWebImage', '~> 3.7.6'
+
+end

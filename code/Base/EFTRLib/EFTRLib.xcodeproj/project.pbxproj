@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		0426DEE41CA446C300CBDEB2 /* EFTRLib.h in Headers */ = {isa = PBXBuildFile; fileRef = 0426DEE31CA446C300CBDEB2 /* EFTRLib.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0426DEEC1CA447F300CBDEB2 /* commit.sh in Resources */ = {isa = PBXBuildFile; fileRef = 0426DEEB1CA447F300CBDEB2 /* commit.sh */; };
-		17DB5D2D9B0B77A47D5111F1 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 611DA76BD859AF503FCA950A /* Pods.framework */; };
+		8632120EF1607E27CEA6B149 /* Pods_EFTRLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFCA930BD70C962B8845C15C /* Pods_EFTRLib.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -17,9 +17,10 @@
 		0426DEE31CA446C300CBDEB2 /* EFTRLib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EFTRLib.h; sourceTree = "<group>"; };
 		0426DEE51CA446C300CBDEB2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0426DEEB1CA447F300CBDEB2 /* commit.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = commit.sh; sourceTree = SOURCE_ROOT; };
-		5250F8730EDCE7D86FA9A730 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		164A21359FA14DB1E43D6723 /* Pods-EFTRLib.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EFTRLib.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EFTRLib/Pods-EFTRLib.debug.xcconfig"; sourceTree = "<group>"; };
+		50041199ECA38752F84D1294 /* Pods-EFTRLib.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EFTRLib.release.xcconfig"; path = "Pods/Target Support Files/Pods-EFTRLib/Pods-EFTRLib.release.xcconfig"; sourceTree = "<group>"; };
 		611DA76BD859AF503FCA950A /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8FA912DA663928391C7CA773 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		EFCA930BD70C962B8845C15C /* Pods_EFTRLib.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EFTRLib.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -27,7 +28,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				17DB5D2D9B0B77A47D5111F1 /* Pods.framework in Frameworks */,
+				8632120EF1607E27CEA6B149 /* Pods_EFTRLib.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,8 +41,8 @@
 				0426DEEB1CA447F300CBDEB2 /* commit.sh */,
 				0426DEE21CA446C300CBDEB2 /* EFTRLib */,
 				0426DEE11CA446C300CBDEB2 /* Products */,
-				20E1904B6B7C588E093FC61B /* Pods */,
 				70781246EB4CFC19C882AD9C /* Frameworks */,
+				3A0F786597BD70DDDC228202 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -62,11 +63,11 @@
 			path = EFTRLib;
 			sourceTree = "<group>";
 		};
-		20E1904B6B7C588E093FC61B /* Pods */ = {
+		3A0F786597BD70DDDC228202 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				5250F8730EDCE7D86FA9A730 /* Pods.debug.xcconfig */,
-				8FA912DA663928391C7CA773 /* Pods.release.xcconfig */,
+				164A21359FA14DB1E43D6723 /* Pods-EFTRLib.debug.xcconfig */,
+				50041199ECA38752F84D1294 /* Pods-EFTRLib.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -75,6 +76,7 @@
 			isa = PBXGroup;
 			children = (
 				611DA76BD859AF503FCA950A /* Pods.framework */,
+				EFCA930BD70C962B8845C15C /* Pods_EFTRLib.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -97,13 +99,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0426DEE81CA446C300CBDEB2 /* Build configuration list for PBXNativeTarget "EFTRLib" */;
 			buildPhases = (
-				F16C84AF213B4BEB7BFD822B /* Check Pods Manifest.lock */,
+				E0103A3974508ED1C6BFCE02 /* 📦 Check Pods Manifest.lock */,
 				0426DEDB1CA446C300CBDEB2 /* Sources */,
 				0426DEDC1CA446C300CBDEB2 /* Frameworks */,
 				0426DEDD1CA446C300CBDEB2 /* Headers */,
 				0426DEDE1CA446C300CBDEB2 /* Resources */,
-				D784FFA6E72E25DB6F422FC3 /* Copy Pods Resources */,
 				0426DEED1CA4481E00CBDEB2 /* ShellScript */,
+				DDE92F4C2B08E12259239634 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -171,29 +173,29 @@
 			shellScript = "\"${SRCROOT}/commit.sh\"";
 			showEnvVarsInLog = 0;
 		};
-		D784FFA6E72E25DB6F422FC3 /* Copy Pods Resources */ = {
+		DDE92F4C2B08E12259239634 /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "📦 Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EFTRLib/Pods-EFTRLib-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F16C84AF213B4BEB7BFD822B /* Check Pods Manifest.lock */ = {
+		E0103A3974508ED1C6BFCE02 /* 📦 Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "📦 Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -304,7 +306,7 @@
 		};
 		0426DEE91CA446C300CBDEB2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5250F8730EDCE7D86FA9A730 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = 164A21359FA14DB1E43D6723 /* Pods-EFTRLib.debug.xcconfig */;
 			buildSettings = {
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -322,7 +324,7 @@
 		};
 		0426DEEA1CA446C300CBDEB2 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8FA912DA663928391C7CA773 /* Pods.release.xcconfig */;
+			baseConfigurationReference = 50041199ECA38752F84D1294 /* Pods-EFTRLib.release.xcconfig */;
 			buildSettings = {
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;

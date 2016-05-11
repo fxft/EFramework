@@ -20,8 +20,8 @@ mkdir -p "${SRCROOT}/Frameworks/PublicOS"
 cp -r -f ${CONFIGURATION_BUILD_DIR}/../*  ${SRCROOT}/Frameworks/
 
 # 复制一份初始化到Public
-cp -r -f ${SRCROOT}/Frameworks/Debug-iphoneos/*  ${SRCROOT}/Frameworks/Public/
-cp -r -f ${SRCROOT}/Frameworks/Release-iphoneos/*  ${SRCROOT}/Frameworks/PublicOS/
+#cp -r -f ${SRCROOT}/Frameworks/Debug-iphoneos/*  ${SRCROOT}/Frameworks/Public/
+#cp -r -f ${SRCROOT}/Frameworks/Release-iphoneos/*  ${SRCROOT}/Frameworks/PublicOS/
 
 
 # 输入、输出路径
@@ -36,21 +36,37 @@ filelist=`find ${iphoneos} -name *.framework`
 for file in $filelist
 do
 # 文件
- filename=${file##*/}
+filename=${file##*/}
 # 文件名
 name=${filename%.*}
 
-iospath=${iphoneos}/${name}.framework/${name}
-isimpath=${iphonesimulator}/${name}.framework/${name}
+#iospath=${iphoneos}/${name}/${name}.framework/${name}
+iospath=${file}/${name}
+isimpath=${file/Debug-iphoneos/Debug-iphonesimulator}/${name}
 
 opath=${outputpath}/${name}.framework/${name}
+
+#先拷贝一个副本到通用版本Public
+cp -r -f ${file}  ${SRCROOT}/Frameworks/Public/
+
+#先拷贝一个副本到发布版本PublicOS
+
+cp -r -f ${file/Debug-iphoneos/Release-iphoneos}  ${SRCROOT}/Frameworks/PublicOS/
+
 
 lipo -create ${iospath} ${isimpath} -output ${opath}
 
 echo "${iospath}     ${isimpath}     >>${opath}"
 
 
+
 done
+
+#mkdir -p "${SRCROOT}/../Frameworks/Public"
+#mkdir -p "${SRCROOT}/../Frameworks/PublicOS"
+#
+#cp -r -f ${SRCROOT}/Frameworks/Public/*  ${SRCROOT}/../Frameworks/Public/
+#cp -r -f ${SRCROOT}/Frameworks/PublicOS/*  ${SRCROOT}/../Frameworks/PublicOS/
 
 mkdir -p "${SRCROOT}/../../../comm/EF/Frameworks/Public"
 mkdir -p "${SRCROOT}/../../../comm/EF/Frameworks/PublicOS"
