@@ -101,6 +101,7 @@ ON_Button(signal){
         
     }
     cell.imageView.image = [UIImage imageNamed:@"tabbar_discoverHL"];
+    cell.imageView.size = CGSizeMake(60, 60);
     return cell;
 }
 

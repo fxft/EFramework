@@ -105,6 +105,7 @@ ON_Button(signal){
     UIButten *btn = signal.source;
     if ([signal is:[UIButten TOUCH_UP_INSIDE]]) {
         if ([btn is:@"leftBtn"]) {//customNavLeftBtn
+            [self showTitleActivity:NO];
             [self backAndRemoveWithAnimate:YES];
         }else if ([btn is:@"rightBtn"]){//customNavRightBtn
             

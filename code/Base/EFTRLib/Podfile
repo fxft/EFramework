@@ -28,4 +28,26 @@ pod 'Realm', '~> 0.102.0'#非关系型数据库
 pod 'SDAutoLayout', '~> 1.53'
 pod 'SDWebImage', '~> 3.7.6'
 
+pod 'SDCycleScrollView','~> 1.64' #第一图片轮播器
+
+pod 'iOS-MagnifyingGlass', '~> 0.0.2'#放大鏡
+
+#pod 'TransitionTreasury', '~> 3.0.4'#转场动画
+#pod 'TransitionAnimation', '~> 3.0.4'#转场动画依赖
+
+pod 'Permission', '~> 1.4.1'    #权限获取
+#/*Bluetooth
+#Camera
+#Contacts
+#Events
+#Motion
+#Microphone
+#Notifications
+#Photos
+#Reminders
+#LocationAlways
+#LocationWhenInUse*/
+
+pod 'SYStickHeaderWaterFall', '~> 0.0.2' #瀑布流
+
 end

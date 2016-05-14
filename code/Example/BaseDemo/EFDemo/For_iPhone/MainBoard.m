@@ -140,7 +140,6 @@
     
     [subBoards addObject:@{@"title":@"SDAutoLayout",@"subtitle":@"autolayout效率库",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/gsdios/SDAutoLayout",@"source":@"SDAutoLayout"}}];
     
-    [subBoards addObject:@{@"title":@"MJRefresh",@"subtitle":@"下拉刷新库",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/CoderMJLee/MJRefresh",@"source":@"MJRefresh"}}];
     
     [subBoards addObject:@{@"title":@"CocoaAsyncSocket",@"subtitle":@"TCP、UDP库",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/robbiehanson/CocoaAsyncSocket",@"source":@"CocoaAsyncSocket"}}];
     
@@ -149,13 +148,56 @@
     [subBoards addObject:@{@"title":@"GPUImageFilter",@"subtitle":@"GPUImage图像滤镜处理样例",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/sealband/GPUImageFilter",@"source":@"GPUImageFilter"}}];
     
     
-    [subBoards addObject:@{@"title":@"MBProgressHUD",@"subtitle":@"提示框库",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/matej/MBProgressHUD",@"source":@"MBProgressHUD"}}];
-    
-    
     [self.boards addObject:@{@"title":@"ThirdPart",@"subtitle":@"第三方框架介绍",@"map":@"ThirdPart",@"open":@"open",@"url":URLFOR_controllerWithNav(@"ListBoard"),@"boards":subBoards}];
     
     
     subBoards = [NSMutableArray arrayWithCapacity:0];
+    [subBoards addObject:@{@"title":@"MBProgressHUD",@"subtitle":@"提示框",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/matej/MBProgressHUD",@"source":@"MBProgressHUD"}}];
+    
+    [subBoards addObject:@{@"title":@"SDLoopProgressView",@"subtitle":@"进度指示器",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/gsdios/SDProgressView",@"source":@"SDLoopProgressView"}}];
+    
+    [subBoards addObject:@{@"title":@"NVActivityIndicatorView",@"subtitle":@"加载指示器",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/ninjaprox/NVActivityIndicatorView",@"source":@"NVActivityIndicatorView"}}];
+    
+    [subBoards addObject:@{@"title":@"MJRefresh",@"subtitle":@"下拉刷新",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/CoderMJLee/MJRefresh",@"source":@"MJRefresh"}}];
+    
+    [subBoards addObject:@{@"title":@"SDCycleScrollView",@"subtitle":@"图片轮播器",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/gsdios/SDCycleScrollView",@"source":@"SDCycleScrollView"}}];
+    
+    [subBoards addObject:@{@"title":@"SDPhotoBrowser",@"subtitle":@"图片浏览器，模仿微博图片浏览器动感效果，综合了图片展示和存储等多项能",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/gsdios/SDPhotoBrowser",@"source":@"SDPhotoBrowser"}}];
+    
+    [subBoards addObject:@{@"title":@"ZLPhotoBrowser",@"subtitle":@"方便易用的相册照片多选框架，支持拍照、预览快速多选；相册混合选择；在线下载iCloud端图片，且针对iCloud端图片的选择做了细节处理；自定义最大选择量及最大预览量",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/longitachi/ZLPhotoBrowser",@"source":@"ZLPhotoBrowser"}}];
+    
+    [subBoards addObject:@{@"title":@"TZImagePickerController",@"subtitle":@"一个支持多选、选原图和视频的图片选择器，同时有预览功能，适配了iOS6789系统",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/banchichen/TZImagePickerController",@"source":@"TZImagePickerController"}}];
+    
+    
+    
+    
+    [subBoards addObject:@{@"title":@"SYStarRatingView",@"subtitle":@"评分指示器",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/zhangsuya/SYStarRatingView",@"source":@"SYStarRatingView"}}];
+    
+    [subBoards addObject:@{@"title":@"Permission",@"subtitle":@"用户权限控制器",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/delba/Permission",@"source":@"Permission"}}];
+    
+     [subBoards addObject:@{@"title":@"SYStickHeaderWaterFall",@"subtitle":@"支持各种类型的瀑布流结构",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/zhangsuya/SYStickHeaderWaterFall",@"source":@"SYStickHeaderWaterFall"}}];
+    
+    
+    [subBoards addObject:@{@"title":@"YSLDraggableCardContainer",@"subtitle":@"卡片拖动切换",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/y-hryk/YSLDraggableCardContainer",@"source":@"YSLDraggableCardContainer"}}];
+    
+    [subBoards addObject:@{@"title":@"ZFPlayer",@"subtitle":@"视频播放器，横竖全屏",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/renzifeng/ZFPlayer",@"source":@"ZFPlayer"}}];
+    
+    [subBoards addObject:@{@"title":@"WMPlayer",@"subtitle":@"继承UIView，支持播放mp4、m3u8、3gp、mov，全屏和小屏播放同时支持",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/zhengwenming/WMPlayer",@"source":@"WMPlayer"}}];
+    
+    [subBoards addObject:@{@"title":@"LiveVideoCoreSDK",@"subtitle":@"手机美颜视频直播",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/runner365/LiveVideoCoreSDK",@"source":@"LiveVideoCoreSDK"}}];
+    
+    [subBoards addObject:@{@"title":@"ijkplayer",@"subtitle":@"视频播放器，Bilibili支持RTSP，支持ios/android",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/Bilibili/ijkplayer",@"source":@"ijkplayer"}}];
+    
+    [subBoards addObject:@{@"title":@"TBPlayer",@"subtitle":@"视频边下边播播，把播放器播放过的数据流缓存到本地",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/suifengqjn/TBPlayer",@"source":@"TBPlayer"}}];
+    
+    
+    [subBoards addObject:@{@"title":@"SSVideoPlayer",@"subtitle":@"视频播放器，支持拉动，播放列表，全屏",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/immrss/SSVideoPlayer",@"source":@"SSVideoPlayer"}}];
+    
+    
+    
+    [subBoards addObject:@{@"title":@"emitterLoop",@"subtitle":@"粒子特效动画",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/zhangsuya/emitterLoop",@"source":@"emitterLoop"}}];
+    
+    [subBoards addObject:@{@"title":@"HyPopMenuView",@"subtitle":@"菜单弹出框，毛玻璃效果，仿新浪",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/wwdc14/HyPopMenuView",@"source":@"HyPopMenuView"}}];
     
     
     [self.boards addObject:@{@"title":@"ThirdComponent",@"subtitle":@"第三方控件介绍",@"map":@"ThirdComponent",@"open":@"open",@"url":URLFOR_controllerWithNav(@"ListBoard"),@"boards":subBoards}];
