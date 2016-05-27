@@ -30,6 +30,7 @@
 @synthesize defaultNavigationBarTranslucent = _defaultNavigationBarTranslucent;
 @synthesize defaultNavigationTitleFont = _defaultNavigationTitleFont;
 @synthesize defaultNavigationBarShadowImage = _defaultNavigationBarShadowImage;
+@synthesize interfaceOrientationMask = _interfaceOrientationMask;
 
 DEF_SINGLETON(HMUIConfig)
 - (id)init
@@ -41,6 +42,8 @@ DEF_SINGLETON(HMUIConfig)
         self.localizable = [HMSystemInfo currentLanguage];
         self.allowedPortrait  = YES;
         self.allowedLandscapeRight = YES;
+        self.interfaceOrientationMask = UIInterfaceOrientationMaskPortrait|UIInterfaceOrientationMaskLandscapeRight;
+        
         _allowedLogWebDataLength = 20480;
     }
     return self;

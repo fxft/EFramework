@@ -34,6 +34,8 @@ pod 'iOS-MagnifyingGlass', '~> 0.0.2'#放大鏡
 
 #pod 'TransitionTreasury', '~> 3.0.4'#转场动画
 #pod 'TransitionAnimation', '~> 3.0.4'#转场动画依赖
+# TTMAnimatedTransitionGallery
+
 
 pod 'Permission', '~> 1.4.1'    #权限获取
 #/*Bluetooth
@@ -49,5 +51,7 @@ pod 'Permission', '~> 1.4.1'    #权限获取
 #LocationWhenInUse*/
 
 pod 'SYStickHeaderWaterFall', '~> 0.0.2' #瀑布流
+
+pod 'TextFieldEffects', '~> 1.2.0' #魔法输入框，各自样式
 
 end

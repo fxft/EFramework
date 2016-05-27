@@ -44,20 +44,11 @@
     [bar setTranslucent:[HMUIConfig sharedInstance].defaultNavigationBarTranslucent];
 }
 
-//// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    if ( self.topViewController )
-	{
-		return [self.topViewController shouldAutorotateToInterfaceOrientation:interfaceOrientation];
-	}
-	return YES;
-}
 
 #if defined(__IPHONE_6_0)
 
 - (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation{
-    if (self.topViewController) {
+    if ([self.topViewController respondsToSelector:@selector(preferredInterfaceOrientationForPresentation)]) {
         return [self.topViewController preferredInterfaceOrientationForPresentation];
     }
     return UIInterfaceOrientationPortrait;
@@ -66,15 +57,15 @@
 {
 
 //	return UIInterfaceOrientationMaskAll;
-    if (self.topViewController) {
+    if ([self.topViewController respondsToSelector:@selector(supportedInterfaceOrientations)]) {
         return [self.topViewController supportedInterfaceOrientations];
     }
-    return UIInterfaceOrientationMaskAll;
+    return [HMUIConfig sharedInstance].interfaceOrientationMask;
 }
 
 - (BOOL)shouldAutorotate
 {
-    if (self.topViewController) {
+    if ([self.topViewController respondsToSelector:@selector(shouldAutorotate)]) {
        return [self.topViewController shouldAutorotate];
     }
     return YES;

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		042A4BB81CF72D2B008482FE /* APIGateway.m in Sources */ = {isa = PBXBuildFile; fileRef = 042A4BAE1CF72D2B008482FE /* APIGateway.m */; };
+		042A4BB91CF72D2B008482FE /* AliEncryption.m in Sources */ = {isa = PBXBuildFile; fileRef = 042A4BB01CF72D2B008482FE /* AliEncryption.m */; };
+		042A4BBA1CF72D2B008482FE /* NSData+DTCrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = 042A4BB21CF72D2B008482FE /* NSData+DTCrypto.m */; };
 		04381EBD1CE31CAC001EC0F5 /* TabbarSubNormalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04381EB81CE31CAC001EC0F5 /* TabbarSubNormalController.m */; };
 		04381EBE1CE31CAC001EC0F5 /* TabbarBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 04381EBA1CE31CAC001EC0F5 /* TabbarBoard.m */; };
 		04381EBF1CE31CAC001EC0F5 /* TabbarSubController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04381EBC1CE31CAC001EC0F5 /* TabbarSubController.m */; };
@@ -18,6 +21,8 @@
 		044C37EB1CE3441D005B82BC /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 044C37E41CE3441D005B82BC /* SDWebImage.framework */; };
 		044C37EC1CE3441D005B82BC /* SDWebImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 044C37E41CE3441D005B82BC /* SDWebImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		044C37F01CE362B9005B82BC /* ThirdPartBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 044C37EF1CE362B9005B82BC /* ThirdPartBoard.m */; };
+		044C380C1CE8D601005B82BC /* BounceBlurTransitionAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 044C380B1CE8D601005B82BC /* BounceBlurTransitionAnimator.m */; };
+		044C38141CE8E366005B82BC /* BounceBlurController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044C38131CE8E366005B82BC /* BounceBlurController.m */; };
 		049B628E1CE1AF78002F6DA2 /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 049B62891CE1AF78002F6DA2 /* AFNetworking.framework */; };
 		049B628F1CE1AF78002F6DA2 /* AFNetworking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 049B62891CE1AF78002F6DA2 /* AFNetworking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		049B62901CE1AF78002F6DA2 /* EFWKLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 049B628A1CE1AF78002F6DA2 /* EFWKLib.framework */; };
@@ -105,6 +110,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		042A4BAD1CF72D2B008482FE /* APIGateway.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIGateway.h; sourceTree = "<group>"; };
+		042A4BAE1CF72D2B008482FE /* APIGateway.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIGateway.m; sourceTree = "<group>"; };
+		042A4BAF1CF72D2B008482FE /* AliEncryption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AliEncryption.h; sourceTree = "<group>"; };
+		042A4BB01CF72D2B008482FE /* AliEncryption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AliEncryption.m; sourceTree = "<group>"; };
+		042A4BB11CF72D2B008482FE /* NSData+DTCrypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+DTCrypto.h"; sourceTree = "<group>"; };
+		042A4BB21CF72D2B008482FE /* NSData+DTCrypto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+DTCrypto.m"; sourceTree = "<group>"; };
 		04381EB71CE31CAC001EC0F5 /* TabbarSubNormalController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabbarSubNormalController.h; sourceTree = "<group>"; };
 		04381EB81CE31CAC001EC0F5 /* TabbarSubNormalController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabbarSubNormalController.m; sourceTree = "<group>"; };
 		04381EB91CE31CAC001EC0F5 /* TabbarBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabbarBoard.h; sourceTree = "<group>"; };
@@ -118,6 +129,10 @@
 		044C37E41CE3441D005B82BC /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDWebImage.framework; path = ../../../comm/EF/Frameworks/Public/SDWebImage.framework; sourceTree = "<group>"; };
 		044C37EE1CE362B9005B82BC /* ThirdPartBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ThirdPartBoard.h; path = For_iPhone/ThirdPart/ThirdPartBoard.h; sourceTree = "<group>"; };
 		044C37EF1CE362B9005B82BC /* ThirdPartBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ThirdPartBoard.m; path = For_iPhone/ThirdPart/ThirdPartBoard.m; sourceTree = "<group>"; };
+		044C380A1CE8D601005B82BC /* BounceBlurTransitionAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BounceBlurTransitionAnimator.h; path = For_iPhone/Controllers/Transitioning/BounceBlurTransitionAnimator.h; sourceTree = "<group>"; };
+		044C380B1CE8D601005B82BC /* BounceBlurTransitionAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BounceBlurTransitionAnimator.m; path = For_iPhone/Controllers/Transitioning/BounceBlurTransitionAnimator.m; sourceTree = "<group>"; };
+		044C38121CE8E366005B82BC /* BounceBlurController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BounceBlurController.h; sourceTree = "<group>"; };
+		044C38131CE8E366005B82BC /* BounceBlurController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BounceBlurController.m; sourceTree = "<group>"; };
 		049B62891CE1AF78002F6DA2 /* AFNetworking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AFNetworking.framework; path = ../../../comm/EF/Frameworks/Public/AFNetworking.framework; sourceTree = "<group>"; };
 		049B628A1CE1AF78002F6DA2 /* EFWKLib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EFWKLib.framework; path = ../../../comm/EF/Frameworks/Public/EFWKLib.framework; sourceTree = "<group>"; };
 		049B628B1CE1AF78002F6DA2 /* FMDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FMDB.framework; path = ../../../comm/EF/Frameworks/Public/FMDB.framework; sourceTree = "<group>"; };
@@ -208,9 +223,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		042A4BAB1CF72D2B008482FE /* NetWork */ = {
+			isa = PBXGroup;
+			children = (
+				042A4BAC1CF72D2B008482FE /* Apigateway */,
+			);
+			name = NetWork;
+			path = For_iPhone/NetWork;
+			sourceTree = "<group>";
+		};
+		042A4BAC1CF72D2B008482FE /* Apigateway */ = {
+			isa = PBXGroup;
+			children = (
+				042A4BAD1CF72D2B008482FE /* APIGateway.h */,
+				042A4BAE1CF72D2B008482FE /* APIGateway.m */,
+				042A4BAF1CF72D2B008482FE /* AliEncryption.h */,
+				042A4BB01CF72D2B008482FE /* AliEncryption.m */,
+				042A4BB11CF72D2B008482FE /* NSData+DTCrypto.h */,
+				042A4BB21CF72D2B008482FE /* NSData+DTCrypto.m */,
+			);
+			path = Apigateway;
+			sourceTree = "<group>";
+		};
 		04381EAC1CE2D0A4001EC0F5 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				044C38091CE8CC49005B82BC /* Transitioning */,
 				04381EB61CE31CAC001EC0F5 /* TabbarController */,
 			);
 			name = Controllers;
@@ -246,6 +284,26 @@
 				044C37EF1CE362B9005B82BC /* ThirdPartBoard.m */,
 			);
 			name = ThirdPart;
+			sourceTree = "<group>";
+		};
+		044C38091CE8CC49005B82BC /* Transitioning */ = {
+			isa = PBXGroup;
+			children = (
+				044C38111CE8E366005B82BC /* TransitionControllers */,
+				044C380A1CE8D601005B82BC /* BounceBlurTransitionAnimator.h */,
+				044C380B1CE8D601005B82BC /* BounceBlurTransitionAnimator.m */,
+			);
+			name = Transitioning;
+			sourceTree = "<group>";
+		};
+		044C38111CE8E366005B82BC /* TransitionControllers */ = {
+			isa = PBXGroup;
+			children = (
+				044C38121CE8E366005B82BC /* BounceBlurController.h */,
+				044C38131CE8E366005B82BC /* BounceBlurController.m */,
+			);
+			name = TransitionControllers;
+			path = For_iPhone/Controllers/Transitioning/TransitionControllers;
 			sourceTree = "<group>";
 		};
 		049B62B31CE1BE3B002F6DA2 /* Foundation */ = {
@@ -356,6 +414,7 @@
 		04F30F161C09D91800EEFAF1 /* For_iPhone */ = {
 			isa = PBXGroup;
 			children = (
+				042A4BAB1CF72D2B008482FE /* NetWork */,
 				044C37ED1CE36280005B82BC /* ThirdPart */,
 				044C37DD1CE32FB1005B82BC /* Elements */,
 				04381EAC1CE2D0A4001EC0F5 /* Controllers */,
@@ -476,15 +535,20 @@
 				044C37E01CE32FF7005B82BC /* ButtonBoard.m in Sources */,
 				049B62B21CE1B409002F6DA2 /* ListBoard.m in Sources */,
 				04F30EFE1C09D91800EEFAF1 /* AppDelegate.m in Sources */,
+				042A4BB81CF72D2B008482FE /* APIGateway.m in Sources */,
 				04381EBD1CE31CAC001EC0F5 /* TabbarSubNormalController.m in Sources */,
 				04F30F071C09D91800EEFAF1 /* ZXingBoard.m in Sources */,
 				049B62B91CE1F568002F6DA2 /* Sandbox.m in Sources */,
 				04F30F191C09D91800EEFAF1 /* MainBoard.m in Sources */,
 				04381EBF1CE31CAC001EC0F5 /* TabbarSubController.m in Sources */,
+				044C380C1CE8D601005B82BC /* BounceBlurTransitionAnimator.m in Sources */,
 				049B62B61CE1BE5F002F6DA2 /* SystemInfo.m in Sources */,
+				044C38141CE8E366005B82BC /* BounceBlurController.m in Sources */,
 				04F30EFB1C09D91800EEFAF1 /* main.m in Sources */,
+				042A4BBA1CF72D2B008482FE /* NSData+DTCrypto.m in Sources */,
 				04381EBE1CE31CAC001EC0F5 /* TabbarBoard.m in Sources */,
 				04F30F0C1C09D91800EEFAF1 /* UserCenter.m in Sources */,
+				042A4BB91CF72D2B008482FE /* AliEncryption.m in Sources */,
 				044C37F01CE362B9005B82BC /* ThirdPartBoard.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

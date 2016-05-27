@@ -397,6 +397,69 @@
 #define WS(weakSelf)  __weak_type __typeof(&*self)weakSelf = self;
 #define SS(strongSelf)  __strong_type __typeof(&*self)strongSelf = self;
 
+
+/**
+ *  语法糖
+ *
+ *
+ */
+//不允许被继承
+/*
+ 使用这个属性可以定义一个 Final Class，也就是说，一个不可被继承的类，假设我们有个名叫 Eunuch（太监） 的类，但并不希望有人可以继承自它：
+ __attribute__((objc_subclassing_restricted))
+ @interface Eunuch : NSObject
+ @end
+ @interface Child : Eunuch // <--- Compile Error
+ @end
+ */
+//需要调用父类方法
+/*
+ aka: NS_REQUIRES_SUPER，标志子类继承这个方法时需要调用 super，否则给出编译警告：
+ @interface Father : NSObject
+ - (void)hailHydra __attribute__((objc_requires_super));
+ @end
+ @implementation Father
+ - (void)hailHydra {
+ NSLog(@"hail hydra!");
+ }
+ @end
+ @interface Son : Father
+ @end
+ @implementation Son
+ - (void)hailHydra {
+ } // <--- Warning missing [super hailHydra]
+ @end
+ */
+/*
+ Objective-C 中的 @(...) 语法糖可以将基本数据类型 box 成 NSNumber 对象，假如想 box 一个 struct 类型或是 union 类型成 NSValue 对象，可以使用这个属性：
+ 
+ typedef struct __attribute__((objc_boxable)) {
+ CGFloat x, y, width, height;
+ } XXRect;
+ 
+ CGRect rect1 = {1, 2, 3, 4};
+ NSValue *value1 = @(rect1); // <--- Compile Error
+ XXRect rect2 = {1, 2, 3, 4};
+ NSValue *value2 = @(rect2); // √
+ */
+/*
+ 构造器和析构器，加上这两个属性的函数会在分别在可执行文件（或 shared library）load 和 unload 时被调用，可以理解为在 main() 函数调用前和 return 后执行：
+ __attribute__((constructor))
+ static void beforeMain(void) {
+ NSLog(@"beforeMain");
+ }
+ __attribute__((destructor))
+ static void afterMain(void) {
+ NSLog(@"afterMain");
+ }
+ int main(int argc, const char * argv[]) {
+ NSLog(@"main");
+ return 0;
+ }
+ 
+ // Console:
+ // "beforeMain" -> "main" -> "afterMain"
+ */
 #endif	// #if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
 
 #pragma mark -

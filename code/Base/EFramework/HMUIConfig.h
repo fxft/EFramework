@@ -30,6 +30,8 @@ AS_SINGLETON(HMUIConfig);
 @property (nonatomic) BOOL                         allowedLandscape;//横屏
 @property (nonatomic) BOOL                         allowedPortraitUpside;//倒屏
 @property (nonatomic) BOOL                         allowedLandscapeRight;//右横屏
+@property (nonatomic) UIInterfaceOrientationMask interfaceOrientationMask;
+
 
 /**
  *  网络数据Log是否进行打印的设置，默认20*1024字节

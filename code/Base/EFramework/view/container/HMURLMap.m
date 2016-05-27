@@ -875,6 +875,7 @@ static int __openDateKEY;
     objc_setAssociatedObject( self, &__openDateKEY, openDate, OBJC_ASSOCIATION_RETAIN_NONATOMIC );
 }
 
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (UIViewController*)nextViewController {
     NSArray* viewControllers = self.navigationController.viewControllers;
@@ -1036,7 +1037,7 @@ static int __nicknameKEY;
 }
 
 - (UIViewController*)open:(NSString *)map close:(NSString *)close animate:(BOOL)animate{
-    return [self open:map closes:[close notEmpty]?@[close]:nil animate:YES];
+    return [self open:map closes:[close notEmpty]?@[close]:nil animate:animate];
     
 }
 - (UIViewController*)open:(NSString *)map closes:(NSArray *)closes animate:(BOOL)animate{
@@ -1170,6 +1171,7 @@ static int __nicknameKEY;
 }
 
 - (void)close:(NSString *)close{
+
     [[HMURLMap sharedInstance] removeMap:close];
 }
 

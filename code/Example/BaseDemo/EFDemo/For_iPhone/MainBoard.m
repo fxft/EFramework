@@ -88,6 +88,7 @@
     [subBoards addObject:@{@"title":@"常规操作",@"subtitle":@"net work",@"map":@"NetWorkNormal",@"open":@"push",@"url":URLFOR_controller(@"NetWorkNormal")}];
     [subBoards addObject:@{@"title":@"图片下载",@"subtitle":@"image loader",@"map":@"ImageLoader",@"open":@"push",@"url":URLFOR_controller(@"ImageLoader")}];
     [subBoards addObject:@{@"title":@"文件下载",@"subtitle":@"file loader",@"map":@"FileLoader",@"open":@"push",@"url":URLFOR_controller(@"FileLoader")}];
+    [subBoards addObject:@{@"title":@"Api网关",@"subtitle":@"阿里云api网关调用",@"map":@"FileLoader",@"open":@"push",@"url":URLFOR_controller(@"APIGateway")}];
     
     [self.boards addObject:@{@"title":@"NetWork",@"subtitle":@"网络数据、异步、多线程",@"map":@"NetWork",@"open":@"open",@"url":URLFOR_controllerWithNav(@"ListBoard"),@"boards":subBoards}];
     
@@ -198,6 +199,26 @@
     [subBoards addObject:@{@"title":@"emitterLoop",@"subtitle":@"粒子特效动画",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/zhangsuya/emitterLoop",@"source":@"emitterLoop"}}];
     
     [subBoards addObject:@{@"title":@"HyPopMenuView",@"subtitle":@"菜单弹出框，毛玻璃效果，仿新浪",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/wwdc14/HyPopMenuView",@"source":@"HyPopMenuView"}}];
+    
+    [subBoards addObject:@{@"title":@"FORScrollViewEmptyAssistant",@"subtitle":@"空数据提示图",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/ZhipingYang/FORScrollViewEmptyAssistant",@"source":@"FORScrollViewEmptyAssistant"}}];
+    
+    
+    [subBoards addObject:@{@"title":@"Wonderful",@"subtitle":@"高亮文本、颜色扩展、跑马灯、颜色渐变、颜色提取",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/dsxNiubility/Wonderful",@"source":@"Wonderful"}}];
+    
+    
+    [subBoards addObject:@{@"title":@"JMHoledView",@"subtitle":@"高亮帮助页提示",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/leverdeterre/JMHoledView",@"source":@"JMHoledView"}}];
+    
+    [subBoards addObject:@{@"title":@"TextFieldEffects",@"subtitle":@"多种带动画的输入框样式",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/raulriera/TextFieldEffects",@"source":@"TextFieldEffects"}}];
+    
+    [subBoards addObject:@{@"title":@"FSInteractiveMap",@"subtitle":@"显示svg图片，应用:地图块选择",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/ArthurGuibert/FSInteractiveMap",@"source":@"FSInteractiveMap"}}];
+    
+    
+    [subBoards addObject:@{@"title":@"MZTimerLabel",@"subtitle":@"倒计时Label",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/mineschan/MZTimerLabel",@"source":@"MZTimerLabel"}}];
+    
+    [subBoards addObject:@{@"title":@"AnimatedTransitionGallery",@"subtitle":@"各种转场动画",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/shu223/AnimatedTransitionGallery",@"source":@"AnimatedTransitionGallery"}}];
+    
+    
+    
     
     
     [self.boards addObject:@{@"title":@"ThirdComponent",@"subtitle":@"第三方控件介绍",@"map":@"ThirdComponent",@"open":@"open",@"url":URLFOR_controllerWithNav(@"ListBoard"),@"boards":subBoards}];

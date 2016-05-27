@@ -7,9 +7,9 @@
 //
 
 #import "TabbarSubController.h"
+#import "BounceBlurTransitionAnimator.h"
 
-
-@interface TabbarSubController ()
+@interface TabbarSubController ()<UINavigationControllerDelegate,UIViewControllerTransitioningDelegate>
 
 @end
 
@@ -50,7 +50,9 @@
 - (void)initSubviews{
     self.view.backgroundColor = [UIColor colorWithRed:26 / 255.0 green:178 / 255.0 blue:10 / 255.0 alpha:1];
     [self.tableView reloadData];
-
+    
+    self.navigationController.delegate = self;
+    self.transitioningDelegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -69,10 +71,14 @@ ON_Button(signal){
     UIButten *btn = signal.source;
     if ([signal is:[UIButten TOUCH_UP_INSIDE]]) {
         if ([btn is:@"leftBtn"]) {//customNavLeftBtn
-            if (self.navigationController.viewControllers.count==1) {
-                [self.tabBarController backAndRemoveWithAnimate:YES];
-            }else{
+            if (self.presentingViewController) {
                 [self backAndRemoveWithAnimate:YES];
+            }else{
+                if (self.navigationController.viewControllers.count==1) {
+                    [self.tabBarController backAndRemoveWithAnimate:YES];
+                }else{
+                    [self backAndRemoveWithAnimate:YES];
+                }
             }
             
         }else if ([btn is:@"rightBtn"]){//customNavRightBtn
@@ -102,6 +108,7 @@ ON_Button(signal){
     }
     cell.imageView.image = [UIImage imageNamed:@"tabbar_discoverHL"];
     cell.imageView.size = CGSizeMake(60, 60);
+    
     return cell;
 }
 
@@ -109,13 +116,45 @@ ON_Button(signal){
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-   [self pushToPath:URLFOR_controller(@"TabbarSubController") map:nil
-           animated:YES complete:^(BOOL viewLoaded, UIViewController *toBoard) {
-               if (!viewLoaded) {
-                   toBoard.hidesBottomBarWhenPushed = YES;
-               }
-           }];
-    
+//   [self pushToPath:URLFOR_controller(@"TabbarSubController") map:nil
+//           animated:YES complete:^(BOOL viewLoaded, UIViewController *toBoard) {
+//               if (!viewLoaded) {
+//                   toBoard.hidesBottomBarWhenPushed = YES;
+//               }
+//           }];
+    [self presentToPath:URLFOR_controllerWithNav(@"BounceBlurController") map:nil animated:YES complete:^(BOOL viewLoaded, UIViewController *toBoard) {
+        if (!viewLoaded) {
+            toBoard.transitioningDelegate = self;
+        }
+    }];
 }
+#pragma mark UIViewController TransitioningDelegate
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source{
+    BounceBlurTransitionAnimator * animator = [BounceBlurTransitionAnimator new];
+    animator.operation = UINavigationControllerOperationPush;
+    
+    return animator;
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed{
+    BounceBlurTransitionAnimator * animator = [BounceBlurTransitionAnimator new];
+    animator.operation = UINavigationControllerOperationPop;
+    
+    return animator;
+}
+
+#pragma mark - navigation transition
+- (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC{
+    BounceBlurTransitionAnimator * animator = [BounceBlurTransitionAnimator new];
+    animator.operation = operation;
+    
+    return animator;
+}
+
+//- (id<UIViewControllerInteractiveTransitioning>)navigationController:(UINavigationController *)navigationController interactionControllerForAnimationController:(id<UIViewControllerAnimatedTransitioning>)animationController{
+//    
+//    return nil;
+//}
 
 @end

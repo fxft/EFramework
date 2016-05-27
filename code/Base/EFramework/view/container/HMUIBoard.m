@@ -329,31 +329,6 @@ DEF_SIGNAL2( ORIENTATION_DID_CHANGED ,HMUIBoard)
 
 #if defined(__IPHONE_6_0)
 
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    if ( interfaceOrientation == UIInterfaceOrientationPortrait)
-    {
-        return _allowedPortrait ? YES : NO;
-    }
-    if ( interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown )
-    {
-        return _allowedPortraitUpside ? YES : NO;
-    }
-    
-    if ( interfaceOrientation == UIInterfaceOrientationLandscapeLeft || interfaceOrientation == UIInterfaceOrientationLandscapeRight )
-    {
-        if ( interfaceOrientation == UIInterfaceOrientationLandscapeRight &&!_allowedLandscapeRight)
-        {
-            return NO;
-        }
-        
-        return _allowedLandscape ? YES : NO;
-    }
-    
-    return NO;
-}
-
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
     NSUInteger orientation = UIInterfaceOrientationMaskPortrait;

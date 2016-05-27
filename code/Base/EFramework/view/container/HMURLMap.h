@@ -170,6 +170,13 @@ AS_SINGLETON(HMURLMap)
 @property (nonatomic, HM_STRONG) NSDate *       openDate;
 @property (nonatomic, HM_STRONG) NSString *      nickname;
 
+
+////在load方法中进行设置，可以配置ViewController支持的横屏方式
+//@property (nonatomic) BOOL							allowedPortrait;
+//@property (nonatomic) BOOL							allowedLandscape;
+//@property (nonatomic) BOOL							allowedPortraitUpside;
+//@property (nonatomic) BOOL							allowedLandscapeRight;
+
 /**
  *  在带有Navigation控制器的视图控制器的load方法中设置，设置为YES表示视图穿透，NO表示不穿透
  */

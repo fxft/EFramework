@@ -124,38 +124,41 @@ DEF_SINGLETON(HMBaseNavigator)
     return [self.visableViewController respondsToSelector:@selector(preferredStatusBarUpdateAnimation)]?[self.visableViewController preferredStatusBarUpdateAnimation]:[super preferredStatusBarUpdateAnimation];
 }
 
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    if (!self.visableViewController) {
-        return [super shouldAutorotateToInterfaceOrientation:interfaceOrientation];
-    }
-    return [self.visableViewController respondsToSelector:@selector(shouldAutorotateToInterfaceOrientation:)]?[self.visableViewController shouldAutorotateToInterfaceOrientation:interfaceOrientation]:[super shouldAutorotateToInterfaceOrientation:interfaceOrientation];
-    
-}
 
 #if defined(__IPHONE_6_0)
 - (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation{
+    UIInterfaceOrientation mask;
     if (!self.visableViewController) {
-        return [super preferredInterfaceOrientationForPresentation];
-    }
-    return [self.visableViewController respondsToSelector:@selector(preferredInterfaceOrientationForPresentation)]?[self.visableViewController preferredInterfaceOrientationForPresentation]:[super preferredInterfaceOrientationForPresentation];
+        mask= [super preferredInterfaceOrientationForPresentation];
+    }else
+    mask =  [self.visableViewController respondsToSelector:@selector(preferredInterfaceOrientationForPresentation)]?[self.visableViewController preferredInterfaceOrientationForPresentation]:[super preferredInterfaceOrientationForPresentation];
 
+    CC(@"Orientation",@"preferredInterfaceOrientationForPresentation",@"for:",self.visableViewController,@"mask:",@(mask));
+    return mask;
 }
+
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
+    UIInterfaceOrientationMask mask;
     if (!self.visableViewController) {
-        return [super supportedInterfaceOrientations];
+        mask =  [super supportedInterfaceOrientations];
+    }else{
+        mask =  [self.visableViewController respondsToSelector:@selector(supportedInterfaceOrientations)]?[self.visableViewController supportedInterfaceOrientations]:[super supportedInterfaceOrientations];
     }
-    return [self.visableViewController respondsToSelector:@selector(supportedInterfaceOrientations)]?[self.visableViewController supportedInterfaceOrientations]:[super supportedInterfaceOrientations];
+    CC(@"Orientation",@"supportedInterfaceOrientations",@"for:",self.visableViewController,@"mask:",@(mask));
+    return mask;
 }
 
 - (BOOL)shouldAutorotate
 {
+    BOOL can ;
     if (!self.visableViewController) {
-        return [super shouldAutorotate];
-    }
-    return [self.visableViewController respondsToSelector:@selector(shouldAutorotate)]?[self.visableViewController shouldAutorotate]:[super shouldAutorotate];
+        can = [super shouldAutorotate];
+    }else
+    can = [self.visableViewController respondsToSelector:@selector(shouldAutorotate)]?[self.visableViewController shouldAutorotate]:[super shouldAutorotate];
+    
+    CC(@"Orientation",@"shouldAutorotate",@"for:",self.visableViewController,@"mask:",@(can));
+    return can;
 }
 
 #endif	// #if defined(__IPHONE_6_0)

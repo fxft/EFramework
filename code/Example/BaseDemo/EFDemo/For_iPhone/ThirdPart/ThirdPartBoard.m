@@ -96,7 +96,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    self.web.delegate = self.web;
+    self.web.delegate = (id)self.web;
     self.web.url = [self.boards valueForKey:@"url"];
   
 }
