@@ -1243,19 +1243,34 @@ DEF_INT( RLMARRAY,		7 )
 			const char *	attr = property_getAttributes(properties[i]);
             /*获取属性类型*/
 			NSUInteger		type = [HMTypeEncoding typeOf:attr];
-            NSRange alias = [propertyName rangeOfString:@"__as"];
+//            NSRange alias = [propertyName rangeOfString:@"__as"];
             NSString *property = propertyName;
             
             /*如果类中存在需要别名的属性，而且需要转化的数据中没有与类别名同样的属性，则进行别名匹配*/
-            if (alias.location!=NSNotFound&&![self.allKeys containsObject:property]) {
-                property = [propertyName substringToIndex:alias.location];
-            }
+//            if (alias.location!=NSNotFound&&![self.allKeys containsObject:property]) {
+//                property = [propertyName substringToIndex:alias.location];
+//            }else if (alias.location!=NSNotFound){
+//                
+//            }
             
             /*获取是否需要名称重定向*/
             SEL redirectSelector = NSSelectorFromString( [NSString stringWithFormat:@"redirectPropertyAliasFor_%@", property] );
             if ( [object respondsToSelector:redirectSelector] )
             {
                 NSArray *propertys = [object performSelector:redirectSelector];
+                for (NSString *kk in propertys) {
+                    if ([self.allKeys containsObject:kk]&&![self.allKeys containsObject:property]) {
+                        property = kk;
+                        break;
+                    }
+                }
+            }
+            
+            /*获取是否需要名称强制重定向*/
+            SEL redirectForceSelector = NSSelectorFromString( [NSString stringWithFormat:@"redirectPropertyAliasForceFor_%@", property] );
+            if ( [object respondsToSelector:redirectForceSelector] )
+            {
+                NSArray *propertys = [object performSelector:redirectForceSelector];
                 for (NSString *kk in propertys) {
                     if ([self.allKeys containsObject:kk]) {
                         property = kk;

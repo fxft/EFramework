@@ -72,7 +72,7 @@ ON_Button(signal){
     }
 }
 
-#define POSTFORM //通过表单的方式上传
+//#define POSTFORM //通过表单的方式上传
 //#define POSTBODY //通过body的方式上传
 
 - (void)test{
@@ -96,7 +96,7 @@ ON_Button(signal){
 #endif
     
     
-    [requestHeaders setValue:@"text/plain;charset=UTF-8" forKey:HTTP_HEADER_ACCEPT];
+    [requestHeaders setValue:@"application/json" forKey:HTTP_HEADER_ACCEPT];
     
     
     //可选Api网关头部
@@ -134,7 +134,7 @@ ON_Button(signal){
     /**
      *  扰乱加密串
      */
-//    [Encryption sharedInstance].secretForApiGateway = @"3c0f6fba687fa2aaad125a223c7f1a09f";
+//    [Encryption sharedInstance].secretForApiGateway = @"3c0f6fba687fa2aaad125a223c7f1a09";
 //    
 //    NSString *path = @"/ttt";
 //    NSString *method = @"GET";
@@ -162,7 +162,7 @@ ON_Button(signal){
     }
     
     NSString *url = @"http://apitest.jjicar.com/UnUseCouponList";
-//    url = @"http://api.jjicar.com/ttt";
+//    url = @"http://api.jjicar.com/User/Login";
 #ifdef POSTFORM
     [manager POST:url parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         NSObject *fff = (id)formData;

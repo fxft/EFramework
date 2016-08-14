@@ -1477,6 +1477,53 @@
     return finalImage;
 }
 
+//3.计算出图片平均灰度，然后每一点灰度与平均灰度比较，大于平均值是1，小于平均值是0
+- (NSString *)pHashValue{
+    UIImage *image = self;
+    NSMutableString * pHashString = [NSMutableString string];
+    CGImageRef imageRef = [image CGImage];
+    unsigned long width = CGImageGetWidth(imageRef);
+    unsigned long height = CGImageGetHeight(imageRef);
+    CGDataProviderRef provider = CGImageGetDataProvider(imageRef);
+    NSData* data = (id)CFBridgingRelease(CGDataProviderCopyData(provider));
+    //    NSLog(@"data = %@",data);
+    const char * heightData = (char*)data.bytes;
+    int sum = 0;
+    
+    for (int i = 0; i < width * height; i++)
+    {
+//        printf("%d ",heightData[i]);
+        if (heightData[i] != 0)
+        {
+            sum += heightData[i];
+        }
+    }
+    int avr = sum / (width * height);
+//    NSLog(@"%d",avr);
+    for (int i = 0; i < width * height; i++)
+    {
+        if (heightData[i] >= avr) {
+            [pHashString appendString:@"1"];
+        }
+        else {
+            [pHashString appendString:@"0"];
+        }
+    }
+//    NSLog(@"pHashString = %@,pHashStringLength = %lu",pHashString,(unsigned long)pHashString.length);
+    return pHashString;
+}
++ (NSInteger)getDifferentValueCountWithString:(NSString *)str1 andString:(NSString *)str2{
+    NSInteger diff = 0;
+    const char * s1 = [str1 UTF8String];
+    const char * s2 = [str2 UTF8String];
+    for (int i = 0 ; i < str1.length ;i++){
+        if(s1[i] != s2[i]){
+            diff++;
+        }
+    }
+    return diff;
+}
+
 #pragma mark - imageToTransparent
 void ProviderReleaseData (void *info, const void *data, size_t size){
     free((void*)data);
@@ -1912,6 +1959,19 @@ void cleanupBuffer(void *userData, void *buf_data)
     HMUIStyle *style = [HMUIShapeStyle styleWithShape:[HMUIRoundedRectangleShape shapeWithRadius:radius] next:[HMUISolidFillStyle styleWithColor:color next:nil]];
     
     return [self imageForStyle:style size:size scale:scale];
+}
+
+- (UIImage *)imageWithTintColor: (UIColor *)tintColor blendMode: (CGBlendMode)mode {
+    UIGraphicsBeginImageContextWithOptions(self.size, NO, self.scale);
+    
+    [tintColor setFill];
+    CGRect bounds = CGRectMake(0, 0, self.size.width, self.size.height);
+    UIRectFill(bounds);
+    
+    [self drawInRect: bounds blendMode: mode alpha: 1.0];
+    UIImage *result = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return result;
 }
 
 #define embossKey(style,width,height,hex,blur,level) [NSString stringWithFormat:@"EmbossStyle%d:%d-%d-%ld-%f-%f",style,(int)width/10,(int)height/10,hex,blur,level]

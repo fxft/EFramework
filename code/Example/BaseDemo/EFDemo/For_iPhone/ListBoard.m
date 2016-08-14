@@ -9,7 +9,7 @@
 #import "ListBoard.h"
 
 
-@interface ListBoard ()
+@interface ListBoard ()<HMUIPhotoBrowserDelegate,HMUIPhotoBrowserDatasource>
 
 @end
 
@@ -73,7 +73,49 @@ ON_Button(signal){
     }
 }
 
+- (BOOL)photoBrowser:(HMUIPhotoBrowser *)photoBrowser didTouchedIndex:(NSUInteger)index{
+    
+    return NO;
+}
 
+- (void)photoBrowser:(HMUIPhotoBrowser *)photoBrowser didLoadCell:(HMPhotoCell *)cell atIndex:(NSUInteger)index{
+    cell.imageView.gifPlay = YES;
+}
+
+
+- (HMPhotoItem *)photoBrowser:(HMUIPhotoBrowser *)browser itemAtIndex:(NSUInteger)index{
+    NSDictionary *city = [self.boards objectAtIndex:browser.tag];
+    NSArray *imags= [city valueForKey:@"imgurl"];
+    NSString *imgurl = imags[index];
+    HMPhotoItem *item = [[HMPhotoItem alloc]init];
+    item.image = [UIImage imageNamed:@"Icon-60"];
+    item.webUrl = imgurl;
+    return item;
+}
+
+- (NSUInteger)photoBrowserNumbers:(HMUIPhotoBrowser *)browser{
+    NSDictionary *city = [self.boards objectAtIndex:browser.tag];
+    NSArray *imags= [city valueForKey:@"imgurl"];
+    return imags.count;
+}
+
+ON_TAPPED(signal){
+    if ([signal is:[UIView TAPPED]]) {
+        UIView *source = signal.source;
+        NSDictionary *city = [self.boards objectAtIndex:source.tag];
+        NSArray *imgurl= [city valueForKey:@"imgurl"];
+        if ([imgurl count]) {
+            HMUIPhotoBrowser *browserboard = [[HMUIPhotoBrowser alloc]init];
+            browserboard.delegate= self;
+            browserboard.dataSource = self;
+            browserboard.allowZoom = NO;
+            browserboard.allowAutoScroll = YES;
+            browserboard.tag = source.tag;
+            
+            [browserboard show];
+        }
+    }
+}
 
 #pragma  mark - table delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -81,6 +123,14 @@ ON_Button(signal){
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSNumber *height = [self.boards[indexPath.row] valueForKey:@"listheight"];
+    if (height) {
+        return [height integerValue];
+    }
+    return 60;
 }
 
 
@@ -97,6 +147,26 @@ ON_Button(signal){
     cell.textLabel.text = [city valueForKey:@"title"];
     cell.detailTextLabel.text = [city valueForKey:@"subtitle"];
     cell.detailTextLabel.textColor = RGB(.5, .5, .5);
+    cell.detailTextLabel.numberOfLines = 0;
+    NSArray *imgurl= [city valueForKey:@"imgurl"];
+    UIImageView *imageview = (id)cell.accessoryView;
+    
+    if ([imgurl count]) {
+        if (imageview==nil) {
+            imageview = [[UIImageView alloc]init];
+            cell.accessoryView= imageview;
+            imageview.tapEnabled = YES;
+        }
+        [imageview setImageWithURLString:imgurl.firstObject placeholderImage:[UIImage imageNamed:@"Icon-60"]];
+        CGFloat wi = [self tableView:tableView heightForRowAtIndexPath:indexPath];
+        imageview.bounds = CGRectMakeBound(wi, wi);
+        imageview.gifPlay = YES;
+        imageview.contentMode = UIViewContentModeScaleAspectFit;
+        imageview.tag = indexPath.row;
+    }else{
+        imageview.image = nil;
+    }
+   
     
     return cell;
 }
@@ -111,6 +181,7 @@ ON_Button(signal){
     NSString *url = [city valueForKey:@"url"];
     NSString *open = [city valueForKey:@"open"];
     NSArray *boards = [city valueForKey:@"boards"];
+    
     
     void (^complete)(BOOL viewLoaded, UIViewController* toBoard)=^(BOOL viewLoaded, UIViewController *toBoard){
         if (!viewLoaded) {

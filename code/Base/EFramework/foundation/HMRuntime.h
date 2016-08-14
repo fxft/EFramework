@@ -115,6 +115,22 @@ NSAssert([alias isKindOfClass:[NSArray class]], @"redirectProperty error alias m
 return alias;\
 }
 
+/**
+ *  属性同属性不同名称匹配，eg. {"a":1} 》》 objc.b
+ *  DEF_REDIRECTPROPERTY_2_ALIAS_FORCE(b,@[@"a"]),只要其中一个属性符合条件就成立
+ *  强制进行转换
+ *
+ *  @param property b
+ *  @param alias    a
+ *
+ *  @return a
+ */
+#undef DEF_REDIRECTPROPERTY_2_ALIAS_FORCE
+#define DEF_REDIRECTPROPERTY_2_ALIAS_FORCE(property,alias) \
+- (NSArray*)redirectPropertyAliasForceFor_##property{ \
+NSAssert([alias isKindOfClass:[NSArray class]], @"redirectProperty error alias must be an NSArray");\
+return alias;\
+}
 
 
 @interface NSDictionary (HMRuntimeForClass)

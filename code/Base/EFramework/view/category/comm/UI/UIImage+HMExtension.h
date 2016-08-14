@@ -100,6 +100,14 @@
 - (UIImage*)imageByApplyingBlurWithRadius:(CGFloat)blurRadius tintColor:(UIColor *)tintColor saturationDeltaFactor:(CGFloat)saturationDeltaFactor maskImage:(UIImage *)maskImage;
 - (UIImage *)imageByApplyingBlurWithRadius:(CGFloat)blurRadius tintColor:(UIColor *)tintColor blendRect:(CGRect)referFrame;
 
+//感知哈希算法,比较两张相识的照片
+//将图片缩小到8x8的尺寸，总共64个像素[image resizeWithQuality:newSize:]
+//将缩小后的图片，转为64级灰度。也就是说，所有像素点总共只有64种颜色[image grayscale];
+//3.计算出图片平均灰度，然后每一点灰度与平均灰度比较，大于平均值是1，小于平均值是0
+- (NSString *)pHashValue;
+//4.得到两个hashValue不同点数,得到指纹以后，就可以对比不同的图片，看看64位中有多少位是不一样的。在理论上，这等同于计算Hammingdistance）。如果不相同的数据位不超过5，就说明两张图片很相似；如果大于10，就说明这是两张不同的图片。 
++ (NSInteger)getDifferentValueCountWithString:(NSString *)str1 andString:(NSString *)str2;
+
 //黑色替换成对应颜色
 - (UIImage*)imageBlackToTransparentWithColor:(UIColor *)color;
 
@@ -184,6 +192,16 @@ typedef enum __EmbossShadowStyle {
  */
 + (UIImage *)imageForColor:(UIColor*)color scale:(CGFloat)scale size:(CGSize)size;
 + (UIImage *)imageForColor:(UIColor *)color scale:(CGFloat)scale size:(CGSize)size radius:(CGFloat)radius;
+
+/**
+ *  图片设置 tint颜色
+ *
+ *  @param tintColor
+ *  @param mode
+ *
+ *  @return 
+ */
+- (UIImage *)imageWithTintColor: (UIColor *)tintColor blendMode: (CGBlendMode)mode;
 /**
  *  根据Style样式生成图片
  *

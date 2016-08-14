@@ -10,6 +10,7 @@
 
 #if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
 
+#define IPHONE_OS_VERSION_MAX11_OR_LATER (__IPHONE_OS_VERSION_MAX_ALLOWED >= 110000)
 #define IPHONE_OS_VERSION_MAX10_OR_LATER (__IPHONE_OS_VERSION_MAX_ALLOWED >= 100000)
 #define IPHONE_OS_VERSION_MAX9_OR_LATER (__IPHONE_OS_VERSION_MAX_ALLOWED >= 90000)
 #define IPHONE_OS_VERSION_MAX8_OR_LATER (__IPHONE_OS_VERSION_MAX_ALLOWED >= 80000)
@@ -18,6 +19,7 @@
 #define IPHONE_OS_VERSION_MAX5_OR_LATER (__IPHONE_OS_VERSION_MAX_ALLOWED >= 50000)
 #define IPHONE_OS_VERSION_MAX4_OR_LATER (__IPHONE_OS_VERSION_MAX_ALLOWED >= 40000)
 
+#define IPHONE_OS_VERSION_MAX10_OR_EARLIER ( !IPHONE_OS_VERSION_MAX11_OR_LATER )
 #define IPHONE_OS_VERSION_MAX9_OR_EARLIER ( !IPHONE_OS_VERSION_MAX10_OR_LATER )
 #define IPHONE_OS_VERSION_MAX8_OR_EARLIER ( !IPHONE_OS_VERSION_MAX9_OR_LATER )
 #define IPHONE_OS_VERSION_MAX7_OR_EARLIER ( !IPHONE_OS_VERSION_MAX8_OR_LATER )
@@ -25,6 +27,7 @@
 #define IPHONE_OS_VERSION_MAX5_OR_EARLIER ( !IPHONE_OS_VERSION_MAX6_OR_LATER )
 #define IPHONE_OS_VERSION_MAX4_OR_EARLIER ( !IPHONE_OS_VERSION_MAX5_OR_LATER )
 
+#define IOS11_OR_LATER		( [[[UIDevice currentDevice] systemVersion] compare:@"11.0"] != NSOrderedAscending )
 #define IOS10_OR_LATER		( [[[UIDevice currentDevice] systemVersion] compare:@"10.0"] != NSOrderedAscending )
 #define IOS9_OR_LATER		( [[[UIDevice currentDevice] systemVersion] compare:@"9.0"] != NSOrderedAscending )
 #define IOS8_OR_LATER		( [[[UIDevice currentDevice] systemVersion] compare:@"8.0"] != NSOrderedAscending )
@@ -34,6 +37,7 @@
 #define IOS4_OR_LATER		( [[[UIDevice currentDevice] systemVersion] compare:@"4.0"] != NSOrderedAscending )
 #define IOS3_OR_LATER		( [[[UIDevice currentDevice] systemVersion] compare:@"3.0"] != NSOrderedAscending )
 
+#define IOS10_OR_EARLIER	( !IOS11_OR_LATER )
 #define IOS9_OR_EARLIER		( !IOS10_OR_LATER )
 #define IOS8_OR_EARLIER		( !IOS9_OR_LATER )
 #define IOS7_OR_EARLIER		( !IOS8_OR_LATER )
@@ -51,6 +55,8 @@
 
 #else	// #if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
 
+#define IOS11_OR_LATER		(NO)
+#define IOS10_OR_LATER		(NO)
 #define IOS9_OR_LATER		(NO)
 #define IOS8_OR_LATER		(NO)
 #define IOS7_OR_LATER		(NO)

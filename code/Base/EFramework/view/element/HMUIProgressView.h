@@ -18,22 +18,30 @@ typedef enum {
 
 @property(nonatomic, HM_STRONG) UIColor *trackTintColor UI_APPEARANCE_SELECTOR;
 @property(nonatomic, HM_STRONG) UIColor *progressTintColor UI_APPEARANCE_SELECTOR;
-@property(nonatomic, HM_STRONG) UIColor *trackBorderTintColor UI_APPEARANCE_SELECTOR;
-@property(nonatomic, HM_STRONG) UIColor *progressBorderTintColor UI_APPEARANCE_SELECTOR;
+@property(nonatomic, HM_STRONG) UIColor *trackBorderTintColor UI_APPEARANCE_SELECTOR;//UIProgressTypeLine
+@property(nonatomic, HM_STRONG) UIColor *progressBorderTintColor UI_APPEARANCE_SELECTOR;//UIProgressTypeLine
+@property(nonatomic, HM_STRONG) UIColor *innerTintColor UI_APPEARANCE_SELECTOR;//UIProgressTypeCircle
+
 @property(nonatomic) NSInteger roundedCorners UI_APPEARANCE_SELECTOR; // Can not use BOOL with UI_APPEARANCE_SELECTOR :-(
-@property(nonatomic) CGFloat thicknessRatio UI_APPEARANCE_SELECTOR;
+@property(nonatomic) CGFloat thicknessRatio UI_APPEARANCE_SELECTOR;//UIProgressTypeCircle
+@property(nonatomic) NSInteger clockwiseProgress UI_APPEARANCE_SELECTOR;//UIProgressTypeCircle
+@property (nonatomic) CGFloat startRadians;//UIProgressTypeCircle
+
 @property(nonatomic) CGFloat progress;
+@property(nonatomic) CGFloat progressTrack;//UIProgressTypeCircle
 
 @property(nonatomic) CGFloat indeterminateDuration UI_APPEARANCE_SELECTOR;
 @property(nonatomic) NSInteger indeterminate UI_APPEARANCE_SELECTOR; // Can not use BOOL with UI_APPEARANCE_SELECTOR :-(
 @property(nonatomic) CGFloat trackHeight UI_APPEARANCE_SELECTOR;
 @property(nonatomic) CGFloat radius UI_APPEARANCE_SELECTOR;
-@property(nonatomic) NSInteger hasBorder UI_APPEARANCE_SELECTOR;
+@property(nonatomic) NSInteger hasBorder UI_APPEARANCE_SELECTOR;//UIProgressTypeLine
 
 @property(nonatomic) UIProgressType progressType;
 
 - (void)setProgress:(CGFloat)progress animated:(BOOL)animated;
 - (void)setProgress:(CGFloat)progress duration:(NSTimeInterval)duration;
+- (void)setProgress:(CGFloat)progress animated:(BOOL)animated initialDelay:(CFTimeInterval)initialDelay;
+- (void)setProgress:(CGFloat)progress animated:(BOOL)animated initialDelay:(CFTimeInterval)initialDelay withDuration:(CFTimeInterval)duration;
 - (void)delayToHide:(NSTimeInterval)delay;
 
 @property(nonatomic, HM_STRONG) UIView *indeterminateView;//如果存在，indeterminate时将出现不停旋转的视图

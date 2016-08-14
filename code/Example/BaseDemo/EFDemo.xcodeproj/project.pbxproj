@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0400A3E41D2C0A730048FB3D /* color.m in Sources */ = {isa = PBXBuildFile; fileRef = 0400A3E31D2C0A730048FB3D /* color.m */; };
+		0400A3E51D2C0B270048FB3D /* Ono.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 049B629D1CE1B210002F6DA2 /* Ono.framework */; };
+		0400A3E61D2C0B270048FB3D /* Ono.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 049B629D1CE1B210002F6DA2 /* Ono.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0400A3E81D2C0BB20048FB3D /* material_colors.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0400A3E71D2C0BB20048FB3D /* material_colors.xml */; };
 		042A4BB81CF72D2B008482FE /* APIGateway.m in Sources */ = {isa = PBXBuildFile; fileRef = 042A4BAE1CF72D2B008482FE /* APIGateway.m */; };
 		042A4BB91CF72D2B008482FE /* AliEncryption.m in Sources */ = {isa = PBXBuildFile; fileRef = 042A4BB01CF72D2B008482FE /* AliEncryption.m */; };
 		042A4BBA1CF72D2B008482FE /* NSData+DTCrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = 042A4BB21CF72D2B008482FE /* NSData+DTCrypto.m */; };
@@ -93,6 +97,7 @@
 				049B62951CE1AF78002F6DA2 /* MBProgressHUD.framework in Embed Frameworks */,
 				049B62AD1CE1B210002F6DA2 /* UITableView_FDTemplateLayoutCell.framework in Embed Frameworks */,
 				044C37EC1CE3441D005B82BC /* SDWebImage.framework in Embed Frameworks */,
+				0400A3E61D2C0B270048FB3D /* Ono.framework in Embed Frameworks */,
 				049B62AF1CE1B210002F6DA2 /* ZipArchive.framework in Embed Frameworks */,
 				049B628F1CE1AF78002F6DA2 /* AFNetworking.framework in Embed Frameworks */,
 				049B62931CE1AF78002F6DA2 /* FMDB.framework in Embed Frameworks */,
@@ -110,6 +115,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0400A3E21D2C0A730048FB3D /* color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = color.h; sourceTree = "<group>"; };
+		0400A3E31D2C0A730048FB3D /* color.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = color.m; sourceTree = "<group>"; };
+		0400A3E71D2C0BB20048FB3D /* material_colors.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material_colors.xml; sourceTree = "<group>"; };
 		042A4BAD1CF72D2B008482FE /* APIGateway.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIGateway.h; sourceTree = "<group>"; };
 		042A4BAE1CF72D2B008482FE /* APIGateway.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIGateway.m; sourceTree = "<group>"; };
 		042A4BAF1CF72D2B008482FE /* AliEncryption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AliEncryption.h; sourceTree = "<group>"; };
@@ -217,12 +225,24 @@
 				049B62A21CE1B210002F6DA2 /* GPUImage.framework in Frameworks */,
 				04F30F111C09D91800EEFAF1 /* libz.dylib in Frameworks */,
 				04F30F151C09D91800EEFAF1 /* libc++.dylib in Frameworks */,
+				0400A3E51D2C0B270048FB3D /* Ono.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0400A3E11D2C0A730048FB3D /* UIEffect */ = {
+			isa = PBXGroup;
+			children = (
+				0400A3E21D2C0A730048FB3D /* color.h */,
+				0400A3E31D2C0A730048FB3D /* color.m */,
+				0400A3E71D2C0BB20048FB3D /* material_colors.xml */,
+			);
+			name = UIEffect;
+			path = For_iPhone/UIEffect;
+			sourceTree = "<group>";
+		};
 		042A4BAB1CF72D2B008482FE /* NetWork */ = {
 			isa = PBXGroup;
 			children = (
@@ -414,6 +434,7 @@
 		04F30F161C09D91800EEFAF1 /* For_iPhone */ = {
 			isa = PBXGroup;
 			children = (
+				0400A3E11D2C0A730048FB3D /* UIEffect */,
 				042A4BAB1CF72D2B008482FE /* NetWork */,
 				044C37ED1CE36280005B82BC /* ThirdPart */,
 				044C37DD1CE32FB1005B82BC /* Elements */,
@@ -521,6 +542,7 @@
 				04F311361C09F46300EEFAF1 /* cities.txt in Resources */,
 				04F30F011C09D91800EEFAF1 /* Main.storyboard in Resources */,
 				04F311371C09F46300EEFAF1 /* iOS7.jpg in Resources */,
+				0400A3E81D2C0BB20048FB3D /* material_colors.xml in Resources */,
 				04F3113A1C09F46300EEFAF1 /* provinces.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -532,6 +554,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0400A3E41D2C0A730048FB3D /* color.m in Sources */,
 				044C37E01CE32FF7005B82BC /* ButtonBoard.m in Sources */,
 				049B62B21CE1B409002F6DA2 /* ListBoard.m in Sources */,
 				04F30EFE1C09D91800EEFAF1 /* AppDelegate.m in Sources */,

@@ -90,7 +90,7 @@
     //    [HMUIConfig sharedInstance].allowControlerGestureBack = YES;
     [HMUINavigationBar setTitleColor:[UIColor whiteColor]];
     //    [HMUINavigationBar setBackgroundImage:[UIImage imageNamed:@"title_back.png"]];
-    [HMUINavigationBar setBackgroundOriginalColor:[UIColor flatGreenSeaColor]];
+    [HMUINavigationBar setBackgroundColor:[UIColor flatGreenSeaColor]];
     
     [HMURLMap map:@"*" URL:URLFOR_controller(@"HMBaseNavigator")];
     HMUIBoard *mainBoard =  [HMURLMap boardForMap:@"*"];

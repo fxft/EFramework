@@ -131,13 +131,16 @@ DEF_INT( TYPE_WEB,		7 )	// Web View
     }else if ([scheme isEqualToString:@"storyboard"]){
         //storyboard://name(.identifier)
         NSString *identifier = nil;
+        NSString *stackname = nil;
         BOOL hasStack = NO;
         if (items.count>0) {
             clazzName = [items firstObject];
+            stackname = clazzName;
             if (items.count>1) {
                 
                 if ([clazzName rangeOfString:@"HMUIStack"].location != NSNotFound) {
                     hasStack = YES;
+                    
                     clazzName = [items safeObjectAtIndex:1];
                     identifier = [items safeObjectAtIndex:2];
                 }else{
@@ -147,7 +150,7 @@ DEF_INT( TYPE_WEB,		7 )	// Web View
         }
         UIViewController *vc = [UIStoryboard boardWithName:identifier inStory:clazzName];
         if (hasStack) {
-            vc = ([clazzName rangeOfString:@"HMUIStackCustom"].location != NSNotFound)?[[[HMUIStack alloc] initCustomBarWithRootViewController:vc] autorelease]:[[[HMUIStack alloc]initWithRootViewController:vc]autorelease];
+            vc = ([stackname rangeOfString:@"HMUIStackCustom"].location != NSNotFound)?[[[HMUIStack alloc] initCustomBarWithRootViewController:vc] autorelease]:[[[HMUIStack alloc]initWithRootViewController:vc]autorelease];
         }
         map.board = vc;
         

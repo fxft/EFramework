@@ -37,6 +37,7 @@ typedef NS_ENUM(NSUInteger, BadgeType) {
 @property (nonatomic,HM_STRONG) UILabel *textLabel;
 @property (nonatomic,HM_STRONG) NSString *text;
 @property (nonatomic)CGSize     maxSize;
+@property (nonatomic)CGSize     minSize;
 @property (nonatomic)CGPoint     customPosition;
 @property (nonatomic)BadgeAutoPosition  autoPosition;//0:none 1:top-right 2:top-left 3:center  4:bottom-right 5:bottom-left
 @end

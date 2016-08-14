@@ -16,6 +16,8 @@
 @property(nonatomic, HM_STRONG) UIColor *progressTintColor;
 @property(nonatomic, HM_STRONG) UIColor *trackBorderTintColor;
 @property(nonatomic, HM_STRONG) UIColor *progressBorderTintColor;
+@property(nonatomic, HM_STRONG) UIColor *innerTintColor;
+@property(nonatomic) CGFloat progressTrack;
 @property(nonatomic) NSInteger roundedCorners;
 @property(nonatomic) CGFloat thicknessRatio;
 @property(nonatomic) CGFloat progress;
@@ -24,6 +26,9 @@
 @property(nonatomic) CGFloat spotlightPoint;
 @property(nonatomic) BOOL spotlightEnable;
 @property(nonatomic) CGFloat hasBorder;
+@property(nonatomic) NSInteger clockwiseProgress;
+@property (nonatomic) CGFloat startRadians;
+
 @end
 
 @interface DACircularProgressLayer : CALayer<ProgressLayerProtocal>
@@ -37,15 +42,19 @@
 @dynamic progressTintColor;
 @dynamic trackBorderTintColor;
 @dynamic progressBorderTintColor;
+@dynamic innerTintColor;
 
 @dynamic roundedCorners;
 @dynamic thicknessRatio;
 @dynamic progress;
+@dynamic progressTrack;
 @dynamic radius;
 @dynamic trackHeight;
 @dynamic spotlightPoint;
 @dynamic spotlightEnable;
 @dynamic hasBorder;
+@dynamic clockwiseProgress;
+@dynamic startRadians;
 
 + (BOOL)needsDisplayForKey:(NSString *)key
 {
@@ -55,53 +64,132 @@
 - (void)drawInContext:(CGContextRef)context
 {
     CGRect rect = self.bounds;
-    CGPoint centerPoint = CGPointMake(rect.size.height / 2.0f, rect.size.width / 2.0f);
+    CGPoint centerPoint = CGPointMake(rect.size.width / 2.0f, rect.size.height / 2.0f);
     CGFloat radius = MIN(rect.size.height, rect.size.width) / 2.0f;
     
+    BOOL clockwise = (self.clockwiseProgress != 0);
+    
     CGFloat progress = MIN(self.progress, 1.0f - FLT_EPSILON);
-    CGFloat radians = (progress * 2.0f * M_PI) - M_PI_2;
+    CGFloat radians = 0;
+    if (clockwise) {
+        radians = (float)((progress * 2.0f * M_PI) - 2*M_PI+self.startRadians);
+    } else {
+        radians = (float)(self.startRadians - (progress * 2.0f * M_PI));
+    }
+    
+    CGFloat progressTrack = MIN(self.progressTrack, 1.0f - FLT_EPSILON);
+    CGFloat radiansTrack = 0;
+    if (clockwise) {
+        radiansTrack = (float)((progressTrack * 2.0f * M_PI) - 2*M_PI+self.startRadians);
+    } else {
+        radiansTrack = (float)(self.startRadians - (progressTrack * 2.0f * M_PI));
+    }
     
     CGContextSetFillColorWithColor(context, self.trackTintColor.CGColor);
     CGMutablePathRef trackPath = CGPathCreateMutable();
     CGPathMoveToPoint(trackPath, NULL, centerPoint.x, centerPoint.y);
-    CGPathAddArc(trackPath, NULL, centerPoint.x, centerPoint.y, radius, 3.0f * M_PI_2, -M_PI_2, NO);
+    CGPathAddArc(trackPath, NULL, centerPoint.x, centerPoint.y, radius, (float)(self.startRadians), radiansTrack, !clockwise);
     CGPathCloseSubpath(trackPath);
     CGContextAddPath(context, trackPath);
     CGContextFillPath(context);
     CGPathRelease(trackPath);
     
-    if (progress > 0.0f)
-    {
+    if (self.roundedCorners) {
+        if (self.trackHeight!=0) {
+            self.thicknessRatio = self.trackHeight/radius;
+        }
+        CGFloat pathWidth = radius * self.thicknessRatio;
+        CGFloat xOffset = radius * (1.0f + ((1.0f - (self.thicknessRatio / 2.0f)) * cosf(radiansTrack)));
+        CGFloat yOffset = radius * (1.0f + ((1.0f - (self.thicknessRatio / 2.0f)) * sinf(radiansTrack)));
+        CGPoint endPoint = CGPointMake(xOffset, yOffset);
+        
+        xOffset = radius * (1.0f + ((1.0f - (self.thicknessRatio / 2.0f)) * cosf(self.startRadians)));
+        yOffset = radius * (1.0f + ((1.0f - (self.thicknessRatio / 2.0f)) * sinf(self.startRadians)));
+        CGPoint startPoint =  CGPointMake(xOffset, yOffset);
+        
+        CGRect startEllipseRect = (CGRect) {
+            .origin.x = startPoint.x - pathWidth / 2.0f,
+            .origin.y = startPoint.y - pathWidth / 2.0f,
+            .size.width = pathWidth,
+            .size.height = pathWidth
+        };
+        CGContextAddEllipseInRect(context, startEllipseRect);
+        CGContextFillPath(context);
+        
+        CGRect endEllipseRect = (CGRect) {
+            .origin.x = endPoint.x - pathWidth / 2.0f,
+            .origin.y = endPoint.y - pathWidth / 2.0f,
+            .size.width = pathWidth,
+            .size.height = pathWidth
+        };
+        CGContextAddEllipseInRect(context, endEllipseRect);
+        CGContextFillPath(context);
+    }
+    
+    
+    if (progress > 0.0f) {
         CGContextSetFillColorWithColor(context, self.progressTintColor.CGColor);
         CGMutablePathRef progressPath = CGPathCreateMutable();
         CGPathMoveToPoint(progressPath, NULL, centerPoint.x, centerPoint.y);
-        CGPathAddArc(progressPath, NULL, centerPoint.x, centerPoint.y, radius, 3.0f * M_PI_2, radians, NO);
+        CGPathAddArc(progressPath, NULL, centerPoint.x, centerPoint.y, radius, (float)(self.startRadians), radians, !clockwise);
         CGPathCloseSubpath(progressPath);
         CGContextAddPath(context, progressPath);
         CGContextFillPath(context);
         CGPathRelease(progressPath);
+        
+        if (self.roundedCorners) {
+            if (self.trackHeight!=0) {
+                self.thicknessRatio = self.trackHeight/radius;
+            }
+            CGFloat pathWidth = radius * self.thicknessRatio;
+            CGFloat xOffset = radius * (1.0f + ((1.0f - (self.thicknessRatio / 2.0f)) * cosf(radians)));
+            CGFloat yOffset = radius * (1.0f + ((1.0f - (self.thicknessRatio / 2.0f)) * sinf(radians)));
+            CGPoint endPoint = CGPointMake(xOffset, yOffset);
+            
+            xOffset = radius * (1.0f + ((1.0f - (self.thicknessRatio / 2.0f)) * cosf(self.startRadians)));
+            yOffset = radius * (1.0f + ((1.0f - (self.thicknessRatio / 2.0f)) * sinf(self.startRadians)));
+            CGPoint startPoint =  CGPointMake(xOffset, yOffset);
+            
+            CGRect startEllipseRect = (CGRect) {
+                .origin.x = startPoint.x - pathWidth / 2.0f,
+                .origin.y = startPoint.y - pathWidth / 2.0f,
+                .size.width = pathWidth,
+                .size.height = pathWidth
+            };
+            CGContextAddEllipseInRect(context, startEllipseRect);
+            CGContextFillPath(context);
+            
+            CGRect endEllipseRect = (CGRect) {
+                .origin.x = endPoint.x - pathWidth / 2.0f,
+                .origin.y = endPoint.y - pathWidth / 2.0f,
+                .size.width = pathWidth,
+                .size.height = pathWidth
+            };
+            CGContextAddEllipseInRect(context, endEllipseRect);
+            CGContextFillPath(context);
+        }
     }
     
-    if (progress > 0.0f && self.roundedCorners)
-    {
-        CGFloat pathWidth = radius * self.thicknessRatio;
-        CGFloat xOffset = radius * (1.0f + ((1.0f - (self.thicknessRatio / 2.0f)) * cosf(radians)));
-        CGFloat yOffset = radius * (1.0f + ((1.0f - (self.thicknessRatio / 2.0f)) * sinf(radians)));
-        CGPoint endPoint = CGPointMake(xOffset, yOffset);
-        
-        CGContextAddEllipseInRect(context, CGRectMake(centerPoint.x - pathWidth / 2.0f, 0.0f, pathWidth, pathWidth));
-        CGContextFillPath(context);
-        
-        CGContextAddEllipseInRect(context, CGRectMake(endPoint.x - pathWidth / 2.0f, endPoint.y - pathWidth / 2.0f, pathWidth, pathWidth));
-        CGContextFillPath(context);
-    }
     
     CGContextSetBlendMode(context, kCGBlendModeClear);
     CGFloat innerRadius = radius * (1.0f - self.thicknessRatio);
-    CGPoint newCenterPoint = CGPointMake(centerPoint.x - innerRadius, centerPoint.y - innerRadius);
-    CGContextAddEllipseInRect(context, CGRectMake(newCenterPoint.x, newCenterPoint.y, innerRadius * 2.0f, innerRadius * 2.0f));
+    CGRect clearRect = (CGRect) {
+        .origin.x = centerPoint.x - innerRadius,
+        .origin.y = centerPoint.y - innerRadius,
+        .size.width = innerRadius * 2.0f,
+        .size.height = innerRadius * 2.0f
+    };
+    CGContextAddEllipseInRect(context, clearRect);
     CGContextFillPath(context);
+    
+    if (self.innerTintColor) {
+        CGContextSetBlendMode(context, kCGBlendModeNormal);
+        CGContextSetFillColorWithColor(context, [self.innerTintColor CGColor]);
+        CGContextAddEllipseInRect(context, clearRect);
+        CGContextFillPath(context);
+    }
 }
+
 
 @end
 
@@ -124,6 +212,10 @@
 @dynamic spotlightPoint;
 @dynamic spotlightEnable;
 @dynamic hasBorder;
+@dynamic clockwiseProgress;
+@dynamic innerTintColor;
+@dynamic progressTrack;
+@dynamic startRadians;
 
 + (BOOL)needsDisplayForKey:(NSString *)key
 {
@@ -313,10 +405,14 @@
             self.progressLayer = [[[DALineProgressLayer alloc]init]autorelease];
             [self.progressLayer setTrackTintColor:RGBA(181, 181, 181, .9)];
             [self.progressLayer setProgressTintColor:RGBA(21, 140, 255, .9)];
+             [self.progressLayer setTrackHeight:4.f];//ceilf(.8*self.height)];
+            
         }else if (_progressType==UIProgressTypeCircle){
             self.progressLayer = [[[DACircularProgressLayer alloc]init]autorelease];
             [self.progressLayer setTrackTintColor:[[UIColor whiteColor] colorWithAlphaComponent:0.3f]];
             [self.progressLayer setProgressTintColor:[UIColor whiteColor]];
+            self.progressLayer.startRadians = 3 * M_PI_2;
+            
             CGFloat border = MIN(frame.size.height, frame.size.width);
             frame = CGRectInset(frame, (frame.size.width-border)/2.0, (frame.size.height-border)/2.0);
         }
@@ -325,7 +421,7 @@
         [self.progressLayer setRoundedCorners:NO];
         
         [self.progressLayer setRadius:5.f];
-        [self.progressLayer setTrackHeight:4.f];//ceilf(.8*self.height)];
+       
         
         [self setBackgroundColor:[UIColor clearColor]];
         [self setIndeterminateDuration:4.0f];
@@ -357,20 +453,11 @@
 
 - (CGFloat)progress
 {
-    return _progress;//self.circularProgressLayer.progress;
-}
-
-- (void)setProgress:(CGFloat)progress
-{
-    [self setProgress:progress animated:NO];
+    return self.circularProgressLayer.progress;
 }
 
 - (void)setLayerProgress{
     self.circularProgressLayer.progress = _progress;
-}
-
-- (void)setProgress:(CGFloat)progress animated:(BOOL)animated{
-    [self setProgress:progress animated:animated duration:1.f];
 }
 
 - (void)setProgress:(CGFloat)progress duration:(NSTimeInterval)duration{
@@ -379,36 +466,101 @@
 
 - (void)setProgress:(CGFloat)progress animated:(BOOL)animated duration:(NSTimeInterval)duration
 {
-    self.hidden = NO;
     
-    CGFloat pinnedProgress = MIN(MAX(progress, 0.0f), 1.0f);
-    CGFloat oldProgress = _progress;
-    _progress = pinnedProgress;
-    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(setLayerProgress) object:self];
+    [self setProgress:progress animated:animated initialDelay:0.0 withDuration:duration];
     
-    if (animated)
-    {
-        CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"progress"];
-        animation.duration = fabs(oldProgress - pinnedProgress)*duration; // Same duration as UIProgressView animation
-        animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-        animation.fromValue = [NSNumber numberWithFloat:oldProgress];
-        animation.toValue = [NSNumber numberWithFloat:pinnedProgress];
-        animation.fillMode = kCAFillModeForwards ;
-        animation.removedOnCompletion = NO;
-        [self.circularProgressLayer addAnimation:animation forKey:@"progress"];
-        [self performSelector:@selector(setLayerProgress) withObject:self afterDelay:.25f inModes:@[NSRunLoopCommonModes]];
-    }
-    else
-    {
-        self.circularProgressLayer.progress = pinnedProgress;
-        [self.circularProgressLayer removeAnimationForKey:@"progress"];
-        [self.circularProgressLayer setNeedsDisplay];
-    }
+//    self.hidden = NO;
+//    
+//    CGFloat pinnedProgress = MIN(MAX(progress, 0.0f), 1.0f);
+//    CGFloat oldProgress = _progress;
+//    _progress = pinnedProgress;
+//    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(setLayerProgress) object:self];
+//    
+//    if (animated)
+//    {
+//        CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"progress"];
+//        animation.duration = fabs(oldProgress - pinnedProgress)*duration; // Same duration as UIProgressView animation
+//        animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+//        animation.fromValue = [NSNumber numberWithFloat:oldProgress];
+//        animation.toValue = [NSNumber numberWithFloat:pinnedProgress];
+//        animation.fillMode = kCAFillModeForwards ;
+//        animation.removedOnCompletion = NO;
+//        [self.circularProgressLayer addAnimation:animation forKey:@"progress"];
+//        [self performSelector:@selector(setLayerProgress) withObject:self afterDelay:.25f inModes:@[NSRunLoopCommonModes]];
+//    }
+//    else
+//    {
+//        self.circularProgressLayer.progress = pinnedProgress;
+//        [self.circularProgressLayer removeAnimationForKey:@"progress"];
+//        [self.circularProgressLayer setNeedsDisplay];
+//    }
    
 //#if (__ON__ == __HM_DEVELOPMENT__)
 //    CC( @"UIProgress",@"Progress:%.2f",pinnedProgress);
 //#endif	// #if (__ON__ == __BEE_DEVELOPMENT__)
 }
+- (CGFloat)progressTrack{
+    return self.circularProgressLayer.progressTrack;
+}
+- (void)setProgressTrack:(CGFloat)progressTrack{
+    self.circularProgressLayer.progressTrack = progressTrack;
+    [self.circularProgressLayer setNeedsDisplay];
+}
+
+- (void)setProgress:(CGFloat)progress
+{
+    [self setProgress:progress animated:NO];
+}
+
+- (void)setProgress:(CGFloat)progress animated:(BOOL)animated
+{
+    [self setProgress:progress animated:animated initialDelay:0.0];
+}
+
+- (void)setProgress:(CGFloat)progress
+           animated:(BOOL)animated
+       initialDelay:(CFTimeInterval)initialDelay
+{
+    CGFloat pinnedProgress = MIN(MAX(progress, 0.0f), 1.0f);
+    [self setProgress:progress
+             animated:animated
+         initialDelay:initialDelay
+         withDuration:fabs(self.progress - pinnedProgress)];
+}
+
+- (void)setProgress:(CGFloat)progress
+           animated:(BOOL)animated
+       initialDelay:(CFTimeInterval)initialDelay
+       withDuration:(CFTimeInterval)duration
+{
+    
+    self.hidden = NO;
+    
+    [self.circularProgressLayer removeAnimationForKey:@"progress"];
+    
+    CGFloat pinnedProgress = MIN(MAX(progress, 0.0f), 1.0f);
+    if (animated) {
+        CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"progress"];
+        animation.duration = duration;
+        animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+        animation.fillMode = kCAFillModeForwards;
+        animation.fromValue = [NSNumber numberWithFloat:self.progress];
+        animation.toValue = [NSNumber numberWithFloat:pinnedProgress];
+        animation.beginTime = CACurrentMediaTime() + initialDelay;
+        animation.delegate = self;
+        [self.circularProgressLayer addAnimation:animation forKey:@"progress"];
+    } else {
+        [self.circularProgressLayer setNeedsDisplay];
+        self.circularProgressLayer.progress = pinnedProgress;
+    }
+}
+
+- (void)animationDidStop:(CAAnimation *)animation finished:(BOOL)flag
+{
+    NSNumber *pinnedProgressNumber = [animation valueForKey:@"toValue"];
+    self.circularProgressLayer.progress = [pinnedProgressNumber floatValue];
+}
+
 
 - (void)delayToHide:(NSTimeInterval)delay{
     self.alpha=1.f;
@@ -482,6 +634,14 @@
     [self.circularProgressLayer setNeedsDisplay];
 }
 
+- (UIColor *)innerTintColor{
+    return self.circularProgressLayer.innerTintColor;
+}
+
+- (void)setInnerTintColor:(UIColor *)innerTintColor{
+    self.circularProgressLayer.innerTintColor = innerTintColor;
+    [self.circularProgressLayer setNeedsDisplay];
+}
 
 - (UIColor *)progressBorderTintColor{
     return self.circularProgressLayer.progressBorderTintColor;
@@ -520,6 +680,17 @@
 - (void)setThicknessRatio:(CGFloat)thicknessRatio
 {
     self.circularProgressLayer.thicknessRatio = MIN(MAX(thicknessRatio, 0.f), 1.f);
+    [self.circularProgressLayer setNeedsDisplay];
+}
+
+- (CGFloat)startRadians
+{
+    return self.circularProgressLayer.startRadians;
+}
+
+- (void)setStartRadians:(CGFloat)startRadians
+{
+    self.circularProgressLayer.startRadians = startRadians;
     [self.circularProgressLayer setNeedsDisplay];
 }
 
@@ -586,5 +757,17 @@
          }
     }
 }
+
+- (NSInteger)clockwiseProgress
+{
+    return self.circularProgressLayer.clockwiseProgress;
+}
+
+- (void)setClockwiseProgress:(NSInteger)clockwiseProgres
+{
+    self.circularProgressLayer.clockwiseProgress = clockwiseProgres;
+    [self.circularProgressLayer setNeedsDisplay];
+}
+
 
 @end

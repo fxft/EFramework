@@ -70,5 +70,6 @@ mkdir -p "${SRCROOT}/../../../comm/EF/Frameworks/PublicOS"
 cp -r -f ${SRCROOT}/Frameworks/Public/*  ${SRCROOT}/../../../comm/EF/Frameworks/Public/
 cp -r -f ${SRCROOT}/Frameworks/PublicOS/*  ${SRCROOT}/../../../comm/EF/Frameworks/PublicOS/
 
+cp -r -f ${SRCROOT}/../../../comm/EF/Frameworks/*  /Volumes/Edata/works/public/comm/EFNew/Frameworks/
 #lipo -create ${SRCROOT}/Frameworks/Debug-iphoneos/EFMWK.framework/EFMWK ./Debug-iphonesimulator/EFMWK.framework/EFMWK -output EFMWK.framework/EFMWK
 

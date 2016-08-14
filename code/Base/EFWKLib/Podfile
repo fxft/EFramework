@@ -2,7 +2,7 @@ platform :ios , '8.0'
 use_frameworks!
 
 target 'EFWKLib' do
-pod 'AFNetworking', '~> 2.6.3'
+pod 'AFNetworking', '<= 2.6.3'
 pod 'MBProgressHUD', '~> 0.9.2'
 pod 'OpenUDID', '~> 1.0.0'
 pod 'FMDB', '~> 2.6'

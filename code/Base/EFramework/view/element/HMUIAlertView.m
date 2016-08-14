@@ -437,9 +437,11 @@
 
 + (instancetype)alertViewWithTitle:(NSString *)title message:(NSString *)message{
     
-    Class alertZ = [HMUIAlert7View class];
-    if (IOS9_OR_LATER) {
+    Class alertZ;
+    if (IOS8_OR_LATER) {
         alertZ = [HMUIAlertView class];
+    }else {
+        alertZ = [HMUIAlert7View class];
     }
     return [alertZ alertWithTitle:title message:message];
 }

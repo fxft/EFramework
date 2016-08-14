@@ -755,6 +755,9 @@ ON_NOTIFICATION(__notification){
     PhotoViewSetIndex(photoView,page);
     
     if (photoView!=nil) {
+        if ([self.delegate respondsToSelector:@selector(photoBrowser:didLoadCell:atIndex:)]) {
+            [self.delegate photoBrowser:self didLoadCell:photoView atIndex:page];
+        }
         return photoView;
     }
     

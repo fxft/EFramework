@@ -67,7 +67,7 @@
 + (instancetype)alertWithTitle:(NSString *)title message:(NSString *)message destructive:(NSString*)destructive{
     HMUIActionSheet *sheet = [HMUIActionSheet alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleActionSheet];
     if (destructive) {
-        UIAlertAction *action = [sheet actionWithTitle:title style:UIAlertActionStyleDestructive];
+        UIAlertAction *action = [sheet actionWithTitle:destructive style:UIAlertActionStyleDestructive];
         [sheet addAction:action];
     }
     return sheet;
@@ -425,9 +425,11 @@
     return [self sheetViewWithTitle:title message:message destructive:nil];
 }
 + (instancetype)sheetViewWithTitle:(NSString *)title message:(NSString *)message destructive:(NSString *)destructive{
-    Class alertZ = [HMUIAction7Sheet class];
-    if (IOS9_OR_LATER) {
+    Class alertZ;
+    if (IOS8_OR_LATER) {
         alertZ = [HMUIActionSheet class];
+    }else{
+        alertZ = [HMUIAction7Sheet class];
     }
     return [alertZ alertWithTitle:title message:message destructive:destructive];
 

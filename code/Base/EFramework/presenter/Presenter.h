@@ -34,7 +34,7 @@ typedef NS_ENUM(NSUInteger, PresenterProcess) {
 
 @class Presenter;
 
-//typedef void(^PresenterCALLBACK)(Presenter* presenter, NSString* something,id bean, PresenterProcess state, NSError *error);
+typedef void(^PresenterCALLBACK)(Presenter* presenter, NSString* something, NSString* tag,id bean, PresenterProcess state, NSError *error);
 
 @protocol PresenterCallBackProtocol <NSObject>
 
@@ -42,6 +42,15 @@ typedef NS_ENUM(NSUInteger, PresenterProcess) {
 
 
 @end
+
+@interface PresenterCallbackBlockItem : NSObject
+
+@property (nonatomic,copy) NSString *tag;
+
+@property (nonatomic,copy) PresenterCALLBACK callback;
+
+@end
+
 
 @protocol PresenterProtocol <NSObject>
 
@@ -113,6 +122,23 @@ typedef NS_ENUM(NSUInteger, PresenterProcess) {
 - (void)unbindIutput:(NSString*)attribute;
 - (void)unbindInputOutput:(NSString*)attribute;
 - (void)unbindAll;
+
+- (void)observeForCommand:(NSString*)command listener:(id<PresenterCallBackProtocol>)Listener;
+- (void)unobserveForCommand:(NSString*)command listener:(id<PresenterCallBackProtocol>)Listener;
+
+- (NSArray*)observeListenersForCommand:(NSString*)command;
+- (void)unobserveListenersForCommand:(NSString*)command;
+
+//callback tag需要自行进行分支判断
+- (void)observeForCommand:(NSString*)command withTag:(NSString*)tag block:(PresenterCALLBACK)callback;
+
+- (void)unobserveForCommand:(NSString*)command withTag:(NSString*)tag;
+// PresenterCallbackBlockItem array
+- (NSArray*)observeBlockItemsForCommand:(NSString*)command;
+- (void)unobserveBlockItemsForCommand:(NSString*)command;
+
+
+- (void)callbackListenter:(NSString*)something bean:(id)bean state:(PresenterProcess)state error:(NSError *)error;
 
 @end
 

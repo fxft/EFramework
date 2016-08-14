@@ -177,6 +177,7 @@
 @synthesize type=_type;
 @synthesize color=_color;
 @synthesize maxSize=_maxSize;
+@synthesize minSize=_minSize;
 @synthesize textLabel;
 @synthesize autoPosition;
 @synthesize customPosition;
@@ -272,8 +273,8 @@
         if (_maxSize.width==0) {
             _maxSize.width = frame.size.width;
         }
-        frame.size.height = MIN(_maxSize.height, frame.size.height);
-        frame.size.width = MAX(frame.size.height, MIN(_maxSize.width, frame.size.width));
+        frame.size.height = MAX(MIN(_maxSize.height, frame.size.height), _minSize.height);
+        frame.size.width = MAX(MAX(frame.size.height, MIN(_maxSize.width, frame.size.width)), _minSize.width);
     }
     frame.size.height += inset.top+inset.bottom;
     frame.size.width += inset.left+inset.right;

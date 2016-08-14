@@ -9,14 +9,14 @@ PODS:
   - GPUImage (0.1.7)
   - iOS-MagnifyingGlass (0.0.2)
   - JHChainableAnimations (1.3.0)
-  - Masonry (1.0.0)
-  - MJRefresh (3.1.0)
+  - Masonry (1.0.1)
+  - MJRefresh (3.1.10)
   - Ono (1.2.2)
-  - Permission (1.4.1)
+  - Permission (1.4.2)
   - Realm (0.102.0):
     - Realm/Headers (= 0.102.0)
   - Realm/Headers (0.102.0)
-  - SDAutoLayout (1.53)
+  - SDAutoLayout (2.1.3)
   - SDCycleScrollView (1.64):
     - SDWebImage (~> 3.7)
   - SDWebImage (3.7.6):
@@ -32,12 +32,12 @@ DEPENDENCIES:
   - GPUImage (~> 0.1.7)
   - iOS-MagnifyingGlass (~> 0.0.2)
   - JHChainableAnimations (~> 1.3.0)
-  - Masonry (~> 1.0.0)
-  - MJRefresh (~> 3.1.0)
+  - Masonry (~> 1.0.1)
+  - MJRefresh (~> 3.1.10)
   - Ono (~> 1.2.2)
-  - Permission (~> 1.4.1)
-  - Realm (~> 0.102.0)
-  - SDAutoLayout (~> 1.53)
+  - Permission (~> 1.4.2)
+  - Realm (<= 0.102.0)
+  - SDAutoLayout (~> 2.1.3)
   - SDCycleScrollView (~> 1.64)
   - SDWebImage (~> 3.7.6)
   - SYStickHeaderWaterFall (~> 0.0.2)
@@ -50,12 +50,12 @@ SPEC CHECKSUMS:
   GPUImage: 733a5f0fab92df9de1c37ba9df520a833ccb406d
   iOS-MagnifyingGlass: b11b7d3e8be7de22c85f0edcaa75538bdf0827dc
   JHChainableAnimations: 22085fcb04ca87349e584573558e637f659fd769
-  Masonry: b529bb169217897b6354d4b56b1fada6d475b13d
-  MJRefresh: 743e6404967d1c2c688472ea3ecfde247d872db4
+  Masonry: a1a931a0d08870ed8ae415a2ea5ea68ebcac77df
+  MJRefresh: bb72948c985914b0b5cecac573a2c69a8915fb02
   Ono: 80b1c686777d3f6d5d5ce6fcac8a74afef4ca197
-  Permission: 236c6b62fb6a1524fbb323d00facbfacc0c96544
+  Permission: e7e1c2555ffe8726a0c28e04799fe973116e5b3f
   Realm: 5d219f9037e3ec2019c599b8227bfc95433cb10e
-  SDAutoLayout: ea6e2ae9fbb438aa2feb0c4363dba9297e98638a
+  SDAutoLayout: ddf39b38dbd793a4802c8feb6429096aea4aa658
   SDCycleScrollView: 806fedb9342ab03b58b84442f985517b42c7cbb7
   SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
   SYStickHeaderWaterFall: 6fea7e6705d7b8b1f366912ac5e4e05a1aac7f00
@@ -63,6 +63,6 @@ SPEC CHECKSUMS:
   UITableView+FDTemplateLayoutCell: 234e1582bcc4e18461af91155123bb96538ed030
   ZipArchive: e25a4373192673e3229ac8d6e9f64a3e5713c966
 
-PODFILE CHECKSUM: 2e364fc76a2b188d6496a71ef8f18709ba791b10
+PODFILE CHECKSUM: 34c9e055e3f7ae7e297fe16b6d9af5399c392d96
 
 COCOAPODS: 1.0.0

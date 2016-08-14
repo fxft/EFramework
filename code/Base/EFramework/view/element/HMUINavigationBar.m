@@ -130,12 +130,13 @@ static CGSize		__buttonSize = { 0 };
 - (CGSize)sizeThatFits:(CGSize)size{
     CGSize navigationBarSize = [super sizeThatFits:size];
 //    32/44
+    CGFloat y = [[UIApplication sharedApplication].keyWindow.rootViewController prefersStatusBarHidden]?0:20;
     if (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation)) {
 //        self.frame = CGRectMake(0, IOS8_OR_LATER?0:20, navigationBarSize.width, navigationBarSize.height);
-        self.frame = CGRectMake(0, 20, navigationBarSize.width, navigationBarSize.height);
+        self.frame = CGRectMake(0, y, navigationBarSize.width, navigationBarSize.height);
     }else{
-        if (!CGRectEqualToRect(CGRectMake(0, 20, navigationBarSize.width, navigationBarSize.height), self.frame)) {
-            self.frame = CGRectMake(0, 20, navigationBarSize.width, navigationBarSize.height);
+        if (!CGRectEqualToRect(CGRectMake(0, y, navigationBarSize.width, navigationBarSize.height), self.frame)) {
+            self.frame = CGRectMake(0, y, navigationBarSize.width, navigationBarSize.height);
         }
         
     }
@@ -189,22 +190,18 @@ static CGSize		__buttonSize = { 0 };
 }
 
 - (void)layoutSubviews{
+    
     [super layoutSubviews];
     
     [self sendSubviewToBack:self.imagelayer];
     [self sendSubviewToBack:self.sublayer];
     [self sendSubviewToBack:self.shadowlayer];
     [self sendSubviewToBack:self.baselayer];
-    
+
 }
 
 - (void)drawRect:(CGRect)rect{
-//    [super drawRect:rect];
-//    if (self.translucent) {
-//         self.backgroundColor = [UIColor clearColor];
-//    }else{
-//        self.backgroundColor = [UIColor whiteColor];
-//    }
+    
     self.backgroundColor = [UIColor clearColor];
     self.sublayer.backgroundColor = self.barTintColor;
     self.imagelayer.image = [self backgroundImageForBarPosition:self.barPosition barMetrics:UIBarMetricsDefault];
@@ -215,7 +212,28 @@ static CGSize		__buttonSize = { 0 };
     }else{
          self.baselayer.alpha = self.sublayer.backgroundColor.alpha;
     }
-   
+    [UIView beginAnimations:@"statusbar" context:nil];
+    
+    [UIView setAnimationDuration:.15f];
+    [UIView setAnimationBeginsFromCurrentState:YES];
+    
+    if ([[UIApplication sharedApplication].keyWindow.rootViewController prefersStatusBarHidden]) {
+        self.y = 0;
+    }else {
+        self.y = 20;
+    }
+    
+    [UIView commitAnimations];
+    
+//    [UIView animateWithDuration:.15f animations:^{
+//        if ([UIApplication sharedApplication].statusBarHidden&&self.y!=0) {
+//            self.y = 0;
+//        }else if (![UIApplication sharedApplication].statusBarHidden&&self.y!=20) {
+//            self.y = 20;
+//        }
+//    }];
+    
+//    self.backgroundColor = [[UIColor blueColor] colorWithAlphaComponent:.4];
 }
 
 - (instancetype)initWithFrame:(CGRect)frame{
