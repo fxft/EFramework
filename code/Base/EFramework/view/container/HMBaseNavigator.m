@@ -132,8 +132,9 @@ DEF_SINGLETON(HMBaseNavigator)
         mask= [super preferredInterfaceOrientationForPresentation];
     }else
     mask =  [self.visableViewController respondsToSelector:@selector(preferredInterfaceOrientationForPresentation)]?[self.visableViewController preferredInterfaceOrientationForPresentation]:[super preferredInterfaceOrientationForPresentation];
-
+#ifdef  DEBUG
     CC(@"Orientation",@"preferredInterfaceOrientationForPresentation",@"for:",self.visableViewController,@"mask:",@(mask));
+#endif
     return mask;
 }
 
@@ -145,7 +146,9 @@ DEF_SINGLETON(HMBaseNavigator)
     }else{
         mask =  [self.visableViewController respondsToSelector:@selector(supportedInterfaceOrientations)]?[self.visableViewController supportedInterfaceOrientations]:[super supportedInterfaceOrientations];
     }
+#ifdef  DEBUG
     CC(@"Orientation",@"supportedInterfaceOrientations",@"for:",self.visableViewController,@"mask:",@(mask));
+#endif
     return mask;
 }
 
@@ -156,8 +159,9 @@ DEF_SINGLETON(HMBaseNavigator)
         can = [super shouldAutorotate];
     }else
     can = [self.visableViewController respondsToSelector:@selector(shouldAutorotate)]?[self.visableViewController shouldAutorotate]:[super shouldAutorotate];
-    
+#ifdef  DEBUG
     CC(@"Orientation",@"shouldAutorotate",@"for:",self.visableViewController,@"mask:",@(can));
+#endif
     return can;
 }
 

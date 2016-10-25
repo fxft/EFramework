@@ -100,5 +100,8 @@ extern UIInterfaceOrientation InterfaceOrientation();
 #undef LaunchNotificationUrlKey
 #define LaunchNotificationUrlKey @"url"
 
+#undef LaunchNotificationCannotOpenUrlKey
+#define LaunchNotificationCannotOpenUrlKey @"CannotOpenUrlKey"
+
 #undef LaunchNotificationSourceKey
 #define LaunchNotificationSourceKey @"source"

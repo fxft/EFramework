@@ -124,7 +124,7 @@ DEF_SINGLETON( HMUIWindow )
 {
 	self.backgroundColor = [UIColor blackColor];
 	self.hidden = YES;
-	self.windowLevel = UIWindowLevelStatusBar + 3.0f;
+	self.windowLevel = UIWindowLevelStatusBar + 99.0f;
 	self.layer.shouldRasterize = YES;
     
 	self.pannable = YES;
@@ -160,23 +160,23 @@ DEF_SINGLETON( HMUIWindow )
 	self.pinchable = NO;
 }
 
-- (void)buildSublayersFor:(UIView *)view depth:(CGFloat)depth origin:(CGPoint)origin
+- (CGFloat)buildSublayersFor:(UIView *)view depth:(CGFloat)depth origin:(CGPoint)origin
 {
 	if ( depth >= MAX_DEPTH )
-		return;
+		return 0;
 	
 	if ( view.hidden )
-		return;
+		return 0;
     
 	if ( 0 == view.frame.size.width || 0 == view.frame.size.height )
-		return;
+		return 0;
 	
 	CGRect screenBound = [UIScreen mainScreen].bounds;
 	CGRect viewFrame;
     CGPoint offsetPoint = CGPointZero;
-    
-	viewFrame.origin.x = origin.x + view.center.x - offsetPoint.x - view.bounds.size.width / 2.0f;
-	viewFrame.origin.y = origin.y + view.center.y - offsetPoint.y - view.bounds.size.height / 2.0f;
+
+    viewFrame.origin.x = origin.x + view.center.x - offsetPoint.x - view.bounds.size.width / 2.0f-([view.superview isKindOfClass:[UIScrollView class]]?[(UIScrollView *)view.superview contentOffset].x:0);
+	viewFrame.origin.y = origin.y + view.center.y - offsetPoint.y - view.bounds.size.height / 2.0f-([view.superview isKindOfClass:[UIScrollView class]]?[(UIScrollView *)view.superview contentOffset].y:0);
 	viewFrame.size.width = view.bounds.size.width;
 	viewFrame.size.height = view.bounds.size.height;
     
@@ -184,9 +184,9 @@ DEF_SINGLETON( HMUIWindow )
 	CGFloat overflowHeight = screenBound.size.height * 1.5;
 	
 	if ( CGRectGetMaxX(viewFrame) < -overflowWidth || CGRectGetMinX(viewFrame) > (screenBound.size.width + overflowWidth) )
-		return;
+		return 0;
 	if ( CGRectGetMaxY(viewFrame) < -overflowHeight || CGRectGetMinY(viewFrame) > (screenBound.size.height + overflowHeight) )
-		return;
+		return 0;
     
     //	INFO( @"view = %@", [[view class] description] );
 	
@@ -249,21 +249,25 @@ DEF_SINGLETON( HMUIWindow )
         
 		[layer release];
 	}
-    
+    CGFloat dep = layer.depth;
 	for ( UIView * subview in view.subviews )
 	{
-		[self buildSublayersFor:subview depth:(depth + 1 + [view.subviews indexOfObject:subview] * 0.025f) origin:layer.rect.origin];
+		dep = [self buildSublayersFor:subview depth:(depth + 1 + [view.subviews indexOfObject:subview] * 0.005f) origin:layer.rect.origin];
 	}
+    return dep;
 }
 - (void)buildLayers
 {
-    UIWindow *window = nil;
-    if (![HMUIApplication sharedInstance].window) {
-        window = [UIApplication sharedApplication].keyWindow;
-    }else{
-        window = [HMUIApplication sharedInstance].window;
+
+    CGFloat depth=0;
+    for (NSInteger i = [UIApplication sharedApplication].windows.count-1 ;i>=0;i--) {
+        
+        UIWindow *window =[UIApplication sharedApplication].windows[i];
+        if ([window isKindOfClass:[HMUIWindow class]]||[window isKindOfClass:NSClassFromString(@"HMDEBUGWindow")]||[window isKindOfClass:NSClassFromString(@"UITextEffectsWindow")]) {
+            continue;
+        }
+        depth = [self buildSublayersFor:window depth:depth origin:CGPointZero];
     }
-	[self buildSublayersFor:window depth:0 origin:CGPointZero];
 }
 
 - (void)removeLayers
@@ -462,6 +466,7 @@ DEF_SINGLETON(HMDEBUGWindow)
     return self;
 }
 - (void)awakeFromNib{
+    [super awakeFromNib];
     [self load];
 }
 - (id)init

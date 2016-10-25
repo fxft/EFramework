@@ -27,7 +27,7 @@ PODS:
   - OpenUDID (1.0.0)
 
 DEPENDENCIES:
-  - AFNetworking (~> 2.6.3)
+  - AFNetworking (<= 2.6.3)
   - FMDB (~> 2.6)
   - MBProgressHUD (~> 0.9.2)
   - OpenUDID (~> 1.0.0)
@@ -38,6 +38,6 @@ SPEC CHECKSUMS:
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   OpenUDID: e7cb6984c7304906ad20f3a36bf087b025896b6b
 
-PODFILE CHECKSUM: 105ce7f534eecf6df1e41b7282df3b79da96f349
+PODFILE CHECKSUM: 5930ae598b30cda5b8eb3e2d30923fbdbde71fb1
 
 COCOAPODS: 1.0.0

@@ -27,15 +27,15 @@
 #define IPHONE_OS_VERSION_MAX5_OR_EARLIER ( !IPHONE_OS_VERSION_MAX6_OR_LATER )
 #define IPHONE_OS_VERSION_MAX4_OR_EARLIER ( !IPHONE_OS_VERSION_MAX5_OR_LATER )
 
-#define IOS11_OR_LATER		( [[[UIDevice currentDevice] systemVersion] compare:@"11.0"] != NSOrderedAscending )
-#define IOS10_OR_LATER		( [[[UIDevice currentDevice] systemVersion] compare:@"10.0"] != NSOrderedAscending )
-#define IOS9_OR_LATER		( [[[UIDevice currentDevice] systemVersion] compare:@"9.0"] != NSOrderedAscending )
-#define IOS8_OR_LATER		( [[[UIDevice currentDevice] systemVersion] compare:@"8.0"] != NSOrderedAscending )
-#define IOS7_OR_LATER		( [[[UIDevice currentDevice] systemVersion] compare:@"7.0"] != NSOrderedAscending )
-#define IOS6_OR_LATER		( [[[UIDevice currentDevice] systemVersion] compare:@"6.0"] != NSOrderedAscending )
-#define IOS5_OR_LATER		( [[[UIDevice currentDevice] systemVersion] compare:@"5.0"] != NSOrderedAscending )
-#define IOS4_OR_LATER		( [[[UIDevice currentDevice] systemVersion] compare:@"4.0"] != NSOrderedAscending )
-#define IOS3_OR_LATER		( [[[UIDevice currentDevice] systemVersion] compare:@"3.0"] != NSOrderedAscending )
+#define IOS11_OR_LATER		( [[[[UIDevice currentDevice] systemVersion] componentsSeparatedByString:@"."].firstObject integerValue]>=11  )
+#define IOS10_OR_LATER		( [[[[UIDevice currentDevice] systemVersion] componentsSeparatedByString:@"."].firstObject integerValue]>=10  )
+#define IOS9_OR_LATER		( [[[[UIDevice currentDevice] systemVersion] componentsSeparatedByString:@"."].firstObject integerValue]>=9  )
+#define IOS8_OR_LATER		( [[[[UIDevice currentDevice] systemVersion] componentsSeparatedByString:@"."].firstObject integerValue]>=8  )
+#define IOS7_OR_LATER		( [[[[UIDevice currentDevice] systemVersion] componentsSeparatedByString:@"."].firstObject integerValue]>=7  )
+#define IOS6_OR_LATER		( [[[[UIDevice currentDevice] systemVersion] componentsSeparatedByString:@"."].firstObject integerValue]>=6  )
+#define IOS5_OR_LATER		( [[[[UIDevice currentDevice] systemVersion] componentsSeparatedByString:@"."].firstObject integerValue]>=5 )
+#define IOS4_OR_LATER		( [[[[UIDevice currentDevice] systemVersion] componentsSeparatedByString:@"."].firstObject integerValue]>=4  )
+#define IOS3_OR_LATER		( [[[[UIDevice currentDevice] systemVersion] componentsSeparatedByString:@"."].firstObject integerValue]>=3  )
 
 #define IOS10_OR_EARLIER	( !IOS11_OR_LATER )
 #define IOS9_OR_EARLIER		( !IOS10_OR_LATER )
@@ -85,6 +85,7 @@
 + (NSString *)deviceUUID;//open uuid
 
 + (NSString *)macaddress;//可以忽略
++ (NSString *)ipAddress;//will return error string when error;
 + (NSString *)appShortVersion NS_AVAILABLE_IOS(4_0);//build
 + (NSString *)appName;
 

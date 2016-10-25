@@ -58,14 +58,15 @@
 @property (nonatomic, assign) BOOL      allowAutoScroll;//允许自动滚动
 @property (nonatomic, assign) NSTimeInterval   autoScrollInteval;//自动滚动播放
 @property (nonatomic, assign) BOOL      allowZoom;//支持缩放
-@property (nonatomic, assign) BOOL      removeWhenTouch;//点击后移除
+@property (nonatomic, assign) BOOL      allowHumb;//图片弹出效果
 @property (nonatomic, assign) BOOL      showText;
 @property (nonatomic, assign) BOOL      circulation;//是否支持循环
 @property (nonatomic, assign) UIViewContentMode photoContentMode;//图像显示方式
 
+@property (nonatomic,HM_STRONG,readonly) UIImageView *backgroundBaseView;//可以对该属性进行背景设置，比如颜色，添加图层,default black color
 // 显示
 - (void)show;
-- (void)showFromView:(UIView*)view forImage:(UIImage*)image;
+- (void)showFromView:(UIView *)view animated:(BOOL)animated;
 - (void)hidden;
 
 - (void)nextPhotoIndexAnimated:(BOOL)animated;
@@ -89,7 +90,29 @@
  */
 - (HMPhotoItem *)photoBrowser:(HMUIPhotoBrowser *)browser itemAtIndex:(NSUInteger)index;
 
+
 @optional
+
+/**
+ *  数据源原位置获取图片或uiview。前提allowHumb＝YES
+ *
+ *  @param browser  当前的browser
+ *  @param index   数据索引
+ *
+ *  @return 数据源
+ */
+- (id)photoBrowser:(HMUIPhotoBrowser *)browser sourceAtIndex:(NSUInteger)index;
+
+
+/**
+ *  数据源原位置获取，如果-［self photoBrowser:sourceAtIndex:］返回的是UIView则－［self photoBrowser:frameAtIndex:］
+ *
+ *  @param browser  当前的browser
+ *  @param index   数据索引
+ *
+ *  @return 数据源
+ */
+- (CGRect)photoBrowser:(HMUIPhotoBrowser *)browser frameAtIndex:(NSUInteger)index;
 
 /**
  *  cell视图获取
@@ -126,7 +149,28 @@
 - (BOOL)photoBrowser:(HMUIPhotoBrowser *)photoBrowser didTouchedIndex:(NSUInteger)index;
 //长按事件
 - (void)photoBrowser:(HMUIPhotoBrowser *)photoBrowser didLongTouchedIndex:(NSUInteger)index;
-//双击事件
-- (void)photoBrowser:(HMUIPhotoBrowser *)photoBrowser didDoubbleTouchedIndex:(NSUInteger)index;
+//双击事件,如果返回NO，可以屏蔽双击放大的事件
+- (BOOL)photoBrowser:(HMUIPhotoBrowser *)photoBrowser didDoubbleTouchedIndex:(NSUInteger)index;
+
+
+
+/**
+ *  humbImageView
+ *
+ *  @param browser  当前的browser
+ *  @param index   数据索引
+ *
+ *  @return 数据源
+ */
+- (void)photoBrowser:(HMUIPhotoBrowser *)browser willshowHumbImageView:(UIImageView*)humb atIndex:(NSUInteger)index;
+
+/**
+ *  获取window当前图片是否有旋转角度,当支持旋转时
+ *
+ *  @param browser  当前的browser
+ *
+ *  @return 是否已经选择
+ */
+- (BOOL)photoBrowserWindowRoated:(HMUIPhotoBrowser *)browser;
 
 @end

@@ -137,7 +137,7 @@
 {
     NSTimeInterval timeInterval=[[NSDate date] timeIntervalSince1970];
     
-    return [NSString stringWithFormat:@"%ld",(long)(timeInterval*1000)];
+    return [NSString stringWithFormat:@"%lld",(unsigned long long)timeInterval*1000];
 }
 
 + (NSString *)nonce
@@ -159,7 +159,12 @@
     
     for(NSString *key in temp){
         NSString *val = [paramDict valueForKey:key];
-        [paramString appendFormat:@"&%@=%@",key,val];//[key formatURLEnocde],[val formatURLEnocde]];
+        if (![val notEmpty]) {
+            [paramString appendFormat:@"&%@",key];//[key formatURLEnocde],[val formatURLEnocde]];
+        }else{
+            [paramString appendFormat:@"&%@=%@",key,val];//[key formatURLEnocde],[val formatURLEnocde]];
+        }
+        
     }
     
     return [paramString substringFromIndex:1];

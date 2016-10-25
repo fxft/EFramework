@@ -88,6 +88,7 @@
     [subBoards addObject:@{@"title":@"常规操作",@"subtitle":@"net work",@"map":@"NetWorkNormal",@"open":@"push",@"url":URLFOR_controller(@"NetWorkNormal")}];
     [subBoards addObject:@{@"title":@"图片下载",@"subtitle":@"image loader",@"map":@"ImageLoader",@"open":@"push",@"url":URLFOR_controller(@"ImageLoader")}];
     [subBoards addObject:@{@"title":@"文件下载",@"subtitle":@"file loader",@"map":@"FileLoader",@"open":@"push",@"url":URLFOR_controller(@"FileLoader")}];
+    [subBoards addObject:@{@"title":@"接口测试下载",@"subtitle":@"test api",@"map":@"apitest",@"open":@"push",@"url":URLFOR_controller(@"ApiTest")}];
     [subBoards addObject:@{@"title":@"Api网关",@"subtitle":@"阿里云api网关调用",@"map":@"FileLoader",@"open":@"push",@"url":URLFOR_controller(@"APIGateway")}];
     
     [self.boards addObject:@{@"title":@"NetWork",@"subtitle":@"网络数据、异步、多线程",@"map":@"NetWork",@"open":@"open",@"url":URLFOR_controllerWithNav(@"ListBoard"),@"listheight":@(49),@"boards":subBoards}];
@@ -104,6 +105,8 @@
     
     subBoards = [NSMutableArray arrayWithCapacity:0];
     [subBoards addObject:@{@"title":@"转场",@"subtitle":@"转场方式",@"map":@"transitions",@"open":@"push",@"url":URLFOR_controller(@"Transitions")}];
+    
+    [subBoards addObject:@{@"title":@"跳转方式",@"subtitle":@"各种页面切换返回",@"map":@"PushBoard",@"open":@"push",@"url":URLFOR_controller(@"PushBoard")}];
     
     [self.boards addObject:@{@"title":@"Router",@"subtitle":@"路由规则",@"map":@"Router",@"open":@"open",@"url":URLFOR_controllerWithNav(@"ListBoard"),@"listheight":@(49),@"boards":subBoards}];
     
@@ -153,6 +156,12 @@
     
     [subBoards addObject:@{@"title":@"GPUImageFilter",@"subtitle":@"GPUImage图像滤镜处理样例",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/sealband/GPUImageFilter",@"source":@"GPUImageFilter"},@"imgurl":@[]}];
     
+    [subBoards addObject:@{@"title":@"BluetoothKit",@"subtitle":@"swift蓝牙连接工具",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/rhummelmose/BluetoothKit",@"source":@"BluetoothKit"},@"imgurl":@[]}];
+    
+    [subBoards addObject:@{@"title":@"ohana-ios",@"subtitle":@"Uber 开源的一个辅助 iOS 联系人操作库，帮你更容易的展示设备联系人信息，操作联系人信息",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/uber/ohana-ios",@"source":@"ohana-ios"},@"imgurl":@[]}];
+    
+    
+     [subBoards addObject:@{@"title":@"Ali Weex",@"subtitle":@"A framework for building Mobile cross-platform UI",@"map":@"Ali Weex",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/alibaba/weex",@"source":@"Weex"},@"imgurl":@[]}];
     
     [self.boards addObject:@{@"title":@"ThirdPart",@"subtitle":@"第三方框架介绍",@"map":@"ThirdPart",@"open":@"open",@"url":URLFOR_controllerWithNav(@"ListBoard"),@"listheight":@(49),@"boards":subBoards}];
     
@@ -161,6 +170,10 @@
     [subBoards addObject:@{@"title":@"MBProgressHUD",@"subtitle":@"提示框",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/matej/MBProgressHUD",@"source":@"MBProgressHUD"},@"imgurl":@[@"https://camo.githubusercontent.com/f0501c946d277d84a2f3ba9eefb1988fd13e5f75/687474703a2f2f646c2e64726f70626f782e636f6d2f752f3337383732392f4d4250726f67726573734855442f76312f362d7468756d622e706e67"]}];
     
     [subBoards addObject:@{@"title":@"SDLoopProgressView",@"subtitle":@"进度指示器",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/gsdios/SDProgressView",@"source":@"SDLoopProgressView"},@"imgurl":@[]}];
+    
+    [subBoards addObject:@{@"title":@"JSDownloadView",@"subtitle":@"精巧顺滑的下载动画",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/Josin22/JSDownloadView",@"source":@"JSDownloadView"},@"imgurl":@[@"https://raw.githubusercontent.com/Josin22/JSDownloadView/master/JSDownloadViewDemo/Source/download.gif"]}];
+    
+    
     
     [subBoards addObject:@{@"title":@"PageControls",@"subtitle":@"分页指示器,带切换动画",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/popwarsweet/PageControls",@"source":@"PageControls"},@"imgurl":@[@"https://github.com/popwarsweet/PageControls/raw/master/demo.gif"]}];
     
@@ -173,6 +186,9 @@
     
     [subBoards addObject:@{@"title":@"SDPhotoBrowser",@"subtitle":@"图片浏览器，模仿微博图片浏览器动感效果，综合了图片展示和存储等多项能",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/gsdios/SDPhotoBrowser",@"source":@"SDPhotoBrowser"},@"imgurl":@[]}];
     
+    [subBoards addObject:@{@"title":@"HZPhotoBrowser",@"subtitle":@"图片浏览器 ，photoBrowser ，新浪微博，picture,pictureBrowser,sina,weibo",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/chennyhuang/HZPhotoBrowser",@"source":@"HZPhotoBrowser"},@"imgurl":@[]}];
+    
+    
     [subBoards addObject:@{@"title":@"ZLPhotoBrowser",@"subtitle":@"方便易用的相册照片多选框架，支持拍照、预览快速多选；相册混合选择；在线下载iCloud端图片，且针对iCloud端图片的选择做了细节处理；自定义最大选择量及最大预览量",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/longitachi/ZLPhotoBrowser",@"source":@"ZLPhotoBrowser"},@"imgurl":@[@"https://github.com/longitachi/ZLPhotoBrowser/raw/master/%E6%95%88%E6%9E%9C%E5%9B%BE/%E9%A2%84%E8%A7%88%E5%9B%BE%E5%BF%AB%E9%80%9F%E9%80%89%E6%8B%A9.gif",@"https://github.com/longitachi/ZLPhotoBrowser/raw/master/%E6%95%88%E6%9E%9C%E5%9B%BE/%E9%A2%84%E8%A7%88%E5%A4%A7%E5%9B%BE%E5%BF%AB%E9%80%9F%E9%80%89%E6%8B%A9.gif",@"https://github.com/longitachi/ZLPhotoBrowser/raw/master/%E6%95%88%E6%9E%9C%E5%9B%BE/%E6%9F%A5%E7%9C%8B%E5%A4%A7%E5%9B%BE%E6%94%AF%E6%8C%81%E7%BC%A9%E6%94%BE.gif",@"https://github.com/longitachi/ZLPhotoBrowser/raw/master/%E6%95%88%E6%9E%9C%E5%9B%BE/%E7%9B%B8%E5%86%8C%E5%86%85%E6%B7%B7%E5%90%88%E9%80%89%E6%8B%A9.gif",@"https://github.com/longitachi/ZLPhotoBrowser/raw/master/%E6%95%88%E6%9E%9C%E5%9B%BE/%E5%8E%9F%E5%9B%BE%E5%8A%9F%E8%83%BD.gif",@"https://github.com/longitachi/ZLPhotoBrowser/raw/master/%E6%95%88%E6%9E%9C%E5%9B%BE/%E5%AE%9E%E6%97%B6%E7%9B%91%E6%8E%A7%E7%9B%B8%E5%86%8C%E5%8F%98%E5%8C%96.gif",@"https://github.com/longitachi/ZLPhotoBrowser/raw/master/%E6%95%88%E6%9E%9C%E5%9B%BE/%E5%8A%A0%E8%BD%BDiCloud%E7%85%A7%E7%89%87.gif"]}];
     
     [subBoards addObject:@{@"title":@"TZImagePickerController",@"subtitle":@"一个支持多选、选原图和视频的图片选择器，同时有预览功能，适配了iOS6789系统",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/banchichen/TZImagePickerController",@"source":@"TZImagePickerController"},@"imgurl":@[@"https://github.com/banchichen/TZImagePickerController/raw/master/TZImagePickerController/ScreenShots/photoPickerVc.PNG",@"https://github.com/banchichen/TZImagePickerController/raw/master/TZImagePickerController/ScreenShots/photoPreviewVc.PNG"]}];
@@ -184,8 +200,7 @@
     
     
     [subBoards addObject:@{@"title":@"TOCropViewController",@"subtitle":@"漂亮的 iOS 图片裁切工具库",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/TimOliver/TOCropViewController",@"source":@"TOCropViewController"},@"imgurl":@[@"https://github.com/TimOliver/TOCropViewController/raw/master/screenshot.jpg"]}];
-    
-    
+   
     
     
     
@@ -214,6 +229,9 @@
     
     [subBoards addObject:@{@"title":@"TBPlayer",@"subtitle":@"视频边下边播播，把播放器播放过的数据流缓存到本地",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/suifengqjn/TBPlayer",@"source":@"TBPlayer"},@"imgurl":@[]}];
     
+    [subBoards addObject:@{@"title":@"LFLiveKit",@"subtitle":@"来疯直播开源的一套直播相关的工具集",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/LaiFengiOS/LFLiveKit",@"source":@"LFLiveKit"},@"imgurl":@[]}];
+    
+    
     
     [subBoards addObject:@{@"title":@"SSVideoPlayer",@"subtitle":@"视频播放器，支持拉动，播放列表，全屏",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/immrss/SSVideoPlayer",@"source":@"SSVideoPlayer"},@"imgurl":@[@"https://raw.githubusercontent.com/immrss/SSVideoPlayer/master/Demo.gif"]}];
     
@@ -236,6 +254,8 @@
     
     [subBoards addObject:@{@"title":@"IBAnimatableMaterial",@"subtitle":@"Material Design 水波效果的动画",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/IBAnimatable/IBAnimatableMaterial",@"source":@"IBAnimatableMaterial"},@"imgurl":@[@"https://cloud.githubusercontent.com/assets/573856/16713775/151b34d6-46f5-11e6-9334-875453a01a9a.gif"]}];
     
+     [subBoards addObject:@{@"title":@"ColorMatchTabs",@"subtitle":@"另类的tab控件",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/Yalantis/ColorMatchTabs",@"source":@"ColorMatchTabs"},@"imgurl":@[@"https://github.com/Yalantis/ColorMatchTabs/raw/master/Resources/preview.gif"]}];
+    
     
     [subBoards addObject:@{@"title":@"JMHoledView",@"subtitle":@"高亮帮助页提示",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/leverdeterre/JMHoledView",@"source":@"JMHoledView"},@"imgurl":@[@"https://github.com/leverdeterre/JMHoledView/raw/master/screenshots/demo1.png"]}];
     
@@ -253,15 +273,22 @@
     [subBoards addObject:@{@"title":@"GSKStretchyHeaderView",@"subtitle":@"一个通用有弹性的HeaderView",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/gskbyte/GSKStretchyHeaderView",@"source":@"GSKStretchyHeaderView"},@"imgurl":@[@"https://raw.githubusercontent.com/gskbyte/GSKStretchyHeaderView/master/screenshots/airbnb_small.gif",@"https://raw.githubusercontent.com/gskbyte/GSKStretchyHeaderView/master/screenshots/stretchy_blur_small.gif",@"https://raw.githubusercontent.com/gskbyte/GSKStretchyHeaderView/master/screenshots/tabs_small.gif",@"https://raw.githubusercontent.com/gskbyte/GSKStretchyHeaderView/master/screenshots/twitter_small.gif",@"https://raw.githubusercontent.com/gskbyte/GSKStretchyHeaderView/master/screenshots/scalable_text_small.gif"]}];
     
     
-    
+    [subBoards addObject:@{@"title":@"PYSearch",@"subtitle":@" iOS 中一款优雅的搜索控制器。",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/iphone5solo/PYSearch",@"source":@"PYSearch"},@"imgurl":@[@"https://github.com/iphone5solo/learngit/raw/master/imagesForPYSearch/PYSearchDemo.gif",@"https://github.com/iphone5solo/learngit/raw/master/imagesForPYSearch/hotSearchStyle02.png"]}];
     
     [self.boards addObject:@{@"title":@"ThirdComponent",@"subtitle":@"第三方控件介绍",@"map":@"ThirdComponent",@"open":@"open",@"url":URLFOR_controllerWithNav(@"ListBoard"),@"listheight":@(49),@"boards":subBoards}];
     
     
+    
+    subBoards = [NSMutableArray arrayWithCapacity:0];
+    
+    [subBoards addObject:@{@"title":@"官方demo",@"subtitle":@"前提:到github下载最新版本Weex，并配置好环境，编译通过",@"map":@"AMap",@"open":@"push",@"url":URLFOR_controller(@"WXDemoViewController")}];
+    
+    [self.boards addObject:@{@"title":@"Weex框架",@"subtitle":@"Ali Weex framework",@"map":@"Weex",@"open":@"push",@"url":URLFOR_controller(@"ListBoard"),@"listheight":@(49),@"boards":subBoards}];
+    
     subBoards = [NSMutableArray arrayWithCapacity:0];
     
     
-    [self.boards addObject:@{@"title":@"Others",@"subtitle":@"其他",@"map":@"Others",@"open":@"open",@"url":URLFOR_controllerWithNav(@"ListBoard"),@"listheight":@(49),@"boards":subBoards}];
+    [self.boards addObject:@{@"title":@"Others",@"subtitle":@"其他",@"map":@"Others",@"open":@"push",@"url":URLFOR_controller(@"ListBoard"),@"listheight":@(49),@"boards":subBoards}];
     
    [self.tableView reloadData];
     

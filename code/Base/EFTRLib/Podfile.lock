@@ -12,7 +12,6 @@ PODS:
   - Masonry (1.0.1)
   - MJRefresh (3.1.10)
   - Ono (1.2.2)
-  - Permission (1.4.2)
   - Realm (0.102.0):
     - Realm/Headers (= 0.102.0)
   - Realm/Headers (0.102.0)
@@ -22,9 +21,10 @@ PODS:
   - SDWebImage (3.7.6):
     - SDWebImage/Core (= 3.7.6)
   - SDWebImage/Core (3.7.6)
+  - SocketRocket (0.5.1)
   - SYStickHeaderWaterFall (0.0.2)
-  - TextFieldEffects (1.2.0)
   - UITableView+FDTemplateLayoutCell (1.4)
+  - WeexSDK (0.8.0)
   - ZipArchive (1.4.0)
 
 DEPENDENCIES:
@@ -35,15 +35,19 @@ DEPENDENCIES:
   - Masonry (~> 1.0.1)
   - MJRefresh (~> 3.1.10)
   - Ono (~> 1.2.2)
-  - Permission (~> 1.4.2)
   - Realm (<= 0.102.0)
   - SDAutoLayout (~> 2.1.3)
   - SDCycleScrollView (~> 1.64)
   - SDWebImage (~> 3.7.6)
+  - SocketRocket (~> 0.5.1)
   - SYStickHeaderWaterFall (~> 0.0.2)
-  - TextFieldEffects (~> 1.2.0)
   - UITableView+FDTemplateLayoutCell (~> 1.4)
+  - WeexSDK (from `../../../../../../projects/comm/external/weex/sdk`)
   - ZipArchive (~> 1.4.0)
+
+EXTERNAL SOURCES:
+  WeexSDK:
+    :path: ../../../../../../projects/comm/external/weex/sdk
 
 SPEC CHECKSUMS:
   CocoaAsyncSocket: a18c75dca4b08723628a0bacca6e94803d90be91
@@ -53,16 +57,16 @@ SPEC CHECKSUMS:
   Masonry: a1a931a0d08870ed8ae415a2ea5ea68ebcac77df
   MJRefresh: bb72948c985914b0b5cecac573a2c69a8915fb02
   Ono: 80b1c686777d3f6d5d5ce6fcac8a74afef4ca197
-  Permission: e7e1c2555ffe8726a0c28e04799fe973116e5b3f
   Realm: 5d219f9037e3ec2019c599b8227bfc95433cb10e
   SDAutoLayout: ddf39b38dbd793a4802c8feb6429096aea4aa658
   SDCycleScrollView: 806fedb9342ab03b58b84442f985517b42c7cbb7
   SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
+  SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
   SYStickHeaderWaterFall: 6fea7e6705d7b8b1f366912ac5e4e05a1aac7f00
-  TextFieldEffects: bc4fd3bd557321bd61a0762f3f50965477a36f62
   UITableView+FDTemplateLayoutCell: 234e1582bcc4e18461af91155123bb96538ed030
+  WeexSDK: 1c33583fd85f5448012966f165dbe5e5a56dd38e
   ZipArchive: e25a4373192673e3229ac8d6e9f64a3e5713c966
 
-PODFILE CHECKSUM: 34c9e055e3f7ae7e297fe16b6d9af5399c392d96
+PODFILE CHECKSUM: e4bab41fe7132b057accd49d8a44893e432e03d9
 
 COCOAPODS: 1.0.0

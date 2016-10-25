@@ -42,7 +42,7 @@
 
 - (void)photoCellTouchIn:(HMPhotoCell *)cell;
 @optional
-- (void)photoCellDoubleTouchIn:(HMPhotoCell *)cell;
+- (BOOL)photoCellDoubleTouchIn:(HMPhotoCell *)cell;
 - (void)photoCellLongTouchIn:(HMPhotoCell *)cell;
 - (void)photoCellTouchBegin:(HMPhotoCell *)cell;
 - (void)photoCellTouchEnd:(HMPhotoCell *)cell;

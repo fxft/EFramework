@@ -39,7 +39,8 @@
 @property (nonatomic, HM_STRONG) UILabel *textlabel;
 @property (nonatomic,assign) UIInterfaceOrientation orientaionDeviceNext;
 @property (nonatomic,HM_WEAK) UIView *ssssuperView;
-@property (nonatomic,HM_STRONG) UIWindow *baseWindow;
+@property (nonatomic,HM_STRONG) UIView *baseWindow;
+@property (nonatomic,HM_STRONG) UIView *roateWindow;
 
 @end
 
@@ -54,17 +55,16 @@
 @synthesize allowOriententation = _allowOriententation;
 @synthesize allowAutoScroll=_allowAutoScroll;
 @synthesize showText=_showText;
-@synthesize textlabel;
+@synthesize textlabel=_textlabel;
 @synthesize allowZoom=_allowZoom;
 @synthesize currentPhotoIndex=_currentPhotoIndex;
 @synthesize padding=_padding;
 @synthesize photoContentMode;
 @synthesize photos=_photos;
-@synthesize delegate;
+@synthesize delegate=_delegate;
 @synthesize autoScrollInteval=_autoScrollInteval;
 @synthesize orientaionDeviceNext;
 @synthesize dataSource=_dataSource;
-@synthesize removeWhenTouch;
 @synthesize circulation;
 @synthesize baseWindow=_baseWindow;
 
@@ -81,7 +81,7 @@
     _prePhotoIndex = -1;
     circulation = YES;
     self.photoContentMode = UIViewContentModeScaleAspectFit;
-    self.backgroundColor = [UIColor whiteColor];
+    self.backgroundColor = [UIColor clearColor];
     self.autoresizesSubviews = YES;
     
     // 1.创建UIScrollView
@@ -95,22 +95,28 @@
 - (void)createScrollView
 {
     CGRect frame = self.frame;
+   
+    if (CGRectEqualToRect(CGRectZero, frame)) {
+        return;
+    }
+    
     frame.origin = CGPointZero;
     frame.origin.x -= self.padding;
     frame.size.width += (2 * self.padding);
+    
     [CATransaction begin];
     [CATransaction setDisableActions:YES];
     
     if (_photoScrollView==nil) {
         _photoScrollView = [[UIScrollView alloc] initWithFrame:frame];
-        _photoScrollView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
+        _photoScrollView.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
         _photoScrollView.pagingEnabled = YES;
         _photoScrollView.delegate = self;
         _photoScrollView.showsHorizontalScrollIndicator = NO;
         _photoScrollView.showsVerticalScrollIndicator = NO;
         _photoScrollView.backgroundColor = [UIColor clearColor];
+        _photoScrollView.bounces = NO;
         [self addSubview:_photoScrollView];
-//        _photoScrollView.layer.anchorPoint = CGPointMake(0.5f, 0.5f);
         
     }
     if (!CGRectEqualToRect(_photoScrollView.frame, frame)) {
@@ -119,95 +125,209 @@
     [CATransaction commit];
 }
 
+- (UIImageView *)backgroundBaseView{
+    return self.baseWindow.backgroundImageView;
+}
+
 - (void)hidden{
+    
     [self removeWhenTouched];
+    
 }
 
-- (void)show
+- (void)show{
+    
+    [self showAnimated:YES];
+    
+}
+
+- (void)showAnimated:(BOOL)animated
 {
-    UIWindow *window = nil;
-    if (![HMUIApplication sharedInstance].window) {
-        window = [UIApplication sharedApplication].keyWindow;
-    }else{
-        window = [HMUIApplication sharedInstance].window;
-    }
-
-    self.ssssuperView = window;
     
-    self.backgroundColor = [UIColor blackColor];
+    [self showFromView:nil animated:animated];
     
-    if (self.superview!=self.baseWindow) {
-        [self.baseWindow addSubview:self];
-        self.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
-    }
-    self.baseWindow.hidden = NO;
-    
-    if (CGRectEqualToRect(self.frame, CGRectZero)) {
-        
-        self.frame = [UIScreen mainScreen].bounds;
-    }
-    
-    self.alpha = 0.f;
-    [UIView animateWithDuration:.28f
-                     animations:^{
-                         self.alpha = 1.f;
-                     } completion:^(BOOL finished) {
-                         if (self.allowOriententation) {
-                          self.ssssuperView.hidden = YES;
-                         }
-                         
-                     }];
-    self.showText = YES;
-    removeWhenTouch = YES;
-    [self reloadData];
 }
-- (void)showFromView:(UIView *)view forImage:(UIImage*)image{
-    CGRect from = [view frameInWindow];
-    UIWindow *window = nil;
-    if (![HMUIApplication sharedInstance].window) {
-        window = [UIApplication sharedApplication].keyWindow;
-    }else{
-        window = [HMUIApplication sharedInstance].window;
-    }
 
-    self.ssssuperView = window;
+- (void)showHumbFrom:(CGRect)from image:(UIImage*)image willAnimated:(void (^)(UIImageView *))willAnimated step1Animated:(void (^)(UIImageView *))step1Animated  step2Animated:(void (^)(UIImageView *))step2Animated compeleAnimated:(void (^)(void))compeleAnimated{
+
+    if (image==nil) {
+        NSAssert(YES, @"image is nil");
+    }
+    
+    UIImageView *imagev = [self.baseWindow viewWithTag:11111111];
+    if (imagev==nil) {
+        imagev = [[[UIImageView alloc]initWithImage:image] autorelease];
+        imagev.contentMode = self.photoContentMode;
+        imagev.frame = from;
+        imagev.tag = 11111111;
+        imagev.backgroundColor = [UIColor clearColor];
+        [self.baseWindow addSubview:imagev];
+    }
     
     
-    UIImageView *imagev = [[[UIImageView alloc]initWithImage:image] autorelease];
-    imagev.contentMode = self.photoContentMode;
-    self.baseWindow.hidden = NO;
-    imagev.frame = from;
-    [self.baseWindow addSubview:imagev];
-    self.alpha = 0.f;
-    self.backgroundColor = [UIColor blackColor];
+    if (willAnimated) {
+        willAnimated(imagev);
+    }
     
-    if (CGRectEqualToRect(self.frame, CGRectZero)) {
+    [UIView animateWithDuration:.25f animations:^{
         
-        self.frame = [UIScreen mainScreen].bounds;
-    }
-    
-    if (self.superview!=self.baseWindow) {
-        [self.baseWindow addSubview:self];
-        self.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
-    }
-    [_curViews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    
-
-    [UIView animateWithDuration:0.35f animations:^{
-        imagev.frame = [UIScreen mainScreen].bounds;
-        self.alpha = 1.f;
-    } completion:^(BOOL finished) {
-        imagev.hidden = YES;
-        [imagev removeFromSuperview];
-        if (self.allowOriententation) {
-            self.ssssuperView.hidden = YES;
+        if (step1Animated) {
+            step1Animated(imagev);
         }
         
-        self.showText = YES;
-        removeWhenTouch = YES;
-        [self reloadData];
+    } completion:^(BOOL finished) {
+        
+        if (step2Animated) {
+            [UIView animateWithDuration:.20f animations:^{
+                step2Animated(imagev);
+            } completion:^(BOOL finished) {
+                imagev.hidden = YES;
+                [imagev removeFromSuperview];
+                if (compeleAnimated) {
+                    compeleAnimated();
+                }
+            }];
+        }else{
+            imagev.hidden = YES;
+            [imagev removeFromSuperview];
+            
+            if (compeleAnimated) {
+                compeleAnimated();
+            }
+        }
+        
+        
     }];
 }
+
+- (void)showHumbHide:(BOOL)hide{
+    CGRect frame=CGRectZero;
+    UIImage *image = nil;
+    if ([self.dataSource respondsToSelector:@selector(photoBrowser:sourceAtIndex:)]) {
+        
+        image = [self.dataSource photoBrowser:self sourceAtIndex:self.currentPhotoIndex];
+        
+        if ([image isKindOfClass:[UIImageView class]]) {
+            
+            frame = [(UIImageView*)image frameInWindow];
+            image = [(UIImageView*)image image];
+        }else if ([image isKindOfClass:[UIView class]]) {
+            
+            frame = [(UIView*)image frameInWindow];
+            image = [(UIView*)image screenshot];
+        }
+        if ([self.dataSource respondsToSelector:@selector(photoBrowser:frameAtIndex:)]){
+            frame = [self.dataSource photoBrowser:self frameAtIndex:self.currentPhotoIndex];
+        }
+    }
+//    if (image==nil) {
+//        NSAssert(YES, @"image is nil");
+//    }
+//    
+    WS(weakSelf)
+    CGRect to = self.superview.bounds;
+    CGAffineTransform affine = [self orientationAffineFor:self.orientaionDeviceNext];
+    CGRect framebase = [self.baseWindow frameInWindow];
+    if (hide) {
+        
+        to = CGRectMake(frame.origin.x-framebase.origin.x, frame.origin.y-framebase.origin.y, frame.size.width, frame.size.height);
+        frame = self.superview.frame;
+    }
+    
+    
+    [self showHumbFrom:frame image:image willAnimated:^(UIImageView *imagev) {
+
+        if ([weakSelf.delegate respondsToSelector:@selector(photoBrowser:willshowHumbImageView:atIndex:)]){
+            [weakSelf.delegate photoBrowser:weakSelf willshowHumbImageView:imagev atIndex:weakSelf.currentPhotoIndex];
+        }
+        
+        weakSelf.alpha = 0.f;
+        if (!hide) {
+            weakSelf.roateWindow.alpha = 0.f;
+            weakSelf.backgroundBaseView.alpha = 0.f;
+            weakSelf.frame = to;
+            imagev.frame = CGRectMake(frame.origin.x-framebase.origin.x, frame.origin.y-framebase.origin.y, frame.size.width, frame.size.height);
+        }else{
+            imagev.transform = affine;
+            imagev.frame = frame;
+        }
+        
+        [_curViews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+        
+    } step1Animated:^(UIImageView *imagev) {
+        if (hide) {
+            imagev.transform = CGAffineTransformIdentity;
+            weakSelf.roateWindow.alpha = 0.f;
+            weakSelf.backgroundBaseView.alpha = 0.f;
+        }else{
+            weakSelf.roateWindow.alpha = 1.f;
+            weakSelf.backgroundBaseView.alpha = 1.f;
+        }
+        imagev.frame = to;
+        
+    } step2Animated:^(UIImageView *imagev) {
+        weakSelf.alpha = hide?0.0f:1.f;
+    } compeleAnimated:^{
+        if (hide) {
+            
+            [weakSelf.baseWindow removeFromSuperview];
+            [weakSelf removeFromSuperview];
+        }else{
+            [weakSelf reloadData];
+        }
+       
+    }];
+}
+
+
+- (void)showFromView:(UIView *)view animated:(BOOL)animated{
+    
+    UIWindow *window = nil;
+    if (![HMUIApplication sharedInstance].window) {
+        window = [UIApplication sharedApplication].keyWindow;
+    }else{
+        window = [HMUIApplication sharedInstance].window;
+    }
+    if (view) {
+        window = (id)view;
+    }
+    self.ssssuperView = window;
+    
+    if (self.baseWindow.superview!=self.ssssuperView) {
+        [self.ssssuperView addSubview:self.baseWindow];
+    }
+    
+    
+    if (self.superview!=self.roateWindow) {
+        [self.roateWindow addSubview:self];
+        self.frame = self.roateWindow.bounds;
+        self.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+    }
+
+    if (!animated) {
+        self.alpha = 1.f;
+        [self reloadData];
+    }else{
+        if (self.allowHumb) {
+            [self showHumbHide:NO];
+        }else{
+            self.alpha = 0.f;
+            
+            [UIView animateWithDuration:.28f
+                             animations:^{
+                                 self.alpha = 1.f;
+                             } completion:^(BOOL finished) {
+                                 [self reloadData];
+                                 
+                             }];
+        
+        
+        }
+    }
+    
+    
+}
+
 
 - (void)dealloc
 {
@@ -221,6 +341,7 @@
     }
     [_curViews removeAllObjects];
     [_curViews release];
+    self.roateWindow = nil;
     self.photos = nil;
     self.delegate = nil;
     self.dataSource = nil;
@@ -229,15 +350,41 @@
     HM_SUPER_DEALLOC();
 }
 
-- (UIWindow *)baseWindow{
+- (UIView *)baseWindow{
     if (_baseWindow==nil) {
-        _baseWindow = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
-        _baseWindow.windowLevel = UIWindowLevelStatusBar + 8;
+        BOOL roated = NO;
+        if ([self.delegate respondsToSelector:@selector(photoBrowserWindowRoated:)]){
+            roated = [self.delegate photoBrowserWindowRoated:self];
+        }
+        if (roated) {
+            _baseWindow = [[UIView alloc]initWithFrame:[UIScreen mainScreen].bounds];
+        }else{
+            if (UIInterfaceOrientationIsPortrait((UIInterfaceOrientation)[UIDevice currentDevice].orientation)) {
+                _baseWindow = [[UIView alloc]initWithFrame:[UIScreen mainScreen].bounds];
+            }else if (UIInterfaceOrientationIsLandscape((UIInterfaceOrientation)[UIDevice currentDevice].orientation)) {
+                _baseWindow = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.height, [UIScreen mainScreen].bounds.size.width)];
+            }else{
+                
+                _baseWindow = [[UIView alloc]initWithFrame:CGRectMake(0, 0, MIN([UIScreen mainScreen].bounds.size.height, [UIScreen mainScreen].bounds.size.width), MAX([UIScreen mainScreen].bounds.size.height, [UIScreen mainScreen].bounds.size.width))];
+            }
+
+        }
+//        _baseWindow.frame = CGRectMake(100, 100, 200, 300);
+        _baseWindow.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
         _baseWindow.tagString = @"photoBWindow";
-        _baseWindow.backgroundColor = [UIColor clearColor];
-        //        baseWindow.layer.anchorPoint = CGPointMake(0.5, 0.5);
+        _baseWindow.backgroundImageView.backgroundColor = [UIColor blackColor];
     }
     return _baseWindow;
+}
+
+- (UIView *)roateWindow{
+    if (_roateWindow==nil) {
+        
+        _roateWindow = [[UIView alloc]initWithFrame:self.baseWindow.bounds];
+//        _roateWindow.backgroundColor = [[UIColor yellowColor] colorWithAlphaComponent:.4f];
+        [_roateWindow EFOwner:self.baseWindow];
+    }
+    return _roateWindow;
 }
 
 - (void)willMoveToSuperview:(UIView *)newSuperview{
@@ -269,9 +416,30 @@
     [self createScrollView];
 }
 
-- (void)setDataSource:(id<HMUIPhotoBrowserDatasource>)dataSource{
-    _dataSource = dataSource;
-    
+
+
+- (void)setDataSource:(id<HMUIPhotoBrowserDatasource>)dataSource
+{
+    if (_dataSource != dataSource)
+    {
+        _dataSource = dataSource;
+        if (_dataSource)
+        {
+            [self reloadData];
+        }
+    }
+}
+
+- (void)setDelegate:(id<HMUIPhotoBrowserDelegate>)delegate
+{
+    if (_delegate != delegate)
+    {
+        _delegate = delegate;
+        if (_delegate && _dataSource)
+        {
+            [self setNeedsLayout];
+        }
+    }
 }
 #pragma mark - 自动滚动
 
@@ -344,38 +512,98 @@ ON_NOTIFICATION(__notification){
     if (![__notification is:UIDeviceOrientationDidChangeNotification]) {
         return;
     }
-    if (roating) {
+    
+    if (!self.allowOriententation) {
         return;
     }
-    self.orientaionDeviceNext = (UIInterfaceOrientation)[UIDevice currentDevice].orientation;//[HMDeviceCapacity sharedInstance].orientaionDeviceNext;
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(orientationUpdate:) object:self];
-        [self performSelector:@selector(orientationUpdate:) withObject:self afterDelay:.1f inModes:@[NSRunLoopCommonModes]];
-    });
+    if (!UIInterfaceOrientationIsPortrait((UIInterfaceOrientation)[UIDevice currentDevice].orientation)&&!UIInterfaceOrientationIsLandscape((UIInterfaceOrientation)[UIDevice currentDevice].orientation)) {
+        return;
+    }
+    self.orientaionDeviceNext = (UIInterfaceOrientation)[UIDevice currentDevice].orientation;
+   
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(orientationUpdate:) object:self];
+    [self performSelector:@selector(orientationUpdate:) withObject:self afterDelay:.25f inModes:@[NSRunLoopCommonModes]];
 }
 
 - (void)orientationUpdate:(id)obj{
+    if (roating) {
+        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(orientationUpdate:) object:self];
+        [self performSelector:@selector(orientationUpdate:) withObject:self afterDelay:.25f inModes:@[NSRunLoopCommonModes]];
+        return;
+    }
     roating = YES;
     self.userInteractionEnabled = NO;
     CGAffineTransform affine = [self orientationAffineFor:self.orientaionDeviceNext];
-    if (!CGAffineTransformEqualToTransform(self.superview.transform, affine)) {
-  
-        [UIView animateWithDuration:.35f animations:^{
-            self.superview.transform = affine;
-            self.superview.frame = [[UIScreen mainScreen] bounds];
-            self.textlabel.alpha = .0f;
-        } completion:^(BOOL finished) {
-           self.textlabel.alpha = 1.0f;
-           roating = NO;
-            self.userInteractionEnabled = YES;
-        }];
-        
-        
-    }else{
-        self.userInteractionEnabled = YES;
-        roating = NO;
+    BOOL roated = NO;
+    if ([self.delegate respondsToSelector:@selector(photoBrowserWindowRoated:)]){
+        roated = [self.delegate photoBrowserWindowRoated:self];
     }
+    
+    BOOL orientaionLandscape = UIInterfaceOrientationIsLandscape(self.orientaionDeviceNext);
+    
+    if (roated) {
+        affine = CGAffineTransformIdentity;
+//        orientaionLandscape = YES;
+    }
+    
+    
+    WS(weakSelf)
+    CGRect frame = CGRectZero;
+    frame = weakSelf.baseWindow.bounds;
+    HMPhotoCell *cell = weakSelf.currentPhotoView;
+    
+    [UIView animateWithDuration:.25f animations:^{
+        weakSelf.superview.transform = affine;//旋转一个角度，不旋转baseview
+        weakSelf.textlabel.alpha = .0f;
+    } completion:^(BOOL finished) {
+        if (finished) {
+            //制造一个截屏，放置到baseview
+            [weakSelf showHumbFrom:frame image:cell.imageView.image willAnimated:^(UIImageView * imagev) {
+               //初始化位置和方向
+                 weakSelf.hidden = YES;
+                if (orientaionLandscape){
+                    imagev.frame = frame;
+                    imagev.transform = affine;
+                }else{
+                    imagev.frame = CGRectMake((-cell.width+frame.size.width)/2, (-cell.height+frame.size.height)/2, cell.width, cell.height);
+                    imagev.transform = affine;
+                }
+            } step1Animated:^(UIImageView *imagev) {
+                imagev.frame = frame;
+                weakSelf.superview.frame = frame;
+            } step2Animated:^(UIImageView *imagev) {
+                weakSelf.hidden = NO;
+                weakSelf.textlabel.alpha = 1.0f;
+            } compeleAnimated:^{
+//                weakSelf.superview.transform = affine;
+                
+//                weakSelf.superview.center = weakSelf.baseWindow.center;
+//                cell.hidden = NO;
+//                weakSelf.transform = CGAffineTransformIdentity;
+                weakSelf.userInteractionEnabled = YES;
+                
+//                if (orientaionLandscape) {
+//                    weakSelf.superview.frame = CGRectMake(0, 0, frame.size.height, frame.size.width);
+//                }else{
+//                    weakSelf.superview.frame = frame;
+//                }
+                roating = NO;
+            }];
+        }else{
+//            weakSelf.superview.transform = affine;
+            weakSelf.superview.frame = frame;
+            cell.hidden = NO;
+//            weakSelf.transform = CGAffineTransformIdentity;
+            weakSelf.userInteractionEnabled = YES;
+            
+//            if (orientaionLandscape) {
+//                weakSelf.frame = CGRectMake(0, 0, frame.size.height, frame.size.width);
+//            }else{
+//                weakSelf.frame = frame;
+//            }
+            roating = NO;
+        }
+    }];
 }
 
 #pragma mark - 私有方法
@@ -402,8 +630,9 @@ ON_NOTIFICATION(__notification){
     if (!_showText) {
         return;
     }
+    [self bringSubviewToFront:self.textlabel];
     [self.textlabel sizeToFit];
-    self.textlabel.y = self.height-self.textlabel.height-22;
+    self.textlabel.y = 10;//self.height-self.textlabel.height-22;
     self.textlabel.x = (self.width-self.textlabel.width)/2;
     
 }
@@ -413,16 +642,12 @@ ON_NOTIFICATION(__notification){
     [self updateTollbarState];
 }
 
-- (void)setFrame:(CGRect)frame{
-    [super setFrame:frame];
-    
-}
 
 - (void)layoutSubviews{
     [super layoutSubviews];
     
     [self createScrollView];
-    
+
     if (!loaded) {
         [self reloadData];
     }else{
@@ -431,23 +656,6 @@ ON_NOTIFICATION(__notification){
     }
 }
 
-
-- (void)resetContentsize{
-    if (count <= 1) {
-        _photoScrollView.scrollEnabled = NO;
-    }else{
-        _photoScrollView.scrollEnabled = YES;
-    }
-
-    [CATransaction begin];
-    [CATransaction setDisableActions:YES];
-    if (self.circulation) {
-        _photoScrollView.contentSize = CGSizeMake(_photoScrollView.width * 3, 1);
-    }else{
-        _photoScrollView.contentSize = CGSizeMake(_photoScrollView.width * MIN(count, 3), 1);
-    }
-    [CATransaction commit];
-}
 
 - (void)updatePhotos{
     
@@ -462,6 +670,7 @@ ON_NOTIFICATION(__notification){
 #pragma mark 设置选中的图片
 
 - (HMPhotoCell *)currentPhotoView{
+    
     for (HMPhotoCell *cell in _curViews) {
         if (PhotoViewIndex(cell)==_currentPhotoIndex) {
             return cell;
@@ -497,13 +706,13 @@ ON_NOTIFICATION(__notification){
             
             return;
         }else if (_currentPhotoIndex==0){
-            [_photoScrollView setContentOffset:CGPointMake(1 * (self.width+2*self.padding), 0) animated:animated];
+            [_photoScrollView setContentOffset:CGPointMake(1 * (ceilf(self.width)+2*self.padding), 0) animated:animated];
             return;
         }
         
     }
     
-    [_photoScrollView setContentOffset:CGPointMake(2 * (self.width+2*self.padding), 0) animated:animated];
+    [_photoScrollView setContentOffset:CGPointMake(2 * (ceilf(self.width)+2*self.padding), 0) animated:animated];
     
     
     
@@ -517,7 +726,7 @@ ON_NOTIFICATION(__notification){
         
         if (_currentPhotoIndex==0) {
             prePage = 5;
-            [_photoScrollView setContentOffset:CGPointMake(2 * (self.width+2*self.padding), 0) animated:animated];
+            [_photoScrollView setContentOffset:CGPointMake(2 * (ceilf(self.width)+2*self.padding), 0) animated:animated];
             
             return;
         }
@@ -529,16 +738,19 @@ ON_NOTIFICATION(__notification){
 
 
 #pragma mark - MJPhotoView代理
-- (void)photoCellDoubleTouchIn:(HMPhotoCell *)cell{
+- (BOOL)photoCellDoubleTouchIn:(HMPhotoCell *)cell{
     if ([self.delegate respondsToSelector:@selector(photoBrowser:didDoubbleTouchedIndex:)]) {
-        [self.delegate photoBrowser:self didDoubbleTouchedIndex:PhotoViewIndex(cell)];
+       return [self.delegate photoBrowser:self didDoubbleTouchedIndex:PhotoViewIndex(cell)];
     }
+    return YES;
 }
+
 - (void)photoCellLongTouchIn:(HMPhotoCell *)cell{
     if ([self.delegate respondsToSelector:@selector(photoBrowser:didLongTouchedIndex:)]) {
         [self.delegate photoBrowser:self didLongTouchedIndex:PhotoViewIndex(cell)];
     }
 }
+
 - (void)photoCellTouchIn:(HMPhotoCell *)cell
 {
     
@@ -565,26 +777,7 @@ ON_NOTIFICATION(__notification){
 }
 - (void)removeWhenTouched
 {
-    if (removeWhenTouch) {
-        self.allowOriententation = NO;
-        
-        if ([self.superview.tagString is:@"photoBWindow"]) {
-            self.ssssuperView.hidden = NO;
-        }
-        
-        [UIView animateWithDuration:.35f animations:^{
-            self.alpha = 0.f;
-        } completion:^(BOOL finished) {
-            
-            [self removeFromSuperview];
-            
-            self.alpha = 1.f;
-            if ([self.superview.tagString is:@"photoBWindow"]) {
-                self.superview.hidden = YES;
-            }
-            
-        }];
-    }
+    [self showHumbHide:YES];
 }
 
 #pragma mark 显示照片
@@ -623,6 +816,23 @@ ON_NOTIFICATION(__notification){
     [self showPhotos];
 }
 
+- (void)resetContentsize{
+    if (count <= 1) {
+        _photoScrollView.scrollEnabled = NO;
+    }else{
+        _photoScrollView.scrollEnabled = YES;
+    }
+    
+    [CATransaction begin];
+    [CATransaction setDisableActions:YES];
+    if (self.circulation) {
+        _photoScrollView.contentSize = CGSizeMake(_photoScrollView.width * 3, 0);
+    }else{
+        _photoScrollView.contentSize = CGSizeMake(_photoScrollView.width * MIN(count, 3), 0);
+    }
+    [CATransaction commit];
+}
+
 - (void)loadDataAnimated:(BOOL)animated
 {
     if (_currentPhotoIndex==_prePhotoIndex) {
@@ -658,39 +868,41 @@ ON_NOTIFICATION(__notification){
 - (void)resetFrame:(BOOL)animated{
 
     CGRect photoViewFrame = self.bounds;
-    
-    [CATransaction begin];
-    [CATransaction setDisableActions:YES];
+    CGPoint point = CGPointZero;
+
     for (int i = 0; i < _curViews.count; i++) {
         HMPhotoCell *v = [_curViews objectAtIndex:i];
         photoViewFrame.origin.x = (photoViewFrame.size.width * i) + (2*i+1)*self.padding;
+        
         v.frame = photoViewFrame;
         if (PhotoViewIndex(v)!=_currentPhotoIndex) {
             v.hidden = YES;
         }else{
             v.hidden = NO;
+            point = CGPointMake(v.origin.x-self.padding, v.origin.y);
         }
     }
-    [CATransaction commit];
+
     
-    CGPoint point = CGPointMake(photoViewFrame.size.width+2*self.padding, 0);
+    
+    point = CGPointMake(_photoScrollView.width,0);
     prePage = 1;
-    if (!self.circulation) {
-        if (_currentPhotoIndex==0) {
+    if (!self.circulation) {//不循环
+        if (_currentPhotoIndex==0) {//最前
             point = CGPointZero;
             prePage = 0;
-        }else if (_currentPhotoIndex==count-1){
+        }else if (_currentPhotoIndex==count-1){//最后
             point = CGPointMake(2*(photoViewFrame.size.width+2*self.padding), 0);
-            
             prePage = 2;
         }
        
+    }else{
+        if (_curViews.count<=2) {
+            prePage = _currentPhotoIndex;
+            point = CGPointMake(_currentPhotoIndex*_photoScrollView.width, 0);
+        }
     }
     
-    if (_curViews.count<=2) {
-        prePage = _currentPhotoIndex;
-        point = CGPointMake(_currentPhotoIndex*(photoViewFrame.size.width+2*self.padding), 0);
-    }
     
     [_photoScrollView setContentOffset:point animated:animated];
 }
@@ -767,7 +979,6 @@ ON_NOTIFICATION(__notification){
         photoView = [[[HMPhotoCell alloc] init]autorelease];
         photoView.dataSource = self;
         photoView.eventReceiver = self;
-        photoView.backgroundColor = [UIColor clearColor];
         [_curViews addObject:photoView];
     }
     
@@ -801,6 +1012,7 @@ ON_NOTIFICATION(__notification){
 }
 
 #pragma mark - UIScrollView Delegate
+
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     
     if (_allowAutoScroll) {
@@ -822,7 +1034,6 @@ ON_NOTIFICATION(__notification){
     }
 }
 
-
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
     [self resetSubViews:scrollView];
 }
@@ -834,9 +1045,9 @@ ON_NOTIFICATION(__notification){
 }
 
 - (void)resetSubViews:(UIScrollView*)scrollView{
-    int x = scrollView.contentOffset.x;
-    int page = x/scrollView.width;
-    
+    CGFloat x = scrollView.contentOffset.x;
+    CGFloat page = x/scrollView.width;
+    page  = ceilf(page);
     //往下翻一张 index 增加
     if (prePage>page) {//往上翻 index 减少
         _currentPhotoIndex = [self validPageValue:_currentPhotoIndex-1];
@@ -845,8 +1056,19 @@ ON_NOTIFICATION(__notification){
         _currentPhotoIndex = [self validPageValue:_currentPhotoIndex+1];
         
     }
-    
-    [self loadDataAnimated:NO];
+    if (prePage==page) {
+        for (int i = 0; i < _curViews.count; i++) {
+            HMPhotoCell *v = [_curViews objectAtIndex:i];
+            
+            if (PhotoViewIndex(v)!=_currentPhotoIndex) {
+                v.hidden = YES;
+            }else{
+                v.hidden = NO;
+            }
+        }
+    }else{
+        [self loadDataAnimated:NO];
+    }
    
     HMPhotoCell *cell = [self currentPhotoView];
 

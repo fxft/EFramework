@@ -114,7 +114,7 @@
     NSData *data = [NSJSONSerialization dataWithJSONObject:self options:NSJSONWritingPrettyPrinted error:&error];
     if (error) {
 #if (__ON__ == __HM_DEVELOPMENT__)
-        CC( @"JSON",error);
+        CC( @"JSON-NSString",error,self);
 #endif	// #if (__ON__ == __BEE_DEVELOPMENT__)
     }
     return data;

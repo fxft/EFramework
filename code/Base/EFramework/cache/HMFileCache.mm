@@ -241,6 +241,10 @@ DEF_SINGLETON( HMFileCache );
     
 }
 
++ (void)removeAllWebViewCaches{
+    [[NSURLCache sharedURLCache] removeAllCachedResponses];
+}
+
 - (void)removeAllObjects
 {
 	[self removeAllObjectsForBranch:nil];

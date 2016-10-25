@@ -138,6 +138,7 @@ DEF_SIGNAL2( ORIENTATION_DID_CHANGED ,HMUIBoard)
 }
 
 - (void)awakeFromNib{
+    [super awakeFromNib];
     [self initSelf];
 }
 

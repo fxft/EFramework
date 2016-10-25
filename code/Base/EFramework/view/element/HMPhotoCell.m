@@ -130,6 +130,10 @@
     self.photo = nil;
     HM_SUPER_DEALLOC();
 }
+- (instancetype)init
+{
+    return  [self initWithFrame:CGRectZero];
+}
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -165,12 +169,12 @@
 }
 
 - (void)initSelfDefault{
-    self.backgroundColor = [UIColor whiteColor];
+    self.backgroundColor = [UIColor clearColor];
     self.decelerationRate = UIScrollViewDecelerationRateFast;
     self.delegate = self;
     self.showsHorizontalScrollIndicator = NO;
     self.showsVerticalScrollIndicator = NO;
-    
+    self.clipsToBounds = YES;
 }
 
 #pragma mark 调整frame
@@ -202,8 +206,11 @@
     CGRect imageFrame = (boundsHeight<boundsWidth)?CGRectMake(0, 0, imageWidth / scale , boundsHeight):CGRectMake(0, 0, boundsWidth, imageHeight / scale);
     
     // 内容尺寸
-    self.contentSize = CGSizeMake(0, imageFrame.size.height);
     
+    [CATransaction begin];
+    [CATransaction setDisableActions:YES];
+    self.contentSize = imageFrame.size;
+    [CATransaction commit];
     self.scrollEnabled = YES;
     
 }
@@ -235,8 +242,11 @@
         CGRect frame = self.bounds;
         frame.origin = CGPointZero;
         _imageView.frame = CGRectEdgeInsets(self.bounds, _imageInsets);
+        [CATransaction begin];
+        [CATransaction setDisableActions:YES];
         self.contentSize = frame.size;
-        
+        [CATransaction commit];
+
         _descptionView.y = self.height-_descptionView.height;
         _descptionView.width = self.width;
         [self bringSubviewToFront:_descptionView];
@@ -361,6 +371,8 @@
     if (_imageView==nil) {
         _imageView = [[UIImageView alloc]initWithFrame:self.bounds];
         _imageView.contentMode = UIViewContentModeScaleAspectFit;
+        _imageView.backgroundColor = [UIColor clearColor];
+        _imageView.clipsToBounds = YES;
 //        _imageView.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
         [self addSubview:_imageView];
     }
@@ -415,7 +427,7 @@
 - (void)handleDoubleTap:(UITapGestureRecognizer *)tap {
     doubleTap = YES;
     if ([self.dataSource respondsToSelector:@selector(photoCellDoubleTouchIn:)]) {
-        [self.dataSource photoCellDoubleTouchIn:self];
+        if (![self.dataSource photoCellDoubleTouchIn:self])return;
     }
     CGPoint touchPoint = [tap locationInView:self];
     if (self.zoomScale == self.maximumZoomScale) {
@@ -539,9 +551,10 @@
     }
 }
 
+
 - (void)doubleTouch:(UITouch*)touch{
     if ([self.dataSource respondsToSelector:@selector(photoCellDoubleTouchIn:)]) {
-        [self.dataSource photoCellDoubleTouchIn:self];
+        if (![self.dataSource photoCellDoubleTouchIn:self])return;
     }
     CGPoint touchPoint = [touch locationInView:self];
     if (self.zoomScale == self.maximumZoomScale) {
@@ -553,19 +566,23 @@
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [self handleTouches:[event allTouches]];
+
 }
 
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    
     [self handleTouches:[event allTouches]];
+
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     [self handleTouches:[event allTouches]];
-    
+
 }
 
 -(void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
     [self handleTouches:[event allTouches]];
+
 }
 
 @end

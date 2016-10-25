@@ -72,7 +72,7 @@ ON_Button(signal){
     }
 }
 
-//#define POSTFORM //通过表单的方式上传
+#define POSTFORM //通过表单的方式上传
 //#define POSTBODY //通过body的方式上传
 
 - (void)test{
@@ -83,7 +83,8 @@ ON_Button(signal){
     NSMutableDictionary *requestHeaders = [NSMutableDictionary dictionaryWithCapacity:0];
     
     //阿里云需要的数据
-    [requestHeaders setValue:@"23371405" forKey:X_CA_KEY];
+    [requestHeaders setValue:@"23368163" forKey:X_CA_KEY];
+//    [requestHeaders setValue:@"23371405" forKey:X_CA_KEY];
     
     //设置Http标准头
 #ifdef POSTFORM
@@ -108,16 +109,22 @@ ON_Button(signal){
     
     //业务需要的头部
     NSDictionary *headDic = @{
-                              @"token":@"573eaee6324e6",
+                              @"token":@"",
                               @"version":@"1.0",
                               @"appkey":@"123456789",
-                              @"appkey2":[@"我怎么了" formatURLEnocde],//中文要转码
+//                              @"appkey2":[@"我怎么了" formatURLEnocde],//中文要转码
                               };
+    
     [requestHeaders setValuesForKeysWithDictionary:headDic];
     //业务需要的参数
     NSDictionary *paramDic = @{@"status":@"1",@"test2":@"2344"};
+    paramDic = @{
+                  @"username":@"13489184949",
+                  @"password":[@"pppppp".MD5String lowercaseString],
+                  @"deviceToken":@""
+                  };
     NSDictionary *signParam = paramDic;
-
+    
     //如果POST数据是二进制数据，可以计算出Content_MD5，不建议使用该方式（主要是AF的Session不支持）
     NSData *body = [NSData data];//需要post的数据,请按实际情况替换
 #ifdef POSTBODY
@@ -139,9 +146,14 @@ ON_Button(signal){
 //    NSString *path = @"/ttt";
 //    NSString *method = @"GET";
     
-    [AliEncryption sharedInstance].secretForApiGateway = @"c20755aa46160b05474925f27dd82cdb";
+//    [AliEncryption sharedInstance].secretForApiGateway = @"c20755aa46160b05474925f27dd82cdb";
+//    
+//    NSString *path = @"/UnUseCouponList";//
+//    NSString *method = @"POST";//
     
-    NSString *path = @"/UnUseCouponList";//
+    [AliEncryption sharedInstance].secretForApiGateway = @"3c8814f38187d52d78e671edeb563eb4";
+    
+    NSString *path = @"/Api/User/Login";//
     NSString *method = @"POST";//
     
     NSString *signatureKey = nil;
@@ -162,6 +174,7 @@ ON_Button(signal){
     }
     
     NSString *url = @"http://apitest.jjicar.com/UnUseCouponList";
+    url = @"http://apitest.jjicar.com/Api/User/Login";
 //    url = @"http://api.jjicar.com/User/Login";
 #ifdef POSTFORM
     [manager POST:url parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {

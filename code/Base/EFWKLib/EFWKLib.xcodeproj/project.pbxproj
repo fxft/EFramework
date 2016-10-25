@@ -1553,6 +1553,7 @@
 				GCC_PREFIX_HEADER = "$(PROJECT_NAME)/PrefixHeader.pch";
 				INFOPLIST_FILE = EFWKLib/Info.plist;
 				INSTALL_PATH = "@executable_path/../Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				LINK_WITH_STANDARD_LIBRARIES = YES;
 				MACH_O_TYPE = mh_dylib;
@@ -1584,6 +1585,7 @@
 				GCC_PREFIX_HEADER = "$(PROJECT_NAME)/PrefixHeader.pch";
 				INFOPLIST_FILE = EFWKLib/Info.plist;
 				INSTALL_PATH = "@executable_path/../Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				LINK_WITH_STANDARD_LIBRARIES = YES;
 				MACH_O_TYPE = mh_dylib;

@@ -36,8 +36,11 @@ pod 'iOS-MagnifyingGlass', '~> 0.0.2'#放大鏡
 #pod 'TransitionAnimation', '~> 3.0.4'#转场动画依赖
 # TTMAnimatedTransitionGallery
 
+pod 'SocketRocket', '~>0.5.1'
 
-pod 'Permission', '~> 1.4.2'    #权限获取
+pod 'WeexSDK', :path=>'../../../../../../projects/comm/external/weex/sdk'
+
+#pod 'Permission', '~> 1.4.2'    #权限获取
 #/*Bluetooth
 #Camera
 #Contacts
@@ -52,6 +55,6 @@ pod 'Permission', '~> 1.4.2'    #权限获取
 
 pod 'SYStickHeaderWaterFall', '~> 0.0.2' #瀑布流
 
-pod 'TextFieldEffects', '~> 1.2.0' #魔法输入框，各自样式
+#pod 'TextFieldEffects', '~> 1.2.0' #魔法输入框，各自样式
 
 end

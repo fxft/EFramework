@@ -568,10 +568,12 @@
     if (_containerMode&UIPopoverContainerModeBottom){
         containerPoint =  CGPointMake(self.centerX-minRect.size.width/2, self.height-minRect.size.height);
         hasArrow = NO;
+        directionInner = UIPopoverArrowDirectionAny;
         reset = NO;
     }else if (_containerMode&UIPopoverContainerModeTop){
         containerPoint =  CGPointMake(self.centerX-minRect.size.width/2, 0);
         hasArrow = NO;
+        directionInner = UIPopoverArrowDirectionAny;
         reset = NO;
     }else{
         containerPoint =  [self getArrow:&hasArrow direction:&directionInner directionOffset:&arrowOffsetInner minRect:minRect];

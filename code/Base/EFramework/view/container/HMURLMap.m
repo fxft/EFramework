@@ -1054,6 +1054,9 @@ static int __nicknameKEY;
         if (closes&&viewLoaded) {
             
             for (NSString *close in closes) {
+                if ([map isEqualToString:close]) {
+                    continue;
+                }
                 [[HMURLMap sharedInstance] removeMap:close];
             }
             

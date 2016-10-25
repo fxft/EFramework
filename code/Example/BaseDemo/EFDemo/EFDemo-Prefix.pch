@@ -15,6 +15,26 @@
 //#import <StreamingKit/StreamingKit.h>/*音乐播放库*/
 #import <SDAutoLayout/UIView+SDAutoLayout.h>
 
+
+#import <WeexSDK/WeexSDK.h>
+#import <SocketRocket/SocketRocket.h>
+#import "WeexExtend.h"
+
+
+#define CURRENT_IP @"your computer device ip"
+
+#if TARGET_IPHONE_SIMULATOR
+#define DEMO_HOST @"127.0.0.1"
+#else
+#define DEMO_HOST CURRENT_IP
+#endif
+
+#define HOME_URL [NSString stringWithFormat:@"http://%@:12580/examples/build/index.js", DEMO_HOST]
+
+#define BUNDLE_URL [NSString stringWithFormat:@"file://%@/bundlejs/index.js",[NSBundle mainBundle].bundlePath]
+//#undef HOME_URL
+//#define HOME_URL BUNDLE_URL
+
 //#import "HMMapSearchAPI.h"
 
  // Include any system framework and library headers here that should be included in all compilation units.

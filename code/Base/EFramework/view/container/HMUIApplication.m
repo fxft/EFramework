@@ -55,6 +55,15 @@ DEF_NOTIFICATION2( DID_ENTERBACKGROUND ,HMUIApplication)	// state changed
     
 }
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        __shareApp = self;
+    }
+    return self;
+}
+
 - (void)dealloc
 {
     [self unload];
@@ -68,8 +77,8 @@ DEF_NOTIFICATION2( DID_ENTERBACKGROUND ,HMUIApplication)	// state changed
     if (self.window==nil) {
         self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
 //        self.window.windowLevel = 10;
-        [self.window makeKeyWindow];
-        [self.window makeKeyAndVisible];
+//        [self.window makeKeyWindow];
+//        [self.window makeKeyAndVisible];
     }else{
         INFO(@"****Has set the Main Interface.****");
         Class clazz = NSClassFromString(@"HMBaseNavigator");
@@ -84,6 +93,11 @@ DEF_NOTIFICATION2( DID_ENTERBACKGROUND ,HMUIApplication)	// state changed
 
 + (void)enableDefaultAPNS{
     if (!TARGET_IPHONE_SIMULATOR) {
+        NSString *sys = [[UIDevice currentDevice] systemVersion] ;
+        NSString *fi = [sys componentsSeparatedByString:@"."].firstObject;
+        
+        INFO(@( [fi compare:@"8"] != NSOrderedDescending),@([fi compare:@"8"]),@( [fi integerValue]>=8));
+        
         if (IOS8_OR_LATER) {
             
             if ([[UIApplication sharedApplication] respondsToSelector:@selector(registerUserNotificationSettings:)]) {
@@ -94,8 +108,6 @@ DEF_NOTIFICATION2( DID_ENTERBACKGROUND ,HMUIApplication)	// state changed
                 UIRemoteNotificationType myTypes = UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound;
                 [[UIApplication sharedApplication] registerForRemoteNotificationTypes:myTypes];
             }
-            
-            [[UIApplication sharedApplication] registerForRemoteNotifications];
             
         }else{
             [[UIApplication sharedApplication]registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound |UIRemoteNotificationTypeAlert)];
@@ -113,7 +125,7 @@ DEF_NOTIFICATION2( DID_ENTERBACKGROUND ,HMUIApplication)	// state changed
 {
     // Override point for customization after application launch.
     
-    __shareApp = self;
+    
     self.application = application;
     
     [self initWindow];
@@ -126,16 +138,17 @@ DEF_NOTIFICATION2( DID_ENTERBACKGROUND ,HMUIApplication)	// state changed
     
     [self load];
 
-    if ( self.window.rootViewController )
-	{
-		UIView * rootView = self.window.rootViewController.view;
-		if ( rootView )
-		{
-            [self.window makeKeyWindow];
-			[self.window makeKeyAndVisible];
-		}
-	}
-    
+//    if ( self.window.rootViewController )
+//	{
+//		UIView * rootView = self.window.rootViewController.view;
+//		if ( rootView )
+//		{
+//            [self.window makeKeyWindow];
+//			[self.window makeKeyAndVisible];
+//		}
+//	}
+    [self.window makeKeyWindow];
+    [self.window makeKeyAndVisible];
     return YES;
 }
 
@@ -189,6 +202,12 @@ DEF_NOTIFICATION2( DID_ENTERBACKGROUND ,HMUIApplication)	// state changed
     NSLog(@"applicationWillTerminate");
 }
 #pragma mark -
+
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings{
+    
+    [[UIApplication sharedApplication] registerForRemoteNotifications];
+    
+}
 
 // one of these will be called after calling -registerForRemoteNotifications
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
@@ -254,6 +273,8 @@ DEF_NOTIFICATION2( DID_ENTERBACKGROUND ,HMUIApplication)	// state changed
         params.APPEND( LaunchNotificationSourceKey, sourceApplication );
         
 		[self postNotification:HMUIApplication.LAUNCHED withObject:params];
+        
+        return ![[params valueForKey:LaunchNotificationCannotOpenUrlKey] boolValue];
 	}
 	else
 	{

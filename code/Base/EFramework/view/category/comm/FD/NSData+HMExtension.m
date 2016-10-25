@@ -16,7 +16,7 @@
     id object = [NSJSONSerialization JSONObjectWithData:self options:NSJSONReadingMutableContainers error:&serializationError];
     if (serializationError) {
 #if (__ON__ == __HM_DEVELOPMENT__)
-        CC( @"JSON",serializationError);
+        CC( @"JSON-NSData",serializationError,[NSString stringWithCString:self.bytes encoding:NSUTF8StringEncoding]);
 #endif	// #if (__ON__ == __BEE_DEVELOPMENT__)
     }
     return object;

@@ -98,6 +98,11 @@ AS_SINGLETON( HMFileCache );
 + (void)removeAllWebApiCaches;
 
 /**
+ *  移除所有存储在fsCachedData文件夹中的文件，文件夹用于UIWebView网络数据的存储
+ */
++ (void)removeAllWebViewCaches;
+
+/**
  *  数据序列化成Data
  *
  *  @param obj
