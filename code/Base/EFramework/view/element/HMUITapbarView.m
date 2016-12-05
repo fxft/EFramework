@@ -72,6 +72,7 @@ DEF_SIGNAL(TAPNOSELECTED);
 
 - (void)awakeFromNib{
 //    self.backgroundColor = [UIColor clearColor];
+    [super awakeFromNib];
     [self initSelfDefault];
 }
 

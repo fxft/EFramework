@@ -822,7 +822,7 @@
     UIGraphicsEndImageContext();
     
     CGImageRelease(newImageRef);
-    
+    image = [UIImage imageWithCGImage:image.CGImage scale:self.scale orientation:self.imageOrientation];
     return image;
 }
 
@@ -851,7 +851,7 @@
 
     UIImage * image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-    image = [UIImage imageWithCGImage:image.CGImage scale:image.scale orientation:image.imageOrientation];
+    image = [UIImage imageWithCGImage:image.CGImage scale:self.scale orientation:self.imageOrientation];
     return image;
 }
 
@@ -1096,6 +1096,7 @@
     
     UIGraphicsEndImageContext();
     
+    result = [UIImage imageWithCGImage:result.CGImage scale:self.scale orientation:self.imageOrientation];
     return result;
 }
 

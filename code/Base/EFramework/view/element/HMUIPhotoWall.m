@@ -184,7 +184,7 @@
 }
 
 - (void)awakeFromNib{
-    
+    [super awakeFromNib];
     [self initSelfDefault];
     
     if (self.superview&&_dataSource) {

@@ -304,6 +304,7 @@ DEF_SIGNAL2( RETURN_ACTION ,HMUITextField)
 }
 
 - (void)awakeFromNib{
+    [super awakeFromNib];
     [self initSelfDefault];
 }
 

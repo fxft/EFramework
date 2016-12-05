@@ -377,6 +377,7 @@
 }
 
 - (void)awakeFromNib{
+    [super awakeFromNib];
     [self initSelfDefault];
 }
 

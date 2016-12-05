@@ -275,6 +275,12 @@
     
     [subBoards addObject:@{@"title":@"PYSearch",@"subtitle":@" iOS 中一款优雅的搜索控制器。",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"https://github.com/iphone5solo/PYSearch",@"source":@"PYSearch"},@"imgurl":@[@"https://github.com/iphone5solo/learngit/raw/master/imagesForPYSearch/PYSearchDemo.gif",@"https://github.com/iphone5solo/learngit/raw/master/imagesForPYSearch/hotSearchStyle02.png"]}];
     
+    [subBoards addObject:@{@"title":@"起点小说",@"subtitle":@" 起点小说排行榜",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"http://m.zhuishushenqi.com/ranking?timestamp=1480776409.291229&platform=ios",@"source":@"QIDIAN"}}];
+    
+     [subBoards addObject:@{@"title":@"起点小说",@"subtitle":@" 起点小说分类",@"map":@"Button",@"open":@"push",@"url":URLFOR_controller(@"ThirdPartBoard"),@"boards":@{@"url":@"http://m.zhuishushenqi.com/category?platform=ios&timestamp=1480776830.415015",@"source":@"QIDIANFenlei"}}];
+    
+    
+    
     [self.boards addObject:@{@"title":@"ThirdComponent",@"subtitle":@"第三方控件介绍",@"map":@"ThirdComponent",@"open":@"open",@"url":URLFOR_controllerWithNav(@"ListBoard"),@"listheight":@(49),@"boards":subBoards}];
     
     

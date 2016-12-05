@@ -76,6 +76,7 @@ ON_PopoverView( signal);
 @property (nonatomic) BOOL              touchAutoHide;
 @property (nonatomic) BOOL              contentCustom;//弹出框不带箭头效果
 @property (nonatomic) CGRect            contentRect;//如果设置成self.bounds且不为zero 则忽略style背景
+@property (nonatomic)    CGPoint        contentOffset;
 /**
  *  弹出框风格 默认定义两种配色风格，淡蓝色，暗色，支持自定义颜色
  */

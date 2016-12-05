@@ -117,6 +117,7 @@ DEF_SIGNAL( DID_LOADING_PERSENT )	// 加载进度 0-1
 }
 
 - (void)awakeFromNib{
+    [super awakeFromNib];
     [self initSelfDefault];
 }
 

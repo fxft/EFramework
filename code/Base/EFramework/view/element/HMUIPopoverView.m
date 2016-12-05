@@ -601,7 +601,7 @@
         [self resetFrame];
     }else{
         
-        minRect.origin = containerPoint;
+        minRect.origin = CGPointMake(containerPoint.x-_contentOffset.x, containerPoint.y-_contentOffset.y);
         //重新计算一次 minRect
         //popoverMinRect //前面计算后得到的container的大小,包含了可能错误的style
         [_popoverViewContainer setFrame:minRect];

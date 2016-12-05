@@ -63,7 +63,7 @@
 }
 
 - (void)awakeFromNib{
-    
+    [super awakeFromNib];
 }
 
 - (id)initWithFrame:(CGRect)frame

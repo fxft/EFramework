@@ -173,6 +173,7 @@ DEF_SIGNAL2( RETURN_ACTION ,HMUITextView)
 }
 
 - (void)awakeFromNib{
+    [super awakeFromNib];
     [self initSelfDefault];
 }
 

@@ -78,7 +78,7 @@ DEF_NOTIFICATION2( DID_ENTERBACKGROUND ,HMUIApplication)	// state changed
         self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
 //        self.window.windowLevel = 10;
 //        [self.window makeKeyWindow];
-//        [self.window makeKeyAndVisible];
+        [self.window makeKeyAndVisible];
     }else{
         INFO(@"****Has set the Main Interface.****");
         Class clazz = NSClassFromString(@"HMBaseNavigator");
@@ -147,8 +147,8 @@ DEF_NOTIFICATION2( DID_ENTERBACKGROUND ,HMUIApplication)	// state changed
 //			[self.window makeKeyAndVisible];
 //		}
 //	}
-    [self.window makeKeyWindow];
-    [self.window makeKeyAndVisible];
+//    [self.window makeKeyWindow];
+//    [self.window makeKeyAndVisible];
     return YES;
 }
 
@@ -189,7 +189,7 @@ DEF_NOTIFICATION2( DID_ENTERBACKGROUND ,HMUIApplication)	// state changed
     if (self.enableLongtimeNotif) {
         NSTimeInterval interval = [[NSDate date]timeIntervalSince1970] - self.lastTimeInterval>=self.longtimeInterval;
         CC(@"Application",@(interval).description,@"longtime",@(self.longtimeInterval).description,@"lastTime",[NSDate dateWithTimeIntervalSince1970:self.lastTimeInterval]);
-        if (self.longtimeInterval>0.f&&interval) {
+        if (self.longtimeInterval>0.f&&interval&&self.lastTimeInterval) {
             [self postNotification:[HMUIApplication DID_LONGTIMEINACTION]];
         }
     }

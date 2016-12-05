@@ -189,6 +189,7 @@ ON_Button(signal){
         }
         
     } success:^(NSURLSessionDataTask * _Nonnull task, NSData*  _Nonnull responseObject) {
+        NSLog(@"%@",task.currentRequest.allHTTPHeaderFields);
         NSLog(@"lalalal%@",responseObject);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"--------%@",error.description);
