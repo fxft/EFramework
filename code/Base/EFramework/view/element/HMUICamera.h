@@ -26,12 +26,12 @@
 /**
  * Delegate method after the user has successfully taken or selected a photo
  */
-- (void)takeController:(HMUICamera *)controller gotPhoto:(UIImage *)photo withInfo:(NSDictionary *)info;
+- (BOOL)takeController:(HMUICamera *)controller gotPhoto:(UIImage *)photo withInfo:(NSDictionary *)info;
 
 /**
  * Delegate method after the user has successfully taken or selected a video
  */
-- (void)takeController:(HMUICamera *)controller gotVideo:(NSURL *)video withInfo:(NSDictionary *)info;
+- (BOOL)takeController:(HMUICamera *)controller gotVideo:(NSURL *)video withInfo:(NSDictionary *)info;
 @end
 
 @interface HMUICamera : NSObject <UIImagePickerControllerDelegate>

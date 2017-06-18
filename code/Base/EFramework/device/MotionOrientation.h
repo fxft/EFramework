@@ -37,9 +37,9 @@ typedef void (^MotionAccelerometerHandler)(CMAccelerometerData * accelerometerDa
 /**
  *  获取视图方向上需要选择的角度
  *
- *  @param interfaceOr
+ *   interfaceOr
  *
- *  @return 
+ *   return 
  */
 + (CGAffineTransform)affineTransformFor:(UIInterfaceOrientation)interfaceOr;
 

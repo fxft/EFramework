@@ -29,7 +29,11 @@
     }
     return self;
 }
-
+- (void)dealloc
+{
+    self.color = nil;
+    HM_SUPER_DEALLOC();
+}
 - (CGSize)intrinsicContentSize{
     CGSize size = [super intrinsicContentSize];
     return size;
@@ -191,7 +195,7 @@
         textLabel= [[UILabel spawn]retain];
         self.backgroundColor = [UIColor clearColor];
         textLabel.backgroundColor = [UIColor clearColor];
-        textLabel.textAlignment = UITextAlignmentCenter;
+        textLabel.textAlignment = NSTextAlignmentCenter;
         textLabel.font = [UIFont boldSystemFontOfSize:16.0f];
         [self addSubview:textLabel];
     }

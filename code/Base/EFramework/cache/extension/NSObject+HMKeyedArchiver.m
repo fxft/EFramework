@@ -42,6 +42,23 @@
                                                     error:NULL];
 }
 
+- (void)removeArchiver:(NSString *)name{
+    NSString * pathName = nil;
+    if ( name && [name length] )
+    {
+        pathName = [self.filePathArchiver stringByAppendingFormat:@"%@/", name];
+    }
+    else
+    {
+        pathName = self.filePathArchiver;
+    }
+#if (__ON__ == __HM_DEVELOPMENT__)
+    CC(@"Caches",@"remove",pathName);
+#endif
+    [[NSFileManager defaultManager] removeItemAtPath:pathName error:NULL];
+    
+}
+
 - (NSString *)saveWithArchiver:(NSString*)name{
     if (!class_conformsToProtocol([self class],@protocol(NSCoding))&&![self isKindOfClass:[NSArray class]]) {
         
@@ -111,6 +128,23 @@
                               withIntermediateDirectories:YES
                                                attributes:nil
                                                     error:NULL];
+}
+
+- (void)removePlist:(NSString *)name{
+    NSString * pathName = nil;
+    if ( name && [name length] )
+    {
+        pathName = [self.filePathPlist stringByAppendingFormat:@"%@/", name];
+    }
+    else
+    {
+        pathName = self.filePathPlist;
+    }
+#if (__ON__ == __HM_DEVELOPMENT__)
+    CC(@"Caches",@"remove",pathName);
+#endif
+    [[NSFileManager defaultManager] removeItemAtPath:pathName error:NULL];
+   
 }
 
 - (NSString *)saveWithPlist:(NSString*)name{

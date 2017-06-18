@@ -34,6 +34,6 @@
  
  */
 HM_EXTERN void mapInitRange(CLLocationCoordinate2D* minCoor,CLLocationCoordinate2D*  maxCoor);
-HM_EXTERN void mapRangeForCoordinate(CLLocationCoordinate2D coordinate ,CLLocationCoordinate2D minCoor ,CLLocationCoordinate2D maxCoor);
+HM_EXTERN void mapRangeForCoordinate(CLLocationCoordinate2D coordinate ,CLLocationCoordinate2D* minCoor ,CLLocationCoordinate2D* maxCoor);
 HM_EXTERN MSOMapRect mapRectForRange(CLLocationCoordinate2D minCoor ,CLLocationCoordinate2D maxCoor);
 HM_EXTERN CLLocationCoordinate2D mapCenterForRange(CLLocationCoordinate2D minCoor ,CLLocationCoordinate2D maxCoor);

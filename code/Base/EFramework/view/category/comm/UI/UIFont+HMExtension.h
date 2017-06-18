@@ -12,9 +12,9 @@
 /**
  *  自定义字体注册
  *
- *  @param url 本地完整路径
+ *   url 本地完整路径
  */
-+ (void)registerIconFontWithURL:(NSURL *)url;
++ (BOOL)registerIconFontWithURL:(NSURL *)url;
 
 //必须在工程中加入 GoogleMaterial.ttf字体-->>icomoon字体
 + (UIFont *)fontGoogleMaterialWithSize:(CGFloat)size;

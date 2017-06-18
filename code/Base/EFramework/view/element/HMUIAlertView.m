@@ -72,6 +72,7 @@
     self.clicked = nil;
     self.delegate = nil;
     self.tagString = nil;
+    self.keywindow = nil;
     HM_SUPER_DEALLOC();
 }
 
@@ -111,11 +112,12 @@
 - (UIAlertAction *)actionWithTitle:(NSString*)title style:(UIAlertActionStyle)style{
     WS(weakSelf)
     UIAlertAction *action = [UIAlertAction actionWithTitle:title style:style handler:^(UIAlertAction * action) {
-        if (weakSelf.clicked) {
-            for (UIAlertAction *ac in weakSelf.actions) {
+        SS(strongSelf)
+        if (strongSelf.clicked) {
+            for (UIAlertAction *ac in strongSelf.actions) {
                 if ([ac.title is:action.title]) {
                     
-                    [weakSelf dismissWithClickedButtonIndex:[weakSelf.actions indexOfObject:ac] animated:YES];
+                    [strongSelf dismissWithClickedButtonIndex:[strongSelf.actions indexOfObject:ac] animated:YES];
                     break;
                 }
             }

@@ -58,6 +58,11 @@ DEF_SINGLETON(HMBaseNavigator)
     [_map release];
     _map = nil;
 }
+- (void)dealloc
+{
+    self.map = nil;
+    HM_SUPER_DEALLOC();
+}
 
 - (void)viewDidLayoutSubviews{
     
@@ -286,9 +291,11 @@ DEF_SINGLETON(HMBaseNavigator)
             
              self.currentC.view.alpha=0.f;
             
-            __block __weak_type typeof(self) blockSelf = self;
+            WS(weakSelf)
             
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                __strong_type __typeof(&*self)blockSelf = weakSelf;
+                
                 UIViewController *currentVC = blockSelf.currentC;
                 UIViewController *previousVC = blockSelf.previousC;
                 CGAffineTransform trans = CGAffineTransformIdentity;
@@ -335,10 +342,11 @@ DEF_SINGLETON(HMBaseNavigator)
                                 preItem.board.view.alpha = 0.0f;
                                 
                             } completion:^(BOOL finished) {
+
                                 item.board.view.transform = CGAffineTransformIdentity;
                                 preItem.board.view.hidden = YES;
                                 
-                                [self.view bringSubviewToFront:item.board.view];
+                                [blockSelf.view bringSubviewToFront:item.board.view];
                                 preItem.backBoard = nil;
                                 if (commple) {
                                     commple(YES,item.board);
@@ -356,9 +364,10 @@ DEF_SINGLETON(HMBaseNavigator)
                                 item.board.view.alpha = 1.0f;
                                 
                             } completion:^(BOOL finished) {
+                                
                                 item.board.view.transform = CGAffineTransformIdentity;
                                 item.backBoard.view.hidden = YES;
-                                [self.view bringSubviewToFront:item.board.view];
+                                [blockSelf.view bringSubviewToFront:item.board.view];
                                 item.backBoard = nil;
                                 if (commple) {
                                     commple(YES,item.board);
@@ -498,12 +507,13 @@ DEF_SINGLETON(HMBaseNavigator)
                         }
                         
                     } completion:^(BOOL finished) {
+                        
                         currentVC.view.userInteractionEnabled = YES;
                         previousVC.view.userInteractionEnabled = YES;
                         currentVC.view.transform = CGAffineTransformIdentity;
                         if (currentItem.backing){
                             currentVC.view.hidden = YES;
-                            [self.view bringSubviewToFront:previousVC.view];
+                            [blockSelf.view bringSubviewToFront:previousVC.view];
                             [previousVC viewDidAppear:YES];
                             [currentVC viewDidDisappear:YES];
                         }else{

@@ -65,8 +65,8 @@ static inline CTTextAlignment CTTextAlignmentFromTTTTextAlignment(TTTTextAlignme
     }
 #else
     switch (alignment) {
-        case UITextAlignmentLeft: return kCTLeftTextAlignment;
-        case UITextAlignmentCenter: return kCTCenterTextAlignment;
+        case NSTextAlignmentLeft: return kCTLeftTextAlignment;
+        case NSTextAlignmentCenter: return kCTCenterTextAlignment;
         case UITextAlignmentRight: return kCTRightTextAlignment;
         default: return kCTNaturalTextAlignment;
     }
@@ -98,7 +98,7 @@ static inline CTLineBreakMode CTLineBreakModeFromUILineBreakMode(UILineBreakMode
         case UILineBreakModeCharacterWrap: return kCTLineBreakByCharWrapping;
         case UILineBreakModeClip: return kCTLineBreakByClipping;
         case UILineBreakModeHeadTruncation: return kCTLineBreakByTruncatingHead;
-        case UILineBreakModeTailTruncation: return kCTLineBreakByTruncatingTail;
+        case NSLineBreakByTruncatingTail: return kCTLineBreakByTruncatingTail;
         case UILineBreakModeMiddleTruncation: return kCTLineBreakByTruncatingMiddle;
         default: return 0;
     }
@@ -459,10 +459,10 @@ static int __firstLineIndentKEY;
     
     self.font = [UIFont systemFontOfSize:14.0f];
     self.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
-    self.textAlignment = UITextAlignmentCenter;
+    self.textAlignment = NSTextAlignmentCenter;
     self.textColor = [UIColor whiteColor];
     self.backgroundColor = [UIColor clearColor];
-    self.lineBreakMode = UILineBreakModeTailTruncation;
+    self.lineBreakMode = NSLineBreakByTruncatingTail;
 }
 
 - (void)unload_link{
@@ -927,10 +927,12 @@ static int __detectorKEY;
     }
     
     NSMutableArray *mutableLinks = [NSMutableArray array];
+    WS(weakSelf)
     [self.dataDetector_hm enumerateMatchesInString:string options:0 range:range usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
+        SS(strongSelf)
         BOOL filter = YES;
-        if (self.detectorFilter) {
-            filter = self.detectorFilter(result);
+        if (strongSelf.detectorFilter) {
+            filter = strongSelf.detectorFilter(result);
         }
         if (filter) {
             [mutableLinks addObject:result];
@@ -987,7 +989,7 @@ static int __detectorKEY;
     // for NSUnderlineStyleAttributeName error with iphone5 ios7.0.1,i'm no sure that the later version is ok.
 
     if (IOS6_OR_EARLIER) {
-        if (self.numberOfLines==0&&self.lineBreakMode==UILineBreakModeTailTruncation) {
+        if (self.numberOfLines==0&&self.lineBreakMode==NSLineBreakByTruncatingTail) {
             self.lineBreakMode = NSLineBreakByCharWrapping;
         }
     }

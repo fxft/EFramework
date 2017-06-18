@@ -42,8 +42,8 @@ AS_SINGLETON(HMApp)
 /**
  *  检测有没有升级
  *
- *  @param yes     如果已是最新是否需要弹出提示
- *  @param loading 显示正在检测
+ *   yes     如果已是最新是否需要弹出提示
+ *   loading 显示正在检测
  */
 + (void)checkAPPVersionAlertIfNew:(BOOL)yes showLoading:(BOOL)loading;
 + (void)starAPP;
@@ -51,7 +51,7 @@ AS_SINGLETON(HMApp)
 /**
  *  新版本调用有效，可以通过 updateNewInstall更新状态
  *
- *  @return 新安装返回 YES 否则 NO；
+ *   return 新安装返回 YES 否则 NO；
  */
 + (BOOL)isNewInstall;
 + (void)updateNewInstall;
@@ -59,7 +59,7 @@ AS_SINGLETON(HMApp)
 /**
  *  新版本调用有效，可以通过 updateNewVersion更新状态
  *
- *  @return 新版本返回 YES 否则 NO；
+ *   return 新版本返回 YES 否则 NO；
  */
 + (BOOL)isNewVersion;
 + (void)updateNewVersion;
@@ -67,7 +67,7 @@ AS_SINGLETON(HMApp)
 /**
  *  新版本调用有效，可以通过 updateNewKey更新状态
  *
- *  @return 新返回 YES 否则 NO；
+ *   return 新返回 YES 否则 NO；
  */
 + (BOOL)isNewKey:(NSString*)key value:(NSString*)value;
 + (void)updateNewKey:(NSString*)key value:(NSString*)value;
@@ -75,10 +75,10 @@ AS_SINGLETON(HMApp)
 /**
  *  调度启动一个本地通知
  *
- *  @param theDate      未来的时间
- *  @param soundName    可为空
- *  @param alertBody    提示的信息
- *  @param cancelOthers 是否取消之前所有本地通知
+ *   theDate      未来的时间
+ *   soundName    可为空
+ *   alertBody    提示的信息
+ *   cancelOthers 是否取消之前所有本地通知
  */
 + (void)scheduleAlarmForDate:(NSDate*)theDate soundName:(NSString*)soundName alertBody:(NSString*)alertBody cancelOthers:(BOOL)cancelOthers;
 

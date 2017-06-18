@@ -36,8 +36,8 @@ typedef enum : NSUInteger {
 typedef enum : NSUInteger {
     UITapbarStyleFitOrign=0,//自动调整间隔 indent tail无效
     UITapbarStyleFitSpace,//自动调整间隔 indent tail有效
-    UITapbarStyleFitSize,//自动调整大小 indent tail 有效
-    UITapbarStyleFitWidth,//自动调整宽度，需要自行设置高度 indent tail 有效
+    UITapbarStyleFitSize,//自动调整大小 indent space tail 有效
+    UITapbarStyleFitWidth,//自动调整宽度，需要自行设置高度 indent space tail 有效
     UITapbarStyleCanFlexible,//不支持滚动 addFlexible addspace addspace with width
     UITapbarStyleCenter,//居中，indent tail 无效 addspace有效
     UITapbarStyleCustom,//自定义位置 配合 indent tail addspace 超出后支持滚动
@@ -77,6 +77,7 @@ typedef enum : NSUInteger {
 
 @property (assign, nonatomic)   UITapbarStyle barStyle;//布局方式
 @property (assign, nonatomic)   UITapbarDirection direction;//tapbar的方向
+@property (assign, nonatomic)   BOOL asViewOnly;//只用于显示
 
 AS_SIGNAL(TAPCHANGED);
 AS_SIGNAL(TAPNOSELECTED);
@@ -104,3 +105,10 @@ AS_SIGNAL(TAPNOSELECTED);
 - (void)showMask:(BOOL)show;
 
 @end
+
+
+@interface HMUITapbarView (Segmented)
+- (void)asSegmentedWithItems:(NSArray*)items itemSize:(CGSize)size itemColor:(UIColor*)color;
+- (void)asSegmentedWithItems:(NSArray*)items itemSize:(CGSize)size itemColor:(UIColor*)color round:(CGFloat)round;
+@end
+

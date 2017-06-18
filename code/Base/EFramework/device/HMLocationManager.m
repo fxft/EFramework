@@ -39,7 +39,11 @@ DEF_SIGNAL(didUpdateHeading)
 DEF_SIGNAL(didFailWithError)
 
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status{
+#if __IPHONE_OS_VERSION_MAX_ALLOWED < 80000
     if (status == kCLAuthorizationStatusAuthorized) {
+#else
+    if (status == kCLAuthorizationStatusAuthorizedAlways) {
+#endif
         [self sendSignal:[HMLocationManagerDelegate didAuthorizationStatus]];
     }else{
         if (status == kCLAuthorizationStatusNotDetermined) {

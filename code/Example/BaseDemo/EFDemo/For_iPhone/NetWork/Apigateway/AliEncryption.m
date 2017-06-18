@@ -37,18 +37,41 @@
 #pragma mark -  for aliyun api gateway
 
 #pragma mark - HMAC-SHA1
-
++ (NSString *)dataString:(NSData*)value{
+    if ( value )
+    {
+        char			tmp[16];
+        unsigned char *	hex = (unsigned char *)malloc( 2048 + 1 );
+        unsigned char *	bytes = (unsigned char *)[value bytes];
+        unsigned long	length = [value length];
+        
+        hex[0] = '\0';
+        
+        for ( unsigned long i = 0; i < length; ++i )
+        {
+            sprintf( tmp, "%02X", bytes[i] );
+            strcat( (char *)hex, tmp );
+        }
+        
+        NSString * result = [NSString stringWithUTF8String:(const char *)hex];
+        free( hex );
+        return result;
+    }
+    return nil;
+}
 + (NSString *)signature:(NSString*)stringToSign{
     
-    INFO(@"signature:%@",stringToSign);
+//    INFO(@"signature:%@",stringToSign);
     
     NSData *dataToSign=[stringToSign dataUsingEncoding:NSUTF8StringEncoding];
 
     NSData *dataToKey=[[AliEncryption sharedInstance].secretForApiGateway dataUsingEncoding:NSUTF8StringEncoding];
-    
+//    INFO([AliEncryption sharedInstance].secretForApiGateway);
     NSData *data = [dataToSign encryptedDataUsingSHA256WithKey:dataToKey];
-    
-    return [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+//    INFO([[self dataString:data] lowercaseString]);
+    NSString *base64 = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+//    INFO(base64);
+    return base64;
 }
 
 + (NSString*)prepareAPIGatewayForSignWithMethod:(NSString*)HTTPMethod
@@ -131,6 +154,59 @@
     return sign;
 }
 
+
++ (NSString*)prepareIotAPIGatewayForSignWithMethod:(NSString*)HTTPMethod
+                                        headers:(NSDictionary*)Headers
+                                          param:(NSDictionary*)param
+                                           path:(NSString *)path
+                                  signHeaderKey:(NSString **)signHeaderKey{
+    
+    
+    /*
+     String stringToSign=
+     Content-MD5 + "\n" +
+     Headers +
+     Url
+     */
+    
+    NSMutableDictionary *prepareHeaders = [NSMutableDictionary dictionaryWithDictionary:Headers];
+    
+    NSMutableString *sign = [@"" mutableCopy];
+    
+    NSString *Content_MD5 = [Headers valueForKey:HTTP_HEADER_CONTENT_MD5];
+    if (Content_MD5) {
+        [sign appendString:Content_MD5];
+        [prepareHeaders removeObjectForKey:HTTP_HEADER_CONTENT_MD5];
+    }
+    [sign appendString:@"\n"];
+    
+    //Headers指所有参与签名计算的Header的Key、Value，这里要注意参与签名计算的Header是不包含X-Ca-Signature、X-Ca-Signature-Headers的
+    NSArray *keys = prepareHeaders.allKeys;
+    
+    if (keys.count) {
+        //获取签名的头部key字符串
+        *signHeaderKey = [keys componentsJoinedByString:@","];
+        
+        NSArray *keysSort = [keys sortedArrayUsingSelector:@selector(compare:)];
+        
+        for (NSString *key in keysSort) {
+            [sign appendFormat:@"%@:%@\n",key,[Headers valueForKey:key]];
+        }
+        
+    }
+    //Url指Path + Query + Body中Form参数，组织方法：
+    if (path) {
+        [sign appendString:path];
+    }
+    
+    if (param.allKeys.count) {
+        [path rangeOfString:@"?"].location!=NSNotFound?[sign appendString:@"&"]:[sign appendString:@"?"];
+        [sign appendString:[[self class] queryString:param]];
+    }
+    INFO(sign);
+    return sign;
+}
+
 #pragma mark - common
 
 + (NSString *)timestamp
@@ -160,14 +236,24 @@
     for(NSString *key in temp){
         NSString *val = [paramDict valueForKey:key];
         if (![val notEmpty]) {
-            [paramString appendFormat:@"&%@",key];//[key formatURLEnocde],[val formatURLEnocde]];
+            if (paramString.length) {
+                [paramString appendFormat:@"&%@",key];//[key formatURLEnocde],[val formatURLEnocde]];
+            }else{
+                [paramString appendFormat:@"%@",key];//[key formatURLEnocde],[val formatURLEnocde]];
+            }
+            
         }else{
-            [paramString appendFormat:@"&%@=%@",key,val];//[key formatURLEnocde],[val formatURLEnocde]];
+            if (paramString.length) {
+                [paramString appendFormat:@"&%@=%@",key,val];//[key formatURLEnocde],[val formatURLEnocde]];
+            }else{
+                [paramString appendFormat:@"%@=%@",key,val];//[key formatURLEnocde],[val formatURLEnocde]];
+            }
+            
         }
         
     }
-    
-    return [paramString substringFromIndex:1];
+    return paramString;
+//    return [paramString length]>0?[paramString substringFromIndex:1]:@"";
 }
 
 

@@ -61,9 +61,9 @@
 /**
  *  对 autolayout的支持，如果有限制 宽、高 需要进行计算
  *
- *  @param size 需要被重新计算宽高的大小
+ *   size 需要被重新计算宽高的大小
  *
- *  @return 经过限制条件计算后的size
+ *   return 经过限制条件计算后的size
  */
 - (CGSize)autolayoutForSize:(CGSize)size;
 

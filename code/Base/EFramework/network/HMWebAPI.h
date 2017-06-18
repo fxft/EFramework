@@ -47,7 +47,9 @@ AS_STATIC_PROPERTY( methodMockSuccess )
  key for cacheParams dictionary
  */
 AS_STATIC_PROPERTY( cacheDuration )//缓存超时持续时间－内存与文件缓存
+AS_STATIC_PROPERTY( cacheInBranch )
 AS_STATIC_PROPERTY( cacheLast )
+AS_STATIC_PROPERTY( shouldResume )
 /**
  key for urlParams dictionary
  */
@@ -63,7 +65,7 @@ AS_STATIC_PROPERTY( urlRequestType )
  key for configParams dictonary
  */
 AS_STATIC_PROPERTY( process )
-
+AS_STATIC_PROPERTY(Speedrate)
 
 AS_SERVICE(WebAPI)
 /**
@@ -156,13 +158,25 @@ AS_SERVICE(WebAPI)
  缓存数据的过期时间
  */
 - (HMDialogue *) setWebCacheDuration:(NSTimeInterval)cacheDuration;
+
 /**
- 是刷新但是不删除本地缓存资源,过期的除外
+ 缓存数据的目录
+ */
+- (HMDialogue *) setWebCacheInBranch:(NSString*)cacheInBranch;
+
+/**
+ 缓存数据支持断点
+ */
+- (HMDialogue *) setWebCacheShouldResume:(BOOL)shouldResume;
+
+
+/**
+ 是刷新但是不删除本地缓存资源,过期的除外,需要设置 Duration
  */
 - (HMDialogue *) setWebDataFromNetwrokElseCache;
 
 /**
-  如果本地存在直接区本地，否则去网络获取
+  如果本地存在直接区本地，否则去网络获取,需要设置 Duration
  */
 - (HMDialogue *) setWebDataFromCacheElseNetwrok;
 
@@ -174,7 +188,10 @@ AS_SERVICE(WebAPI)
  监听加载过程
  */
 - (HMDialogue *) setWebListenProcess;
-
+/**
+ 监听加载过程网速
+ */
+- (HMDialogue *) setWebListenSpeedrate;
 /**
  重定向
  */

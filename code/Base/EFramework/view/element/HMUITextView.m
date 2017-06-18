@@ -205,8 +205,8 @@ DEF_SIGNAL2( RETURN_ACTION ,HMUITextView)
         CGRect labelFrame = CGRectEdgeInsets(self.bounds, UIEdgeInsetsVerAndHor(9, 8));
         
         _placeholderLabel = [[UILabel alloc] initWithFrame:labelFrame];
-        _placeholderLabel.lineBreakMode = UILineBreakModeCharacterWrap;
-        _placeholderLabel.textAlignment = UITextAlignmentLeft;
+        _placeholderLabel.lineBreakMode = NSLineBreakByCharWrapping;
+        _placeholderLabel.textAlignment = NSTextAlignmentLeft;
         _placeholderLabel.numberOfLines = 0;
         _placeholderLabel.font =  self.font;
         _placeholderLabel.backgroundColor = [UIColor clearColor];
@@ -276,6 +276,8 @@ DEF_SIGNAL2( RETURN_ACTION ,HMUITextView)
     [super setText:text];
     if ([text length]) {
         _placeholderLabel.hidden = YES;
+    }else {
+        _placeholderLabel.hidden = NO;
     }
 }
 
@@ -283,6 +285,8 @@ DEF_SIGNAL2( RETURN_ACTION ,HMUITextView)
     [super setAttributedText:attributedText];
     if ([attributedText length]) {
         _placeholderLabel.hidden = YES;
+    }else {
+        _placeholderLabel.hidden = NO;
     }
 }
 

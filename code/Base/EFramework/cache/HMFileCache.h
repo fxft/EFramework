@@ -8,18 +8,18 @@
 /**
  *  获取文件的MD5值
  *
- *  @param path 文件的完整路径
+ *   path 文件的完整路径
  *
- *  @return
+ *   return
  */
 HM_EXTERN NSString* getFileMD5WithPath(NSString* path);
 
 /**
  *  验证文件的MD5值是否正确
  *
- *  @param path     文件的完整路径
- *  @param md5      md5 description
- *  @param ^Checked 移步回调
+ *   path     文件的完整路径
+ *   md5      md5 description
+ *   ^Checked 移步回调
  */
 HM_EXTERN void checkFileMD5With(NSString* path,NSString *md5,void(^Checked)(BOOL ok,NSString *fileMd5));
 
@@ -44,25 +44,27 @@ HM_EXTERN void checkFileMD5With(NSString* path,NSString *md5,void(^Checked)(BOOL
 
 @property (nonatomic, copy) NSString *	cachePath;///[HMSandbox libCachePath]/Cache/
 @property (nonatomic, copy) NSString *  userDir;//在cachePath下用户自定义的文件夹
+@property (nonatomic, copy) NSString *  webApiCachePath;//webApi缓存路径
+@property (nonatomic, copy) NSString *  imagesCachePath;//图片缓存路径
 
 AS_SINGLETON( HMFileCache );
 
 /**
  *  获取文件或文件夹的大小
  *
- *  @param path 绝对路径
+ *   path 绝对路径
  *
- *  @return
+ *   return
  */
 - (unsigned long long)fileSizeForPath:(NSString *)path;
 - (unsigned long long)fileSizeForDirectory:(NSString *)dic;
 /**
  *  获取在cache+branch目录下某个文件的大小
  *
- *  @param key  文件名
- *  @param branch 文件夹名
+ *   key  文件名
+ *   branch 文件夹名
  *
- *  @return 
+ *   return 
  */
 - (unsigned long long)fileSizeForKey:(NSString *)key branch:(NSString *)branch;
 
@@ -72,11 +74,11 @@ AS_SINGLETON( HMFileCache );
 /**
  *  文件转移
  *
- *  @param key 文件名
- *  @param at  被转移的文件夹名
- *  @param to  需转移的文件夹名
+ *   key 文件名
+ *   at  被转移的文件夹名
+ *   to  需转移的文件夹名
  *
- *  @return 是否成功
+ *   return 是否成功
  */
 - (BOOL)moveItemForKey:(NSString *)key atBranch:(NSString *)at toBranch:(NSString *)to;
 
@@ -105,18 +107,18 @@ AS_SINGLETON( HMFileCache );
 /**
  *  数据序列化成Data
  *
- *  @param obj
+ *   obj
  *
- *  @return 
+ *   return 
  */
 - (NSData *)serialize:(id)obj;
 
 /**
  *  数据反序列化成json对象
  *
- *  @param data
+ *   data
  *
- *  @return
+ *   return
  */
 - (id)unserialize:(id)data;
 

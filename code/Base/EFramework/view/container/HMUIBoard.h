@@ -26,7 +26,7 @@ AS_SINGLETON(PresentWindow);
 /**
  *  注销 window
  *
- *  @param animated 是否支持动画
+ *   animated 是否支持动画
  */
 + (void)resignKeyWindow:(BOOL)animated;
 @end

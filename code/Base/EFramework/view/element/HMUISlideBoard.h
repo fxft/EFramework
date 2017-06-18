@@ -148,10 +148,10 @@ AS_SIGNAL( TOGGLETOHome )
 /**
  *  切换slide控制器的root视图，调用者需要是HMUISlideBoard的子视图，例如left,right,top,bottom,root;或以上四个的子控制器
  *
- *  @param path     - (HMUIBoard *)putChild:(id)path isNew:(BOOL*)isnew;的path类型
- *  @param closePre 是否关闭上一个控制器
+ *   path     - (HMUIBoard *)putChild:(id)path isNew:(BOOL*)isnew;的path类型
+ *   closePre 是否关闭上一个控制器
  *
- *  @return 需要被切换的控制器
+ *   return 需要被切换的控制器
  */
 - (HMUIBoard*)slideToggleToChild:(id)path map:(NSString*)map closePre:(BOOL)closePre;
 - (HMUIBoard*)slideToggleToHomeAndClosePre:(BOOL)closePre;

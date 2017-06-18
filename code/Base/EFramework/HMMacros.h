@@ -46,9 +46,9 @@
 /**
  *  类的单例快速定义
  *
- *  @param __class
+ *   __class
  *
- *  @return 单例
+ *   return 单例
  */
 #undef	AS_SINGLETON
 #define AS_SINGLETON( __class ) \
@@ -58,9 +58,9 @@
 /**
  *  类的单例快速实现
  *
- *  @param __class
+ *   __class
  *
- *  @return 单例
+ *   return 单例
  */
 #undef	DEF_SINGLETON
 #define DEF_SINGLETON( __class ) \
@@ -79,9 +79,9 @@
 /**
  *  类的自动单例快速实现
  *
- *  @param __class
+ *   __class
  *
- *  @return 单例
+ *   return 单例
  */
 #undef	DEF_SINGLETON_AUTOLOAD
 #define DEF_SINGLETON_AUTOLOAD( __class ) \
@@ -103,29 +103,9 @@
 
 #pragma mark -
 
-#ifdef __IPHONE_6_0
-/**
- *  字体换行方式的枚举适配
- *
- */
-#define UILineBreakModeWordWrap			NSLineBreakByWordWrapping
-#define UILineBreakModeCharacterWrap	NSLineBreakByCharWrapping
-#define UILineBreakModeClip				NSLineBreakByClipping
-#define UILineBreakModeHeadTruncation	NSLineBreakByTruncatingHead
-#define UILineBreakModeTailTruncation	NSLineBreakByTruncatingTail
-#define UILineBreakModeMiddleTruncation	NSLineBreakByTruncatingMiddle
 
-/**
- *  字体对齐方式的枚举适配
- *
- */
-#define UITextAlignmentLeft				NSTextAlignmentLeft
-#define UITextAlignmentCenter			NSTextAlignmentCenter
-#define UITextAlignmentRight			NSTextAlignmentRight
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_8_0
 
-#endif	// #ifdef __IPHONE_6_0
-
-#if __IPHONE_8_0
 /**
  *  日历控件的枚举适配
  *
@@ -148,6 +128,10 @@
 #define NSTimeZoneCalendarUnit  NSCalendarUnitTimeZone
 
 #endif
+
+//#if __IPHONE_8_0
+
+//#endif
 
 #pragma mark -
 
@@ -376,9 +360,9 @@
 /**
  *  快速定义一个字符属性
  *
- *  @param 属性名称
+ *   属性名称
  *
- *  @return
+ *   return
  */
 #undef	AS_STRING
 #define AS_STRING	AS_STATIC_PROPERTY_STRING
@@ -386,16 +370,16 @@
 /**
  *  快速实现一个字符属性
  *
- *  @param 属性名称,属性值
+ *   属性名称,属性值
  *
- *  @return
+ *   return
  */
 #undef	DEF_STRING
 #define DEF_STRING	DEF_STATIC_PROPERTY_STRING
 
 
-#define WS(weakSelf)  __weak_type __typeof(&*self)weakSelf = self;
-#define SS(strongSelf)  __strong_type __typeof(&*self)strongSelf = self;
+#define WS(weakSelf)  __unsafe_unretained __typeof(&*self)weakSelf = self;//__weak_type __typeof(&*self)weakSelf = self;
+#define SS(strongSelf)  __strong_type __typeof(&*self)strongSelf = weakSelf;
 
 
 /**

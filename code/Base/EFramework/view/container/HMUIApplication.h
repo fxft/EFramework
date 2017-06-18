@@ -71,6 +71,11 @@ AS_NOTIFICATION( DID_ENTERBACKGROUND )
  */
 - (void)enableDefaultAPNS;
 + (void)enableDefaultAPNS;
+- (void)enableDefaultAPNSType:(NSUInteger)type;
++ (void)enableDefaultAPNSType:(NSUInteger)type;
+
+- (void)disableDefaultAPNS;
++ (void)disableDefaultAPNS;
 
 @end
 

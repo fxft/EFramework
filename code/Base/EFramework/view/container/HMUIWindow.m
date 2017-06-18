@@ -47,12 +47,13 @@
 	self.label.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.6f];
 	self.label.font = [UIFont boldSystemFontOfSize:12.0f];
 	self.label.adjustsFontSizeToFitWidth = YES;
-	self.label.textAlignment = UITextAlignmentCenter;
+	self.label.textAlignment = NSTextAlignmentCenter;
 	[self addSubview:self.label];
 }
 
 - (void)unload
 {
+    self.view = nil;
 	[self.label removeFromSuperview];
 	self.label = nil;
 }
@@ -516,7 +517,13 @@ DEF_SINGLETON(HMDEBUGWindow)
 	[self addSubview:_showLabel];
     [self performSelector:@selector(timeToHide) withObject:nil afterDelay:10.f];
 
+    
+#if  __has_feature(objc_arc)
     self.rootViewController = [[UIViewController alloc]init];
+#else
+    self.rootViewController = [[[UIViewController alloc]init] autorelease];
+#endif
+    
     self.rootViewController.view.userInteractionEnabled = NO;
     self.rootViewController.view.backgroundColor = [UIColor clearColor];
 }

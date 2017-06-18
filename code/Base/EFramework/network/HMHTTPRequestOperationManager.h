@@ -149,7 +149,7 @@ AS_SINGLETON(HMHTTPRequestOperationManager)
 /**
  *  当某一类对象使用了网络加载功能，当释放时请调用该方法，防止也指针异常
  *
- *  @param tagString 对象的的属性值
+ *   tagString 对象的的属性值
  */
 - (void)disableHttpRespondersByTagString:(NSString *)tagString;
 

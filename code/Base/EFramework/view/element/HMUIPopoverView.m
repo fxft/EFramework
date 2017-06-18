@@ -423,23 +423,24 @@
         }
         
         CGAffineTransform concat = CGAffineTransformConcat(scale, tran);
-        
+        WS(weakSelf)
         [UIView animateWithDuration:.35f animations:^{
+            SS(strongSelf)
             if (_backgroundStyle==UIPopoverBackgroundStyle_glass) {
-                self.backImageview.frame = rect;
-                self.backImageview.alpha = 0.f;
+                strongSelf.backImageview.frame = rect;
+                strongSelf.backImageview.alpha = 0.f;
             }else{
-                self.alpha = 0.f;
+                strongSelf.alpha = 0.f;
             }
             _popoverViewContainer.transform = concat;
             _popoverViewContainer.alpha=.0f;
             
         }completion:^(BOOL finished) {
-            
+            SS(strongSelf)
             _popoverViewContainer.alpha=1.0f;
-            self.alpha = 1.f;
+            strongSelf.alpha = 1.f;
             _popoverViewContainer.transform = CGAffineTransformIdentity;
-            [self removeFromSuperview];
+            [strongSelf removeFromSuperview];
         }];
     }else{
         [self removeFromSuperview];
@@ -636,6 +637,7 @@
     [super setFrame:frame];
     
     [self resetFrame];
+    
 }
 
 - (void)setPopoverArrowDirection:(UIPopoverArrowDirection)popoverArrowDirection{
@@ -676,7 +678,7 @@
         return;
     }
     CGFloat shadow = 5;
-    CGFloat contentInner = 7;
+    CGFloat contentInner = 3;
     self.shadowOffset = CGSizeMake(0, 5);
     UIEdgeInsets glassInset = UIEdgeInsetsAll(2);
     HMUIShape *shape = [HMUIRoundedRectangleShape shapeWithRadius:2.5];
@@ -756,7 +758,7 @@
                         self.popoverShape next:shadowStyle];
     
     _popoverViewContainer.style__ = style;
-    
+
 }
 
 - (void)drawRect:(CGRect)rect{
@@ -781,6 +783,28 @@
         CGContextRestoreGState(ctx);
     }
     
+//    for (CALayer *layer in _contentView.layer.sublayers) {
+//        if ([layer.name isEqualToString:@"_contentLayer"]) {
+//            [layer removeFromSuperlayer];
+//        }
+//    }
+//    if (_popoverViewContainer.style__) {
+//        //    CAShapeLayer
+//        
+//        CAShapeLayer *_maskLayer = [CAShapeLayer layer];
+//        _maskLayer.path = [UIBezierPath bezierPathWithRoundedRect:_contentView.bounds cornerRadius:50].CGPath;
+//        _maskLayer.fillColor = [UIColor blackColor].CGColor;
+//        _maskLayer.strokeColor = [UIColor redColor].CGColor;
+//        _maskLayer.frame = _contentView.bounds;
+//        _maskLayer.contentsCenter = CGRectMake(0.5, 0.5, 0.1, 0.1);
+//        _maskLayer.contentsScale = [UIScreen mainScreen].scale;                 //非常关键设置自动拉伸的效果且不变形
+//        
+//        CALayer * _contentLayer = [CALayer layer];
+//        _contentLayer.mask = _maskLayer;
+//        _contentLayer.frame = _contentView.bounds;
+//        _contentLayer.name = @"_contentLayer";
+//        [self.layer addSublayer:_contentLayer];
+//    }
 }
 
 #pragma mark - for table
@@ -826,12 +850,16 @@ DEF_SIGNAL2(TableSelect, HMUIPopoverView)
     
     NSDictionary *dic = [self.tableDatas safeObjectAtIndex:indexPath.row];
     if (dic) {
-        cell.textLabel.text = [dic valueForKey:@"popoverTitle"];
-        BOOL selected = [[dic valueForKey:@"popoverSelected"] boolValue];
-        if (selected) {
-            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        if ([dic isKindOfClass:[NSString class]]) {
+                cell.textLabel.text = (id)dic;
         }else{
-            cell.accessoryType = UITableViewCellAccessoryNone;
+            cell.textLabel.text = [dic valueForKey:@"popoverTitle"];
+            BOOL selected = [[dic valueForKey:@"popoverSelected"] boolValue];
+            if (selected) {
+                cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            }else{
+                cell.accessoryType = UITableViewCellAccessoryNone;
+            }
         }
     }
     return cell;

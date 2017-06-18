@@ -8,7 +8,7 @@
 
 /*
  eg.
- HMPhotoBrowserBoard *browserboard = [HMPhotoBrowserBoard spawn];
+ HMUIPhotoBrowser *browserboard = [HMUIPhotoBrowser spawn];
  
  browserboard.delegate= self;
  browserboard.dataSource = self;
@@ -75,6 +75,8 @@
 - (void)reloadData;
 
 - (HMPhotoCell *)currentPhotoView;
+- (HMPhotoCell *)dequeueReusableCellWithIdentifier:(NSString *)identifier;
+- (void)registerClass:(Class)cellClass forCellReuseIdentifier:(NSString *)identifier;
 
 @end
 
@@ -83,10 +85,10 @@
 /**
  *  数据源获取
  *
- *  @param browser  当前的browser
- *  @param index   数据索引
+ *   browser  当前的browser
+ *   index   数据索引
  *
- *  @return 数据源
+ *   return 数据源
  */
 - (HMPhotoItem *)photoBrowser:(HMUIPhotoBrowser *)browser itemAtIndex:(NSUInteger)index;
 
@@ -96,10 +98,10 @@
 /**
  *  数据源原位置获取图片或uiview。前提allowHumb＝YES
  *
- *  @param browser  当前的browser
- *  @param index   数据索引
+ *   browser  当前的browser
+ *   index   数据索引
  *
- *  @return 数据源
+ *   return 数据源
  */
 - (id)photoBrowser:(HMUIPhotoBrowser *)browser sourceAtIndex:(NSUInteger)index;
 
@@ -107,20 +109,20 @@
 /**
  *  数据源原位置获取，如果-［self photoBrowser:sourceAtIndex:］返回的是UIView则－［self photoBrowser:frameAtIndex:］
  *
- *  @param browser  当前的browser
- *  @param index   数据索引
+ *   browser  当前的browser
+ *   index   数据索引
  *
- *  @return 数据源
+ *   return 数据源
  */
 - (CGRect)photoBrowser:(HMUIPhotoBrowser *)browser frameAtIndex:(NSUInteger)index;
 
 /**
  *  cell视图获取
  *
- *  @param photoBrowser 当前的browser
- *  @param item 当前数据源
+ *   photoBrowser 当前的browser
+ *   item 当前数据源
  *
- *  @return cell视图
+ *   return cell视图
  */
 - (HMPhotoCell *)photoBrowser:(HMUIPhotoBrowser *)photoBrowser forItem:(HMPhotoItem *)item;
 
@@ -129,9 +131,9 @@
 /**
  *  个数返回
  *
- *  @param browser  当前的browser
+ *   browser  当前的browser
  *
- *  @return 个数
+ *   return 个数
  */
 - (NSUInteger )photoBrowserNumbers:(HMUIPhotoBrowser *)browser;
 
@@ -157,19 +159,19 @@
 /**
  *  humbImageView
  *
- *  @param browser  当前的browser
- *  @param index   数据索引
+ *   browser  当前的browser
+ *   index   数据索引
  *
- *  @return 数据源
+ *   return 数据源
  */
 - (void)photoBrowser:(HMUIPhotoBrowser *)browser willshowHumbImageView:(UIImageView*)humb atIndex:(NSUInteger)index;
 
 /**
  *  获取window当前图片是否有旋转角度,当支持旋转时
  *
- *  @param browser  当前的browser
+ *   browser  当前的browser
  *
- *  @return 是否已经选择
+ *   return 是否已经选择
  */
 - (BOOL)photoBrowserWindowRoated:(HMUIPhotoBrowser *)browser;
 

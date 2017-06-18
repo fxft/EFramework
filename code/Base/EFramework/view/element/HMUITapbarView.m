@@ -129,6 +129,8 @@ DEF_SIGNAL(TAPNOSELECTED);
     self.slideview = nil;
     self.defaultColor = nil;
     self.slideviewColor = nil;
+    [self.baseView removeFromSuperview];
+    self.baseView = nil;
     HM_SUPER_DEALLOC();
 }
 
@@ -422,13 +424,20 @@ DEF_SIGNAL(TAPNOSELECTED);
             break;
         case UITapbarStyleFitSize:{
             CGFloat width = 0;
-            space = 0;
+            CGFloat actionSpace = 0;
+            for (NSString *obj in _subSpaces.allValues) {
+                if ([obj isKindOfClass:[NSNumber class]]) {
+                    actionSpace += [obj floatValue];
+                }else{
+                    actionSpace += space;
+                }
+            }
             CGSize s;
             if (self.direction==UITapbarDirectionVertical){
-                width = (bound.height-indentation-tail)/(_subItems.count);
+                width = (bound.height-actionSpace-indentation-tail)/(_subItems.count);
                 s = CGSizeMake(bound.width, width);
             }else{
-                width = (bound.width-indentation-tail)/(_subItems.count);
+                width = (bound.width-actionSpace-indentation-tail)/(_subItems.count);
                 s = CGSizeMake(width, bound.height);
             }
                 
@@ -439,12 +448,18 @@ DEF_SIGNAL(TAPNOSELECTED);
             break;
         case UITapbarStyleFitWidth:{
             CGFloat width = 0;
-            space = 0;
-            
+            CGFloat actionSpace = 0;
+            for (NSString *obj in _subSpaces.allValues) {
+                if ([obj isKindOfClass:[NSNumber class]]) {
+                    actionSpace += [obj floatValue];
+                }else{
+                    actionSpace += space;
+                }
+            }
             if (self.direction==UITapbarDirectionVertical){
-                width = (bound.height-indentation-tail)/(_subItems.count);
+                width = (bound.height-actionSpace-indentation-tail)/(_subItems.count);
             }else{
-                width = (bound.width-indentation-tail)/(_subItems.count);
+                width = (bound.width-actionSpace-indentation-tail)/(_subItems.count);
             }
             
             for (UIView *sub in _subItems) {
@@ -468,7 +483,9 @@ DEF_SIGNAL(TAPNOSELECTED);
                     actionSpace += space;
                 }
             }
-            flex = (others-actionSpace-indentation-tail)/flex;
+            if (flex) {
+                flex = (others-actionSpace-indentation-tail)/flex;
+            }
             
         }
             break;
@@ -530,7 +547,9 @@ DEF_SIGNAL(TAPNOSELECTED);
         
         if (self.barStyle == UITapbarStyleCustom
             || self.barStyle == UITapbarStyleCenter
-            ||self.barStyle == UITapbarStyleCanFlexible) {
+            ||self.barStyle == UITapbarStyleCanFlexible
+            ||self.barStyle == UITapbarStyleFitWidth
+            ||self.barStyle == UITapbarStyleFitSize) {
             NSNumber *number = [_subSpaces valueForKey:key];
             CGFloat offset = number==nil?0:([number isKindOfClass:[NSNumber class]]?number.floatValue:([number isEqual:@"flexible"]?flex:space));
             if (self.direction==UITapbarDirectionVertical){
@@ -614,7 +633,7 @@ DEF_SIGNAL(TAPNOSELECTED);
 - (void)setSelectedIndex:(NSInteger)selectedIndex{
     
     UIButten *source = [_subItems safeObjectAtIndex:selectedIndex];
-    if ([source isKindOfClass:[UIButten class]]) {
+    if ([source isKindOfClass:[UIButten class]]&&!self.asViewOnly) {
         [self sendSignal:UIButten.TOUCH_UP_INSIDE withObject:nil from:source];
     }
     _selectedIndex = selectedIndex;
@@ -650,7 +669,7 @@ DEF_SIGNAL(TAPNOSELECTED);
             UIButten *source = [_subItems safeObjectAtIndex:selectedIndex];
             
             HMSignal *signal = nil;
-            if ([source isKindOfClass:[UIButten class]]&&self.superview) {
+            if ([source isKindOfClass:[UIButten class]]&&self.superview&&!self.asViewOnly) {
                 signal =  [self sendSignal:HMUITapbarView.TAPNOSELECTED withObject:source];
             }
             if (!signal.boolValue) {
@@ -678,22 +697,24 @@ DEF_SIGNAL(TAPNOSELECTED);
         if (target&&[target respondsToSelector:@selector(setSelected:)]&&target.selected){
             [self.slideview.layer removeAllAnimations];
             [self.slideview.layer.sublayers makeObjectsPerformSelector:@selector(removeAllAnimations)];
-            
+            WS(weakSelf)
             switch (self.slideAnimate) {
                 case UITapbarSlideAnimatedNormal:
                     [UIView animateWithDuration:self.slideAnimateDuration animations:^{
-                        [self targetSliderViewPosition:target];
+                        SS(strongSelf)
+                        [strongSelf targetSliderViewPosition:target];
                     }];
                     break;
                 case UITapbarSlideAnimatedEarthworm:
                     [UIView animateWithDuration:self.slideAnimateDuration animations:^{
-                        
-                        [self fromSliderViewPostion:target];
+                        SS(strongSelf)
+                        [strongSelf fromSliderViewPostion:target];
                         
                     } completion:^(BOOL finished) {
+                        SS(strongSelf)
                         if (finished) {
-                            [UIView animateWithDuration:MAX(self.slideAnimateDuration/3, .15f) animations:^{
-                                [self targetSliderViewPosition:target];
+                            [UIView animateWithDuration:MAX(strongSelf.slideAnimateDuration/3, .15f) animations:^{
+                                [strongSelf targetSliderViewPosition:target];
                             }];
                         }
                        
@@ -742,7 +763,7 @@ ON_Button(signal){
         UIButten *but = signal.source;
         
         [self setSelectedIndex:[_subItems indexOfObject:but] witoutSignal:YES];
-        if (self.superview) {
+        if (self.superview&&!self.asViewOnly) {
             [self sendSignal:self.TAPCHANGED withObject:but];
         }
         
@@ -756,5 +777,49 @@ ON_Button(signal){
  // Drawing code
  }
  */
+
+@end
+
+@implementation HMUITapbarView (Segmented)
+- (void)asSegmentedWithItems:(NSArray *)items itemSize:(CGSize)size itemColor:(UIColor *)color{
+    return [self asSegmentedWithItems:items itemSize:size itemColor:color round:10];
+}
+- (void)asSegmentedWithItems:(NSArray*)items itemSize:(CGSize)size itemColor:(UIColor*)color round:(CGFloat)round{
+    
+    self.barStyle = UITapbarStyleCenter;
+    WS(weakSelf)
+    [items enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        SS(strongSelf)
+        HMUIShape *shape = [HMUIRoundedRectangleShape shapeWithTopLeft:round topRight:0 bottomRight:0 bottomLeft:round];
+        HMUIFourBorderStyle *borderStyle = [HMUIFourBorderStyle styleWithTop:color right:color bottom:color left:color width:0.5 next:nil];
+        if (items.count==1){
+            shape = [HMUIRoundedRectangleShape shapeWithTopLeft:round topRight:round bottomRight:round bottomLeft:round];
+        }else{
+            if (idx==0) {
+                shape = [HMUIRoundedRectangleShape shapeWithTopLeft:round topRight:0 bottomRight:0 bottomLeft:round];
+            }else if (items.count==idx+1){
+                shape = [HMUIRoundedRectangleShape shapeWithTopLeft:0 topRight:round bottomRight:round bottomLeft:0];
+            }else{
+                shape = [HMUIRectangleShape shape];
+            }
+        }
+        
+        
+        UIImage *bgimg = [UIImage imageForStyle:[HMUIShapeStyle styleWithShape:shape next:[HMUISolidFillStyle styleWithColor:color next:nil]] size:CGSizeMake(round*2, round*2) scale:2.0];
+         UIImage *bgimgHL = [UIImage imageForStyle:[HMUIShapeStyle styleWithShape:shape next:[HMUISolidFillStyle styleWithColor:[color colorWithAlphaComponent:.2] next:borderStyle]] size:CGSizeMake(round*2, round*2) scale:2.0];
+        UIImage *img = [UIImage imageForStyle:[HMUIShapeStyle styleWithShape:shape next:borderStyle] size:CGSizeMake(round*2, round*2) scale:2.0];
+        
+        UIButten *btn = [strongSelf addItemWithTitle:[obj isKindOfClass:[NSString class]]?obj:nil imageName:nil size:size];
+        if ([obj isKindOfClass:[UIImage class]]) {
+            [btn setImage:obj forState:UIControlStateNormal];
+        }
+        [btn setTitleColor:color forState:UIControlStateNormal];
+        [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+        [btn setBackgroundImage:[img stretched] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[bgimgHL stretched] forState:UIControlStateHighlighted];
+        [btn setBackgroundImage:[bgimg stretched] forState:UIControlStateSelected];
+        
+    }];
+}
 
 @end

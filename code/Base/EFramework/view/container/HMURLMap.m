@@ -375,7 +375,9 @@ static NSMutableDictionary *_schemes=nil;
 - (UIModalPresentationStyle)presentationStyle{
     return UIModalPresentationNone;
 }
-
+-  (CGAffineTransform)targetTransform{
+    return CGAffineTransformIdentity;
+}
 
 @end
 
@@ -937,11 +939,11 @@ static int __nicknameKEY;
 /**
  *  查找最顶层uiviewcontroller
  *
- *  @param item            需要切换的对象
- *  @param controller
- *  @param childController
+ *   item            需要切换的对象
+ *   controller
+ *   childController
  *
- *  @return HMBaseNavigator or HMUIStack
+ *   return HMBaseNavigator or HMUIStack
  */
 - (id<HMBaseNavigatorDelegate>)containerWith:(HMURLMAPItem *)item
                                getController:(UIViewController**)controller
@@ -1498,7 +1500,7 @@ static int __nicknameKEY;
     return [self putChild:path map:nil isNew:isnew close:closepath];
 }
 - (HMUIBoard *)putChild:(id)path map:(NSString*)map isNew:(BOOL*)isnew close:(id)closepath{
-    return [self putChild:path map:map isNew:isnew closePre:closepath complete:nil];
+    return [self putChild:path map:map isNew:isnew close:closepath complete:nil];
 }
 
 - (HMUIBoard *)putChild:(id)path map:(NSString*)map isNew:(BOOL*)isnew close:(id)closepath complete:(void (^)(BOOL, UIViewController *))commple{
@@ -1538,7 +1540,7 @@ static int __nicknameKEY;
         target.view.hidden = NO;
         [self.view bringSubviewToFront:target.view];
         
-        if (*isnew==NO) {
+        if (isnew==NULL||*isnew==NO) {
             [target viewWillAppear:NO];
             [target viewDidAppear:NO];
         }

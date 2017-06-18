@@ -20,9 +20,9 @@
 /**
  *  导航控制器初始化，带有自定义的NavigationBar（HMUINavigationBar）,可支持透明的导航条
  *
- *  @param rootViewController
+ *   rootViewController
  *
- *  @return
+ *   return
  */
 - (instancetype)initCustomBarWithRootViewController:(UIViewController *)rootViewController;
 

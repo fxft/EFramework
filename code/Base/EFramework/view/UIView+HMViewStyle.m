@@ -122,12 +122,12 @@ static void (*_setText)( id, SEL, NSString* );
 //        }else{
 //            size = textRect.size;
 //        }
-        if (self.textAlignment==UITextAlignmentCenter) {
+        if (self.textAlignment==NSTextAlignmentCenter) {
             
             titleRect.origin.y += ceilf((titleRect.size.height - size.height)/2);
             titleRect.origin.x += ceilf((titleRect.size.width - size.width)/2);
             
-        }else if (self.textAlignment==UITextAlignmentRight){
+        }else if (self.textAlignment==NSTextAlignmentRight){
             
             titleRect.origin.y += ceilf((titleRect.size.height - size.height)/2);
             titleRect.origin.x += ceilf((titleRect.size.width - size.width));
@@ -155,6 +155,7 @@ static void (*_setText)( id, SEL, NSString* );
             CGPathAddLineToPoint(path, &CGAffineTransformIdentity, titleRect.origin.x+titleRect.size.width, titleRect.origin.y+titleRect.size.height);
             CGContextAddPath(ctx, path);
             CGContextStrokePath(ctx);
+            CGPathRelease(path);
             
             CGContextRestoreGState(ctx);
             if (context!=nil) {

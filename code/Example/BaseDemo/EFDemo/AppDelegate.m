@@ -113,7 +113,7 @@
     [self enableDefaultAPNS];
     //    [UMExt startWithKey:UMKey launchOptions:self.options push:YES];
     //    [UMExt checkUpdate:UMKey];
-    [WeexExtend initWeexSDKWithAppGroup:@"lql" userAgent:@"TwoPase"];
+//    [WeexExtend initWeexSDKWithAppGroup:@"lql" userAgent:@"TwoPase"];
 }
 
 -(void)observeNotifi{

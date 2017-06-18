@@ -92,6 +92,12 @@ DEF_NOTIFICATION2( DID_ENTERBACKGROUND ,HMUIApplication)	// state changed
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
 
 + (void)enableDefaultAPNS{
+    
+    [self enableDefaultAPNSType:UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeAlert];
+    
+}
+
++ (void)enableDefaultAPNSType:(NSUInteger)type{
     if (!TARGET_IPHONE_SIMULATOR) {
         NSString *sys = [[UIDevice currentDevice] systemVersion] ;
         NSString *fi = [sys componentsSeparatedByString:@"."].firstObject;
@@ -101,23 +107,38 @@ DEF_NOTIFICATION2( DID_ENTERBACKGROUND ,HMUIApplication)	// state changed
         if (IOS8_OR_LATER) {
             
             if ([[UIApplication sharedApplication] respondsToSelector:@selector(registerUserNotificationSettings:)]) {
-                UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge|UIUserNotificationTypeSound|UIUserNotificationTypeAlert categories:nil];
+                UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationType)type categories:nil];
                 [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
             }else {
                 
-                UIRemoteNotificationType myTypes = UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound;
+                UIRemoteNotificationType myTypes = (UIRemoteNotificationType)type;
                 [[UIApplication sharedApplication] registerForRemoteNotificationTypes:myTypes];
             }
             
         }else{
-            [[UIApplication sharedApplication]registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound |UIRemoteNotificationTypeAlert)];
+            [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationType)type];
         }
     }
 }
-#pragma clang diagnostic pop
 
++ (void)disableDefaultAPNS{
+    if (!TARGET_IPHONE_SIMULATOR) {
+        
+        [[UIApplication sharedApplication] unregisterForRemoteNotifications];
+        
+    }
+}
+#pragma clang diagnostic pop
 - (void)enableDefaultAPNS{
     [[self class] enableDefaultAPNS];
+}
+
+- (void)enableDefaultAPNSType:(NSUInteger)type{
+    [[self class] enableDefaultAPNSType:type];
+}
+
+- (void)disableDefaultAPNS{
+    [[self class] disableDefaultAPNS];
 }
 
 

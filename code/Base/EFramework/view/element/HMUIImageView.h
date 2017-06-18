@@ -67,8 +67,8 @@
 /**
  *  设置网络图片
  *
- *  @param url 是完整的地址
- *  @param state
+ *   url 是完整的地址
+ *   state
  *  note 注意释放控件前请积极调用 [self disableHttpRespondersByTagString:@"imgTagstring"]
  */
 - (HMHTTPRequestOperation * )setImageWithURLString:(NSString *)url useCache:(BOOL)cache placeholderImage:(UIImage *)placeholderImage;

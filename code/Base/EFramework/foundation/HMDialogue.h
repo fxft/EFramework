@@ -106,6 +106,7 @@ AS_INT( STATE_CANCELLED )		// 对话被取消了
 - (void)cancel;
 
 - (void)internalNotifyProgressUpdated;
+- (void)internalNotifyActive;
 - (HMHTTPRequestOperation *)ownRequest;
 
 @end

@@ -183,12 +183,12 @@ typedef enum __EmbossShadowStyle {
 /**
  *  生成纯色图片
  *
- *  @param color 色值
- *  @param scale 跟主屏比例一般2.0
- *  @param size  大小
- *  @param radius  圆角
+ *   color 色值
+ *   scale 跟主屏比例一般2.0
+ *   size  大小
+ *   radius  圆角
  *
- *  @return
+ *   return
  */
 + (UIImage *)imageForColor:(UIColor*)color scale:(CGFloat)scale size:(CGSize)size;
 + (UIImage *)imageForColor:(UIColor *)color scale:(CGFloat)scale size:(CGSize)size radius:(CGFloat)radius;
@@ -196,20 +196,20 @@ typedef enum __EmbossShadowStyle {
 /**
  *  图片设置 tint颜色
  *
- *  @param tintColor
- *  @param mode
+ *   tintColor
+ *   mode
  *
- *  @return 
+ *   return 
  */
 - (UIImage *)imageWithTintColor: (UIColor *)tintColor blendMode: (CGBlendMode)mode;
 /**
  *  根据Style样式生成图片
  *
- *  @param style 请选选定一种ShapeStyle进行绘制
- *  @param size  返回图片大小
- *  @param scale 缩放比例
+ *   style 请选选定一种ShapeStyle进行绘制
+ *   size  返回图片大小
+ *   scale 缩放比例
  *
- *  @return 所绘制图片
+ *   return 所绘制图片
  */
 + (UIImage *)imageForStyle:(HMUIStyle *)style size:(CGSize)size scale:(CGFloat)scale;
 

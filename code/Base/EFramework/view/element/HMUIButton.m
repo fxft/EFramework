@@ -456,13 +456,16 @@ DEF_SIGNAL2( DRAG_EXIT ,UIButten)			// 退出
         });
         
     }
+    if (![url notEmpty]) {
+        return;
+    }
     if (_imageUrls==nil) {
         _imageUrls = [[NSMutableDictionary dictionary]retain];
         if (_imageUrlLock==nil) {
             _imageUrlLock = [[NSRecursiveLock alloc]init];
         }
     }
-    [_imageUrls setValue:@{@"url":url,@"bkg":@(background)} forKey:[self keyforState:state]];
+    [_imageUrls setValue:@{@"url":[url notEmpty]?url:@"",@"bkg":@(background)} forKey:[self keyforState:state]];
     
     HMHTTPRequestOperation * operation = [self attemptingForURLString:url];
     if (operation) {
@@ -1295,15 +1298,18 @@ ON_Button(signal){
         CGFloat left = MIN(_titleEdgeInsets.left, _imageEdgeInsets.left);
         left = CGSizeEqualToSize(__imageSize, CGSizeZero)?_titleEdgeInsets.left:left;
         left = CGSizeEqualToSize(sizeText, CGSizeZero)?_imageEdgeInsets.left:left;
+        left -= indsets.left;
         
         _titleEdgeInsets.left -= left;
         _titleEdgeInsets.right += left;
         _imageEdgeInsets.left -= left;
         _imageEdgeInsets.right += left;
+        
     }else if (_buttenType&UIButtenTypeContenSideRight) {
         CGFloat right = MIN(_titleEdgeInsets.right, _imageEdgeInsets.right);
         right = CGSizeEqualToSize(__imageSize, CGSizeZero)?_titleEdgeInsets.right:right;
         right = CGSizeEqualToSize(sizeText, CGSizeZero)?_imageEdgeInsets.right:right;
+        right -= indsets.right;
         
         _titleEdgeInsets.right -= right;
         _titleEdgeInsets.left += right;
@@ -1313,6 +1319,7 @@ ON_Button(signal){
         CGFloat top = MIN(_titleEdgeInsets.top, _imageEdgeInsets.top);
         top = CGSizeEqualToSize(__imageSize, CGSizeZero)?_titleEdgeInsets.top:top;
         top = CGSizeEqualToSize(sizeText, CGSizeZero)?_imageEdgeInsets.top:top;
+        top -= indsets.top;
         
         _titleEdgeInsets.top -= top;
         _titleEdgeInsets.bottom += top;
@@ -1322,13 +1329,14 @@ ON_Button(signal){
         CGFloat bottom = MIN(_titleEdgeInsets.bottom, _imageEdgeInsets.bottom);
         bottom = CGSizeEqualToSize(__imageSize, CGSizeZero)?_titleEdgeInsets.bottom:bottom;
         bottom = CGSizeEqualToSize(sizeText, CGSizeZero)?_imageEdgeInsets.bottom:bottom;
+        bottom -= indsets.bottom;
         
         _titleEdgeInsets.bottom -= bottom;
         _titleEdgeInsets.top += bottom;
         _imageEdgeInsets.bottom -= bottom;
         _imageEdgeInsets.top += bottom;
     }
-//    CC(@"UIButten",NSStringFromUIEdgeInsets(_titleEdgeInsets),NSStringFromUIEdgeInsets(_imageEdgeInsets));
+    //    CC(@"UIButten",NSStringFromUIEdgeInsets(_titleEdgeInsets),NSStringFromUIEdgeInsets(_imageEdgeInsets));
 }
 
 

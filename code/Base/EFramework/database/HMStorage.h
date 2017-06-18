@@ -2,9 +2,9 @@
 /**
  *  sqlite
  *
- *  @param HMDatabase
+ *   HMDatabase
  *
- *  @return
+ *   return
  */
 #import "HMDatabase.h"
 

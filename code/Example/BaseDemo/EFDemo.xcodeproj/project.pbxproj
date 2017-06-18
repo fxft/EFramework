@@ -13,14 +13,6 @@
 		0400A3E81D2C0BB20048FB3D /* material_colors.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0400A3E71D2C0BB20048FB3D /* material_colors.xml */; };
 		041D40511DBF0648001BFC45 /* SocketRocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 041D404F1DBF0647001BFC45 /* SocketRocket.framework */; };
 		041D40521DBF0648001BFC45 /* SocketRocket.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 041D404F1DBF0647001BFC45 /* SocketRocket.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		041D40531DBF0648001BFC45 /* WeexSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 041D40501DBF0648001BFC45 /* WeexSDK.framework */; };
-		041D40541DBF0648001BFC45 /* WeexSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 041D40501DBF0648001BFC45 /* WeexSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		041D405B1DBF06D2001BFC45 /* main.js in Resources */ = {isa = PBXBuildFile; fileRef = 041D40591DBF06D2001BFC45 /* main.js */; };
-		041D405C1DBF06D2001BFC45 /* wx_load_error@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 041D405A1DBF06D2001BFC45 /* wx_load_error@3x.png */; };
-		041D40711DBF0836001BFC45 /* WXImgLoaderDefaultImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 041D40681DBF0836001BFC45 /* WXImgLoaderDefaultImpl.m */; };
-		041D40721DBF0836001BFC45 /* WXEventModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 041D406B1DBF0836001BFC45 /* WXEventModule.m */; };
-		041D40731DBF0836001BFC45 /* WeexExtend.m in Sources */ = {isa = PBXBuildFile; fileRef = 041D406D1DBF0836001BFC45 /* WeexExtend.m */; };
-		041D40741DBF0836001BFC45 /* WXDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 041D406F1DBF0836001BFC45 /* WXDemoViewController.m */; };
 		042A4BB81CF72D2B008482FE /* APIGateway.m in Sources */ = {isa = PBXBuildFile; fileRef = 042A4BAE1CF72D2B008482FE /* APIGateway.m */; };
 		042A4BB91CF72D2B008482FE /* AliEncryption.m in Sources */ = {isa = PBXBuildFile; fileRef = 042A4BB01CF72D2B008482FE /* AliEncryption.m */; };
 		042A4BBA1CF72D2B008482FE /* NSData+DTCrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = 042A4BB21CF72D2B008482FE /* NSData+DTCrypto.m */; };
@@ -104,7 +96,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				041D40541DBF0648001BFC45 /* WeexSDK.framework in Embed Frameworks */,
 				044C37EA1CE3441D005B82BC /* SDAutoLayout.framework in Embed Frameworks */,
 				041D40521DBF0648001BFC45 /* SocketRocket.framework in Embed Frameworks */,
 				049B62A11CE1B210002F6DA2 /* CocoaAsyncSocket.framework in Embed Frameworks */,
@@ -133,17 +124,6 @@
 		0400A3E31D2C0A730048FB3D /* color.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = color.m; sourceTree = "<group>"; };
 		0400A3E71D2C0BB20048FB3D /* material_colors.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = material_colors.xml; sourceTree = "<group>"; };
 		041D404F1DBF0647001BFC45 /* SocketRocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SocketRocket.framework; path = ../../../comm/EF/Frameworks/Public/SocketRocket.framework; sourceTree = "<group>"; };
-		041D40501DBF0648001BFC45 /* WeexSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WeexSDK.framework; path = ../../../comm/EF/Frameworks/Public/WeexSDK.framework; sourceTree = "<group>"; };
-		041D40591DBF06D2001BFC45 /* main.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = main.js; path = ../../../comm/EF/Frameworks/Public/WeexSDK.framework/main.js; sourceTree = "<group>"; };
-		041D405A1DBF06D2001BFC45 /* wx_load_error@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wx_load_error@3x.png"; path = "../../../comm/EF/Frameworks/Public/WeexSDK.framework/wx_load_error@3x.png"; sourceTree = "<group>"; };
-		041D40671DBF0836001BFC45 /* WXImgLoaderDefaultImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXImgLoaderDefaultImpl.h; sourceTree = "<group>"; };
-		041D40681DBF0836001BFC45 /* WXImgLoaderDefaultImpl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXImgLoaderDefaultImpl.m; sourceTree = "<group>"; };
-		041D406A1DBF0836001BFC45 /* WXEventModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXEventModule.h; sourceTree = "<group>"; };
-		041D406B1DBF0836001BFC45 /* WXEventModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXEventModule.m; sourceTree = "<group>"; };
-		041D406C1DBF0836001BFC45 /* WeexExtend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeexExtend.h; sourceTree = "<group>"; };
-		041D406D1DBF0836001BFC45 /* WeexExtend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeexExtend.m; sourceTree = "<group>"; };
-		041D406E1DBF0836001BFC45 /* WXDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXDemoViewController.h; sourceTree = "<group>"; };
-		041D406F1DBF0836001BFC45 /* WXDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXDemoViewController.m; sourceTree = "<group>"; };
 		042A4BAD1CF72D2B008482FE /* APIGateway.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIGateway.h; sourceTree = "<group>"; };
 		042A4BAE1CF72D2B008482FE /* APIGateway.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIGateway.m; sourceTree = "<group>"; };
 		042A4BAF1CF72D2B008482FE /* AliEncryption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AliEncryption.h; sourceTree = "<group>"; };
@@ -242,7 +222,6 @@
 				049B62A61CE1B210002F6DA2 /* Masonry.framework in Frameworks */,
 				04F30F0F1C09D91800EEFAF1 /* libsqlite3.dylib in Frameworks */,
 				049B62941CE1AF78002F6DA2 /* MBProgressHUD.framework in Frameworks */,
-				041D40531DBF0648001BFC45 /* WeexSDK.framework in Frameworks */,
 				049B62AE1CE1B210002F6DA2 /* ZipArchive.framework in Frameworks */,
 				044C37E71CE3441D005B82BC /* Realm.framework in Frameworks */,
 				049B62901CE1AF78002F6DA2 /* EFWKLib.framework in Frameworks */,
@@ -273,46 +252,6 @@
 			);
 			name = UIEffect;
 			path = For_iPhone/UIEffect;
-			sourceTree = "<group>";
-		};
-		041D40621DBF0836001BFC45 /* weexextend */ = {
-			isa = PBXGroup;
-			children = (
-				041D40631DBF0836001BFC45 /* component */,
-				041D40661DBF0836001BFC45 /* handler */,
-				041D40691DBF0836001BFC45 /* module */,
-				041D406C1DBF0836001BFC45 /* WeexExtend.h */,
-				041D406D1DBF0836001BFC45 /* WeexExtend.m */,
-				041D406E1DBF0836001BFC45 /* WXDemoViewController.h */,
-				041D406F1DBF0836001BFC45 /* WXDemoViewController.m */,
-			);
-			name = weexextend;
-			path = ../../../../../../../projects/comm/external/weex/weexextend;
-			sourceTree = "<group>";
-		};
-		041D40631DBF0836001BFC45 /* component */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = component;
-			sourceTree = "<group>";
-		};
-		041D40661DBF0836001BFC45 /* handler */ = {
-			isa = PBXGroup;
-			children = (
-				041D40671DBF0836001BFC45 /* WXImgLoaderDefaultImpl.h */,
-				041D40681DBF0836001BFC45 /* WXImgLoaderDefaultImpl.m */,
-			);
-			path = handler;
-			sourceTree = "<group>";
-		};
-		041D40691DBF0836001BFC45 /* module */ = {
-			isa = PBXGroup;
-			children = (
-				041D406A1DBF0836001BFC45 /* WXEventModule.h */,
-				041D406B1DBF0836001BFC45 /* WXEventModule.m */,
-			);
-			path = module;
 			sourceTree = "<group>";
 		};
 		042A4BAB1CF72D2B008482FE /* NetWork */ = {
@@ -424,8 +363,6 @@
 		04F30EEA1C09D91800EEFAF1 = {
 			isa = PBXGroup;
 			children = (
-				041D40591DBF06D2001BFC45 /* main.js */,
-				041D405A1DBF06D2001BFC45 /* wx_load_error@3x.png */,
 				04F30EF81C09D91800EEFAF1 /* EFDemo */,
 				04F30EF51C09D91800EEFAF1 /* Frameworks */,
 				04F30EF41C09D91800EEFAF1 /* Products */,
@@ -444,7 +381,6 @@
 			isa = PBXGroup;
 			children = (
 				041D404F1DBF0647001BFC45 /* SocketRocket.framework */,
-				041D40501DBF0648001BFC45 /* WeexSDK.framework */,
 				044C37E21CE3441D005B82BC /* Realm.framework */,
 				044C37E31CE3441D005B82BC /* SDAutoLayout.framework */,
 				044C37E41CE3441D005B82BC /* SDWebImage.framework */,
@@ -472,7 +408,6 @@
 		04F30EF81C09D91800EEFAF1 /* EFDemo */ = {
 			isa = PBXGroup;
 			children = (
-				041D40621DBF0836001BFC45 /* weexextend */,
 				04F311271C09F46300EEFAF1 /* assets */,
 				04F30EFC1C09D91800EEFAF1 /* AppDelegate.h */,
 				04F30EFD1C09D91800EEFAF1 /* AppDelegate.m */,
@@ -632,8 +567,6 @@
 				04F30F1E1C09D91800EEFAF1 /* LaunchScreen.storyboard in Resources */,
 				04F311361C09F46300EEFAF1 /* cities.txt in Resources */,
 				04F30F011C09D91800EEFAF1 /* Main.storyboard in Resources */,
-				041D405B1DBF06D2001BFC45 /* main.js in Resources */,
-				041D405C1DBF06D2001BFC45 /* wx_load_error@3x.png in Resources */,
 				04F311371C09F46300EEFAF1 /* iOS7.jpg in Resources */,
 				0400A3E81D2C0BB20048FB3D /* material_colors.xml in Resources */,
 				04F3113A1C09F46300EEFAF1 /* provinces.txt in Resources */,
@@ -648,16 +581,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				0400A3E41D2C0A730048FB3D /* color.m in Sources */,
-				041D40711DBF0836001BFC45 /* WXImgLoaderDefaultImpl.m in Sources */,
 				044C37E01CE32FF7005B82BC /* ButtonBoard.m in Sources */,
 				049B62B21CE1B409002F6DA2 /* ListBoard.m in Sources */,
 				04F30EFE1C09D91800EEFAF1 /* AppDelegate.m in Sources */,
-				041D40731DBF0836001BFC45 /* WeexExtend.m in Sources */,
 				042A4BB81CF72D2B008482FE /* APIGateway.m in Sources */,
-				041D40741DBF0836001BFC45 /* WXDemoViewController.m in Sources */,
 				04381EBD1CE31CAC001EC0F5 /* TabbarSubNormalController.m in Sources */,
 				0448F57A1D7937F900E4E844 /* ApiTest.m in Sources */,
-				041D40721DBF0836001BFC45 /* WXEventModule.m in Sources */,
 				04F30F071C09D91800EEFAF1 /* ZXingBoard.m in Sources */,
 				049B62B91CE1F568002F6DA2 /* Sandbox.m in Sources */,
 				04F30F191C09D91800EEFAF1 /* MainBoard.m in Sources */,

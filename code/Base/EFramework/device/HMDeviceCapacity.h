@@ -8,9 +8,9 @@
 /**
  *  设备能力
  *
- *  @param __notification
+ *   __notification
  *
- *  @return
+ *   return
  */
 
 #import <Foundation/Foundation.h>
@@ -35,7 +35,7 @@ AS_NOTIFICATION(ORIENTATIONCHANGED)
 /**
  *  打电话,并可返回应用
  *
- *  @param phone 电话号码
+ *   phone 电话号码
  */
 HM_EXTERN void MAKECALL(NSString *phone);
 

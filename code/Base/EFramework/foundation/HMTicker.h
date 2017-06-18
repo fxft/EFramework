@@ -28,15 +28,15 @@ ON_Tick(elapsed);
 /**
  *  延迟执行,非主线程,不能取消
  *
- *  @param inter  延迟时间
- *  @param invoke   代码块
+ *   inter  延迟时间
+ *   invoke   代码块
  */
 - (void)delay:(NSTimeInterval)inter invoke:(void (^)(void))invoke;
 /**
  *  延迟执行,主线程,不能取消
  *
- *  @param inter  延迟时间
- *  @param invoke   代码块
+ *   inter  延迟时间
+ *   invoke   代码块
  */
 - (void)delayInMain:(NSTimeInterval)inter invoke:(void (^)(void))invoke;
 @end

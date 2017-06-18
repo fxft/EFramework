@@ -164,6 +164,8 @@ DEF_INT( STATE_PREPARE,		6 )
 - (void)dealloc
 {
     [self unload];
+    self.mock = nil;
+    
     HM_SUPER_DEALLOC();
 }
 
@@ -308,6 +310,12 @@ DEF_INT( STATE_PREPARE,		6 )
 		[self callResponder];
 	}
 	_progressed = NO;
+}
+- (void)internalNotifyActive{
+    if ([_timer.fireDate timeIntervalSinceDate:[NSDate date]]<MIN(3.f,_seconds)) {
+        [self internalStopTimer];
+        [self internalStartTimer];
+    }
 }
 - (HMHTTPRequestOperation *)ownRequest{
     if ([self.object isKindOfClass:[HMHTTPRequestOperation class]]) {
@@ -1181,7 +1189,8 @@ DEF_SINGLETON_AUTOLOAD(HMDialogueQueue)
 
 - (void)dealloc
 {
-	
+    [self.timer invalidate];
+    self.timer = nil;
 	HM_SUPER_DEALLOC();
 }
 

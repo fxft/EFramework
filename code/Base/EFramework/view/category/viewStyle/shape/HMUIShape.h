@@ -23,6 +23,7 @@ extern const CGFloat ttkRounded;
 
 
 @interface HMUIShape : NSObject
+@property (nonatomic) CGMutablePathRef pathRef;
 
 + (instancetype)shape;
 

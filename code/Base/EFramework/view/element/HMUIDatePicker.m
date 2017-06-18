@@ -363,18 +363,20 @@ ON_Button(signal){
             self.calendarPicker.selectDate = self.date;
             [self.calendarPicker reloadData];
         }
+        WS(weakSelf)
         //动画切换选中状态
         [UIView animateWithDuration:.25f animations:^{
+            SS(strongSelf)
+            strongSelf.lastBtn.width = fabs(btn.x-strongSelf.lastBtn.x)+strongSelf.lastBtn.width;
+            strongSelf.lastBtn.x = MIN(btn.x, strongSelf.lastBtn.x);
             
-            self.lastBtn.width = fabs(btn.x-self.lastBtn.x)+self.lastBtn.width;
-            self.lastBtn.x = MIN(btn.x, self.lastBtn.x);
-            
-            [self toggleto:btn.tag];
+            [strongSelf toggleto:btn.tag];
             
         } completion:^(BOOL finished) {
+            SS(strongSelf)
             [UIView animateWithDuration:.15f animations:^{
-                self.lastBtn.width = btn.width;
-                self.lastBtn.x = btn.x;
+                strongSelf.lastBtn.width = btn.width;
+                strongSelf.lastBtn.x = btn.x;
             }];
         }];
         

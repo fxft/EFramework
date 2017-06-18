@@ -108,14 +108,14 @@ AS_SIGNAL( TableSelect )    //input object NSIndexPath
 /**
  *  更新content的大小
  *
- *  @param rect 相对
+ *   rect 相对
  */
 - (void)resetContentViewRect:(CGRect)rect;
 /**
  *  自定义autolayout视图的支持
  *
- *  @param view       自定义视图
- *  @param autolayout 回调，contentView已被添加到父视图，建议不设置与父视图相对的属性eg.top left bottm right
+ *   view       自定义视图
+ *   autolayout 回调，contentView已被添加到父视图，建议不设置与父视图相对的属性eg.top left bottm right
  */
 - (void)setContentView:(UIView*)view autolayout:(void(^)(UIView *contentView))autolayout;
 
@@ -124,7 +124,7 @@ AS_SIGNAL( TableSelect )    //input object NSIndexPath
 /**
  *  弹出
  *
- *  @param animated 是否支持动画
+ *   animated 是否支持动画
  */
 - (void)showWithAnimated:(BOOL)animated;
 - (void)dissmissAnimated:(BOOL)animated;

@@ -125,6 +125,10 @@ AS_INT( STATE_SUCCEEDOLD );
 @property (nonatomic, readonly) NSTimeInterval			timeCostRecving;	// 网络收包耗时
 @property (nonatomic, readonly) NSTimeInterval			timeCostOverAir;	// 网络整体耗时
 
+@property (nonatomic) BOOL                              enableSpeedRate;//打开网络测速
+@property (atomic, assign, readonly) NSInteger       speedRate;// 下载速度 B/s
+@property (nonatomic, assign, readonly) NSInteger       remainingTime;
+
 @property (nonatomic, readonly) BOOL					created;
 @property (nonatomic, readonly) BOOL					sending;
 @property (nonatomic, readonly) BOOL					recving;

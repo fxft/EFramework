@@ -19,11 +19,11 @@ void mapInitRange(CLLocationCoordinate2D* minCoor,CLLocationCoordinate2D*  maxCo
     *maxCoor = CLLocationCoordinate2DMake(-180.f, -180.f);
 }
 
-void mapRangeForCoordinate(CLLocationCoordinate2D coordinate ,CLLocationCoordinate2D minCoor ,CLLocationCoordinate2D maxCoor){
-    maxCoor.latitude = MAX(coordinate.latitude,maxCoor.latitude);
-    maxCoor.longitude = MAX(coordinate.longitude, maxCoor.longitude);
-    minCoor.latitude = MIN(coordinate.latitude, minCoor.latitude);
-    minCoor.longitude = MIN(coordinate.longitude, minCoor.longitude);
+void mapRangeForCoordinate(CLLocationCoordinate2D coordinate ,CLLocationCoordinate2D* minCoor ,CLLocationCoordinate2D* maxCoor){
+    CLLocationCoordinate2D _minCoor = *minCoor;
+    CLLocationCoordinate2D _maxCoor = *maxCoor;
+    *minCoor = CLLocationCoordinate2DMake(MAX(coordinate.latitude*1.f,_maxCoor.latitude), MAX(coordinate.longitude*1.f, _maxCoor.longitude));
+    *maxCoor = CLLocationCoordinate2DMake(MIN(coordinate.latitude*1.f,_minCoor.latitude), MIN(coordinate.longitude*1.f, _minCoor.longitude));
 }
 
 MSOMapRect mapRectForRange(CLLocationCoordinate2D minCoor ,CLLocationCoordinate2D maxCoor){

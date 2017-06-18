@@ -63,6 +63,7 @@ static NSString * const kStringsTableName = @"FDTake";
     self.chooseFromLibraryText = nil;
     self.chooseFromPhotoRollText = nil;
     self.noSourcesText = nil;
+    self.takePhotoText = nil;
     
     HM_SUPER_DEALLOC();
 }
@@ -290,7 +291,7 @@ static NSString * const kStringsTableName = @"FDTake";
         }
         
         if ([self.delegate respondsToSelector:@selector(takeController:gotPhoto:withInfo:)])
-            [self.delegate takeController:self gotPhoto:imageToSave withInfo:info];
+            if(![self.delegate takeController:self gotPhoto:imageToSave withInfo:info])return;
         
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
             [self.popover dismissPopoverAnimated:YES];
@@ -299,7 +300,7 @@ static NSString * const kStringsTableName = @"FDTake";
     else if (CFStringCompare ((CFStringRef) mediaType, kUTTypeMovie, 0)
              == kCFCompareEqualTo) {
         if ([self.delegate respondsToSelector:@selector(takeController:gotVideo:withInfo:)])
-            [self.delegate takeController:self gotVideo:info[UIImagePickerControllerMediaURL] withInfo:info];
+            if (![self.delegate takeController:self gotVideo:info[UIImagePickerControllerMediaURL] withInfo:info])return;
     }
     
     [picker dismissViewControllerAnimated:YES completion:nil];
@@ -362,10 +363,11 @@ static NSString * const kStringsTableName = @"FDTake";
         WS(weakSelf)
         self.actionSheet = [HMUIActionSheet sheetViewWithTitle:nil message:nil];
         [self.actionSheet onClicked:^(HMUIActionSheet *sheet, NSInteger index) {
+            SS(strongSelf)
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
             
-            [weakSelf actionSheet:(UIActionSheet*)sheet didDismissWithButtonIndex:index];
+            [strongSelf actionSheet:(UIActionSheet*)sheet didDismissWithButtonIndex:index];
 #pragma clang diagnostic pop
             
         }];
@@ -383,10 +385,11 @@ static NSString * const kStringsTableName = @"FDTake";
         [alert addButtonWithTitle:@"取消"];
         WS(weakSelf)
         [alert onClicked:^(HMUIAlertView *alert, NSInteger index) {
+            SS(strongSelf)
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
             
-            [weakSelf alertView:(id)alert didDismissWithButtonIndex:index];
+            [strongSelf alertView:(id)alert didDismissWithButtonIndex:index];
 #pragma clang diagnostic pop
         }];
         [alert showInViewController:[self presentingViewController]];

@@ -755,7 +755,7 @@
     UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
-    newImage = [[UIImage alloc]initWithCGImage:newImage.CGImage scale:1.f orientation:self.imageOrientation];
+    newImage = [[UIImage alloc]initWithCGImage:newImage.CGImage scale:self.scale orientation:self.imageOrientation];
     //    INFO(@"%.2f%.2f,%.2f%.2f,%.1f",rotatedSize.width,rotatedSize.height,newImage.size.width,newImage.size.height,newImage.scale);
     return [newImage autorelease];
 }
@@ -2246,7 +2246,7 @@ void cleanupBuffer(void *userData, void *buf_data)
     {
         NSString *retinaPath = [[NSBundle mainBundle] pathForResource:[name stringByAppendingString:@"@2x"] ofType:@"gif"];
         
-        NSData *data = [NSData dataWithContentsOfFile:retinaPath];
+        data = [NSData dataWithContentsOfFile:retinaPath];
         
         if (!data)
         {

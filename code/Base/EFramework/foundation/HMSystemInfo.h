@@ -101,7 +101,7 @@
 /**
  *  返回App支持的路径方案
  *
- *  @return
+ *   return
  */
 + (NSString *)anyScheme;
 + (NSString *)anySchemeForIdentifier:(NSString*)identifier;

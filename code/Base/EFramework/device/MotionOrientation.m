@@ -83,8 +83,10 @@ NSString* const kMotionOrientationKey = @"kMotionOrientationKey";
 #endif
         return;
     }
+    WS(weakSelf)
     [self.motionManager startAccelerometerUpdatesToQueue:self.operationQueue withHandler:^(CMAccelerometerData *accelerometerData, NSError *error) {
-        [self accelerometerUpdateWithData:accelerometerData error:error];
+        SS(strongSelf)
+        [strongSelf accelerometerUpdateWithData:accelerometerData error:error];
     }];
 }
 
@@ -282,16 +284,18 @@ NSString* const kMotionOrientationKey = @"kMotionOrientationKey";
                                                       userInfo:[NSDictionary dictionaryWithObjectsAndKeys:self, kMotionOrientationKey, nil]];
 }
 
+#endif
+
 - (void)dealloc
 {
     [self stop];
-    
+    self.motionManager = nil;
+    self.operationQueue = nil;
+    self.handler = nil;
 #if __has_feature(objc_arc)
 #else
     [super dealloc];
 #endif
 }
-
-#endif
 
 @end

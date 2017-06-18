@@ -14,18 +14,18 @@
 /**
  *  runtime
  *
- *  @param origSelector 被黑的选择器(方法)
- *  @param newSelector  新选择器(方法)
+ *   origSelector 被黑的选择器(方法)
+ *   newSelector  新选择器(方法)
  *
- *  @return 被黑的选择器(方法)
+ *   return 被黑的选择器(方法)
  */
 + (IMP)swizzleSelector:(SEL)origSelector withIMP:(SEL)newSelector;
 
 /**
  *  压缩解压,必须使用ZipArchive类
  *
- *  @param path 路径
- *  @param toDirectory  解压目录
+ *   path 路径
+ *   toDirectory  解压目录
  */
 - (void)unzip:(NSString*)path toDirectory:(NSString*)toDirectory;
 - (void)zip:(NSString*)path newName:(NSString*)newName;

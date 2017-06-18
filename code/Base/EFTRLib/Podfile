@@ -4,7 +4,7 @@ use_frameworks!
 target 'EFTRLib' do
 pod 'CocoaAsyncSocket', '~> 7.4.3'
 pod 'Masonry', '~> 1.0.1'#autolayout 工具库 0.6.2
-pod 'MJRefresh', '~> 3.1.10'#下拉刷新2.4.9
+pod 'MJRefresh', '~> 3.1.12'#下拉刷新2.4.9
 pod 'UITableView+FDTemplateLayoutCell', '~> 1.4'#计算cell高度
 pod 'JHChainableAnimations', '~> 1.3.0'#便捷动画库
 #pod 'AFNetworking', '~> 2.6.3'##EFWK
@@ -25,8 +25,8 @@ pod 'GPUImage', '~> 0.1.7'#图片滤镜、效果库
 #pod 'TTTAttributedLabel', '~> 1.13.4'
 
 pod 'Realm', '<= 0.102.0'#非关系型数据库
-pod 'SDAutoLayout', '~> 2.1.3'
-pod 'SDWebImage', '~> 3.7.6'
+pod 'SDAutoLayout', '~> 2.1.7'
+pod 'SDWebImage', '~> 3.8.1'
 
 pod 'SDCycleScrollView','~> 1.64' #第一图片轮播器
 
@@ -38,8 +38,14 @@ pod 'iOS-MagnifyingGlass', '~> 0.0.2'#放大鏡
 
 pod 'SocketRocket', '~>0.5.1'
 
-pod 'WeexSDK', :path=>'../../../../../../projects/comm/external/weex/sdk'
+#pod 'WeexSDK', :path=>'../../../../../../projects/comm/external/weex/sdk'
 
+
+pod 'wax', :path=>'../../../../../../projects/comm/external/closs/wax/'
+#pod 'wax', :git=>'https://github.com/alibaba/wax.git', :tag=>'1.1.0'
+
+#pod 'WebViewJavascriptBridge', '~> 4.1.4'
+pod 'pop', '~> 1.0.9'#facebook动画库
 #pod 'Permission', '~> 1.4.2'    #权限获取
 #/*Bluetooth
 #Camera

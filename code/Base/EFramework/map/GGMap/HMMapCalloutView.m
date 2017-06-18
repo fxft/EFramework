@@ -52,7 +52,7 @@
     if (_title==nil) {
         _title = [[UILabel spawn]retain];
         _title.numberOfLines = 0;
-        _title.textAlignment = UITextAlignmentLeft;
+        _title.textAlignment = NSTextAlignmentLeft;
         [self addSubview:_title];
     }
     return _title;
@@ -62,7 +62,7 @@
     if (_subtitle==nil) {
         _subtitle = [[UILabel spawn]retain];
         _subtitle.numberOfLines = 0;
-        _subtitle.textAlignment = UITextAlignmentLeft;
+        _subtitle.textAlignment = NSTextAlignmentLeft;
         [self addSubview:_subtitle];
     }
     return _subtitle;

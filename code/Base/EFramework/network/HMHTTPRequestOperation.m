@@ -181,6 +181,11 @@ static NSString *defaultImageCachePath = @"images";
 @property (nonatomic) NSTimeInterval               recvTimeStamp;
 @property (nonatomic) NSTimeInterval               doneTimeStamp;
 
+@property (nonatomic, strong) NSTimer *speedTimer;
+@property (nonatomic, assign) uint64_t previousTotal;
+@property (atomic, assign, readwrite) NSInteger speedRate;
+@property (nonatomic, assign, readwrite) NSInteger remainingTime;
+
 @property (readwrite, nonatomic, HM_STRONG) NSError *       error;
 @property (nonatomic,readwrite)BOOL                isBadURL;
 
@@ -272,6 +277,7 @@ DEF_INT( STATE_SUCCEEDOLD,	8 );
 @synthesize timeCostOverDNS;	// 网络连接耗时（DNS）
 @synthesize timeCostRecving;	// 网络收包耗时
 @synthesize timeCostOverAir;	// 网络整体耗时
+@synthesize enableSpeedRate=_enableSpeedRate;
 
 @dynamic created;
 @dynamic sending;
@@ -325,6 +331,8 @@ DEF_INT( STATE_SUCCEEDOLD,	8 );
 #if (__ON__ == __HM_DEVELOPMENT__)
     CC( @"HTTP",@"[[][][][]t[%@]n[%@]]remove the request '%@'",self.tagString,self.order,self.url);
 #endif	// #if (__ON__ == __BEE_DEVELOPMENT__)
+    [self.speedTimer invalidate];
+    self.speedTimer= nil;
     [_responders removeAllObjects];
     [_responders release];
     self.order = nil;
@@ -342,6 +350,17 @@ DEF_INT( STATE_SUCCEEDOLD,	8 );
     self.requestHeaders = nil;
     self.requestBuildedBlock = nil;
     self.redirectResponseBlock = nil;
+    self.responseData = nil;
+    self.headUserAgent = nil;
+    self.errorDomain = nil;
+    self.error = nil;
+    self.redirectBlock = nil;
+    self.request = nil;
+    self.response = nil;
+    if (self.outputStream) {
+        [self.outputStream close];
+        self.outputStream = nil;
+    }
     HM_SUPER_DEALLOC();
 }
 
@@ -498,7 +517,8 @@ DEF_INT( STATE_SUCCEEDOLD,	8 );
 - (BOOL)checkCache{
     
     if (self.useCache) {
-        self.cachePath = [[HMFileCache sharedInstance] fileNameForKey:AFDataCacheKeyFromURLRequest(self.request.URL) branch:self.cacheInBranch];
+        NSString *filekey = AFDataCacheKeyFromURLRequest(self.request.URL);
+        self.cachePath = [[HMFileCache sharedInstance] fileNameForKey:filekey branch:self.cacheInBranch];
         if (self.cacheDuration>0) {//缓存过期时间
             NSError *error = nil;
             NSDictionary *dic = [[NSFileManager defaultManager] attributesOfItemAtPath:self.cachePath error:&error];
@@ -530,12 +550,12 @@ DEF_INT( STATE_SUCCEEDOLD,	8 );
         NSData *data = nil;
         
         if (!self.useFileCacheOnly) {
-            data = [[HMMemoryCache sharedInstance] objectForKey:AFDataCacheKeyFromURLRequest(self.request.URL)];
+            data = [[HMMemoryCache sharedInstance] objectForKey:filekey];
         }
         
         if (!data) {
             //form disk
-            data = [[HMFileCache sharedInstance] objectForKey:AFDataCacheKeyFromURLRequest(self.request.URL) branch:self.cacheInBranch];
+            data = [[HMFileCache sharedInstance] objectForKey:filekey branch:self.cacheInBranch];
         }
         
         if (data) {
@@ -741,7 +761,7 @@ DEF_INT( STATE_SUCCEEDOLD,	8 );
     }
     
 #if (__ON__ == __HM_DEVELOPMENT__)
-    CC( @"HTTP",@"%d(%@) cost:%.3fs body:%@ stream:%@ %@ %@ \n headers:%@ \n parameters:%@\nrespone:%@ \n error:%@",
+    CC( @"HTTP",@"%d(%@) cost:%.3fs body:%@ stream:%@ %@ %@ %@ \n headers:%@ \n parameters:%@\nrespone:%@ \n error:%@",
        self.statusCode,
        self.statusDesc,
        self.timeCostOverAir,
@@ -749,6 +769,7 @@ DEF_INT( STATE_SUCCEEDOLD,	8 );
        [NSString formatVolume:[[self.request valueForHTTPHeaderField:@"Content-Length"] longLongValue]],
        self.request.HTTPMethod,
        self.url,
+       self.cachePath,
        [self.request.allHTTPHeaderFields JSONString],
        [self.parameters JSONString],
        self.responseData.length>[HMUIConfig sharedInstance].allowedLogWebDataLength?[[@"{很多数据,不显示了,自己去查结果}" add:@"[HMUIConfig sharedInstance].allowedLogWebDataLength:"] add:[@([HMUIConfig sharedInstance].allowedLogWebDataLength) description]]:self.responseString,
@@ -756,6 +777,7 @@ DEF_INT( STATE_SUCCEEDOLD,	8 );
 #endif	// #if (__ON__ == __BEE_DEVELOPMENT__)
     
     [HMHTTPRequestOperationManager cancelRequest:self];
+    [self endSpeedtimer];
 }
 
 - (void)pause{
@@ -1001,6 +1023,52 @@ DEF_INT( STATE_SUCCEEDOLD,	8 );
     
     return bytes2 ? ((CGFloat)bytes1 / (CGFloat)bytes2) : 0.0f;
 }
+- (void)startSpeedtimer{
+    if (self.speedTimer==nil) {
+        self.speedTimer =  [NSTimer scheduledTimerWithTimeInterval:1.0
+                                                            target:self
+                                                          selector:@selector(updateTransferRate)
+                                                          userInfo:nil
+                                                           repeats:YES];
+       
+        [[NSRunLoop currentRunLoop] addTimer:self.speedTimer forMode:NSRunLoopCommonModes];
+        
+    }
+}
+- (void)endSpeedtimer{
+    [self.speedTimer invalidate];
+    self.speedTimer = nil;
+}
+- (void)setEnableSpeedRate:(BOOL)enableSpeedRate{
+    _enableSpeedRate = enableSpeedRate;
+    if (enableSpeedRate) {
+        if (self.speedTimer==nil) {
+            
+            [self performSelector:@selector(startSpeedtimer) onThread:[[self class] networkRequestThread] withObject:nil waitUntilDone:YES];
+        }
+    }else{
+        if (self.speedTimer) {
+            [self performSelector:@selector(endSpeedtimer) onThread:[[self class] networkRequestThread] withObject:nil waitUntilDone:YES];
+        }
+        
+    }
+}
+
+- (void)updateTransferRate
+{
+
+    // Compute the speed rate on the average of the last seconds samples
+    self.speedRate = self.downloadBytes - self.previousTotal;
+    self.previousTotal = self.downloadBytes;
+    
+    [self callResponders];
+}
+
+- (NSInteger)remainingTime
+{
+    return self.speedRate > 0 ? ((NSInteger) (self.downloadTotalBytes - self.downloadBytes) / self.speedRate) : -1;
+}
+
 
 - (NSTimeInterval)timeCostPending
 {

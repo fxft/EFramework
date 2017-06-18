@@ -31,7 +31,9 @@ DEF_STATIC_PROPERTY( uploadBlock )
 DEF_STATIC_PROPERTY( dataBlock )
 
 DEF_STATIC_PROPERTY( cacheDuration )
+DEF_STATIC_PROPERTY( cacheInBranch )
 DEF_STATIC_PROPERTY( cacheLast )
+DEF_STATIC_PROPERTY( shouldResume )
 
 DEF_STATIC_PROPERTY( urlEncoding )
 DEF_STATIC_PROPERTY( responseEncoding )
@@ -40,6 +42,7 @@ DEF_STATIC_PROPERTY( urlResponseType )
 DEF_STATIC_PROPERTY( urlRequestType )
 
 DEF_STATIC_PROPERTY( process )
+DEF_STATIC_PROPERTY( Speedrate )
 
 @synthesize baseUrl;
 @synthesize useCookiePersistence;
@@ -119,6 +122,11 @@ DEF_SERVICE2(WebAPI, __dial){
         if (cacheDuration) {
             duration = [cacheDuration doubleValue];
         }
+        NSString *cacheInBranch = [__dial.input objectForKey:[HMWebAPI cacheInBranch]];
+        
+        NSNumber *shouldResume = [__dial.input objectForKey:[HMWebAPI shouldResume]];
+        
+        NSNumber *Speedrate = [__dial.input objectForKey:[HMWebAPI Speedrate]];
         
         BOOL cachelast=NO;
         NSNumber *cacheLast = [__dial.input objectForKey:[HMWebAPI cacheLast]];
@@ -196,7 +204,14 @@ DEF_SERVICE2(WebAPI, __dial){
         if (duration>0) {
             operation.useCache = YES;
         }
-        operation.cacheInBranch = [[self class] description];
+        if ([cacheInBranch notEmpty]) {
+            operation.cacheInBranch = cacheInBranch;
+        }else{
+            operation.cacheInBranch = [[self class] description];
+        }
+        
+       
+        
         if (__dial.redirect) {
             operation.redirectBlock = __dial.redirect;
         }
@@ -224,9 +239,17 @@ DEF_SERVICE2(WebAPI, __dial){
         if (headers) {
             operation.requestHeaders = [NSMutableDictionary dictionaryWithDictionary:headers];
         }
+        if (shouldResume) {
+            operation.shouldResume = [shouldResume boolValue];
+        }
         
         operation.useCookiePersistence = self.useCookiePersistence;
         
+        if (Speedrate) {
+            operation.enableSpeedRate = [Speedrate boolValue];
+            operation.attentRecvProgress = YES;
+            operation.attentSendProgress = YES;
+        }
         if (process) {
             operation.attentRecvProgress = [process boolValue];
             operation.attentSendProgress = [process boolValue];
@@ -242,9 +265,9 @@ DEF_SERVICE2(WebAPI, __dial){
             [operation startAsync];
         }
     }else if (__dial.succeed){
-        
+        HMHTTPRequestOperation *ownRequest = __dial.ownRequest;
 #if (__ON__ == __HM_DEVELOPMENT__)
-        CC(@"SERVICE",@"succeed",__dial.ownRequest);
+        CC(@"SERVICE",@"succeed",ownRequest);
 #endif	// #if (__ON__ == __BEE_DEVELOPMENT__)
 #ifdef DEBUG
          if (self.enableMock) {
@@ -264,9 +287,9 @@ DEF_SERVICE2(WebAPI, __dial){
 
         id response = nil;
         if (canJson2Object) {
-            response = __dial.ownRequest.responseObject;
+            response = ownRequest.responseObject;
         }else{
-            response = __dial.ownRequest.responseString;
+            response = ownRequest.responseString;
         }
 //        if (__dial.ownRequest.responseType == HTTPRequestType_JSON) {
 //            if (__dial.ownRequest.responseObject==nil&&__dial.ownRequest.responseData) {
@@ -303,7 +326,7 @@ DEF_SERVICE2(WebAPI, __dial){
 
 - (HMDialogue *)setWebUserinfo:(id)userinfo{
     
-    [self.input setObject:userinfo forKey:[HMWebAPI userinfo]];
+    [self.input setValue:userinfo forKey:[HMWebAPI userinfo]];
     
     return self;
 }
@@ -315,7 +338,7 @@ DEF_SERVICE2(WebAPI, __dial){
 
 - (HMDialogue *)setWebParams:(NSDictionary *)params{
     
-    [self.input setObject:params forKey:[HMWebAPI params]];
+    [self.input setValue:params forKey:[HMWebAPI params]];
     
     return self;
 }
@@ -326,7 +349,7 @@ DEF_SERVICE2(WebAPI, __dial){
 
 - (HMDialogue *)setWebHeaders:(NSDictionary *)headers{
     
-    [self.input setObject:headers forKey:[HMWebAPI headers]];
+    [self.input setValue:headers forKey:[HMWebAPI headers]];
     
     return self;
 }
@@ -339,28 +362,28 @@ DEF_SERVICE2(WebAPI, __dial){
 
     self.command = command;
     
-    [self.input setObject:command forKey:[HMWebAPI command]];
+    if (command)[self.input setValue:command forKey:[HMWebAPI command]];
     
     return self;
 }
 
 - (HMDialogue *)setWebHttpMock:(NSString *)mock{
     
-    [self.input setObject:mock forKey:[HMWebAPI methodMock]];
+    [self.input setValue:mock forKey:[HMWebAPI methodMock]];
     
     return self;
 }
 
 - (HMDialogue *)setWebName:(NSString *)name{
     self.name = name;
-    [self.input setObject:name forKey:[HMWebAPI name]];
+    if (name)[self.input setValue:name forKey:[HMWebAPI name]];
     
     return self;
 }
 
 - (HMDialogue *)setWebUrlResponseType:(HTTPResponseType)type{
     
-    [self.input setObject:@(type) forKey:[HMWebAPI urlResponseType]];
+    [self.input setValue:@(type) forKey:[HMWebAPI urlResponseType]];
     
     return self;
     
@@ -368,7 +391,7 @@ DEF_SERVICE2(WebAPI, __dial){
 
 - (HMDialogue *)setWebUrlRequestType:(HTTPRequestType)type{
     
-    [self.input setObject:@(type) forKey:[HMWebAPI urlRequestType]];
+    [self.input setValue:@(type) forKey:[HMWebAPI urlRequestType]];
     
     return self;
 }
@@ -376,7 +399,7 @@ DEF_SERVICE2(WebAPI, __dial){
 
 - (HMDialogue *)setWebMethod:(NSString *)method{
     
-    [self.input setObject:method forKey:[HMWebAPI method]];
+    [self.input setValue:method forKey:[HMWebAPI method]];
     
     return self;
 }
@@ -384,14 +407,14 @@ DEF_SERVICE2(WebAPI, __dial){
 - (HMDialogue *)setWebUploadBlock:(HTTPUploadDataBlock)block{
 
     self.block = block;
-//    [self.input setObject:block forKey:[HMWebAPI uploadBlock]];
+//    [self.input setValue:block forKey:[HMWebAPI uploadBlock]];
     
     return self;
 }
 
 - (HMDialogue *)setWebData:(NSData *)data{
     
-    [self.input setObject:data forKey:[HMWebAPI dataBlock]];
+    [self.input setValue:data forKey:[HMWebAPI dataBlock]];
     
     return self;
 }
@@ -399,38 +422,49 @@ DEF_SERVICE2(WebAPI, __dial){
 
 - (HMDialogue *)setWebUrlEncoding:(NSStringEncoding)encoding{
  
-    [self.input setObject:@(encoding) forKey:[HMWebAPI urlEncoding]];
+    [self.input setValue:@(encoding) forKey:[HMWebAPI urlEncoding]];
     
     return self;
 }
 
 - (HMDialogue *)setWebResponseEncoding:(NSStringEncoding)encoding{
     
-    [self.input setObject:@(encoding) forKey:[HMWebAPI responseEncoding]];
+    [self.input setValue:@(encoding) forKey:[HMWebAPI responseEncoding]];
     
     return self;
 }
 
 - (HMDialogue *)setWebEnableJson2Object:(BOOL)js2oc{
     
-    [self.input setObject:@(js2oc) forKey:[HMWebAPI responseJs2oc]];
+    [self.input setValue:@(js2oc) forKey:[HMWebAPI responseJs2oc]];
     
     return self;
 }
 
 
 - (HMDialogue *)setWebCacheDuration:(NSTimeInterval)cacheDuration{
-    [self.input setObject:@(cacheDuration) forKey:[HMWebAPI cacheDuration]];
+    [self.input setValue:@(cacheDuration) forKey:[HMWebAPI cacheDuration]];
+    return self;
+}
+
+
+- (HMDialogue *) setWebCacheInBranch:(NSString*)cacheInBranch{
+    [self.input setValue:cacheInBranch forKey:[HMWebAPI cacheInBranch]];
+    return self;
+}
+
+- (HMDialogue *)setWebCacheShouldResume:(BOOL)shouldResume{
+    [self.input setValue:@(shouldResume) forKey:[HMWebAPI shouldResume]];
     return self;
 }
 
 - (HMDialogue *)setWebDataFromNetwrokElseCache{
-    [self.input setObject:@(NO) forKey:[HMWebAPI cacheLast]];
+    [self.input setValue:@(NO) forKey:[HMWebAPI cacheLast]];
     return self;
 }
 
 - (HMDialogue *)setWebDataFromCacheElseNetwrok{
-    [self.input setObject:@(YES) forKey:[HMWebAPI cacheLast]];
+    [self.input setValue:@(YES) forKey:[HMWebAPI cacheLast]];
     return self;
 }
 
@@ -440,7 +474,12 @@ DEF_SERVICE2(WebAPI, __dial){
 }
 
 - (HMDialogue *)setWebListenProcess{
-    [self.input setObject:@(YES) forKey:[HMWebAPI process]];
+    [self.input setValue:@(YES) forKey:[HMWebAPI process]];
+    return self;
+}
+
+- (HMDialogue *)setWebListenSpeedrate{
+    [self.input setValue:@(YES) forKey:[HMWebAPI Speedrate]];
     return self;
 }
 

@@ -247,10 +247,10 @@ AS_SINGLETON(HMURLMap)
 /**
  *  push or present
  *
- *  @param path  <UIViewController> <NSString>  URLFOR_controller(@"xxx") or Main.HMUIStack.DetailBoard or Main.DetailBoard
- *  @param animated
+ *   path  <UIViewController> <NSString>  URLFOR_controller(@"xxx") or Main.HMUIStack.DetailBoard or Main.DetailBoard
+ *   animated
  *
- *  @return target uiview controller
+ *   return target uiview controller
  */
 - (UIViewController*)pushToPath:(id)path animated:(BOOL)animated;
 /*map for name*/
@@ -259,10 +259,10 @@ AS_SINGLETON(HMURLMap)
 /**
  *   present
  *
- *  @param path  <UIViewController> <NSString>  URLFOR_controller(@"xxx") or Main.HMUIStack.DetailBoard or Main.DetailBoard
- *  @param animated
+ *   path  <UIViewController> <NSString>  URLFOR_controller(@"xxx") or Main.HMUIStack.DetailBoard or Main.DetailBoard
+ *   animated
  *
- *  @return target uiview controller
+ *   return target uiview controller
  */
 /*map for name*/
 - (UIViewController*)presentToPath:(id)path map:(NSString*)map animated:(BOOL)animated;
@@ -271,10 +271,10 @@ AS_SINGLETON(HMURLMap)
 /**
  *  add to parenController. if exited bringtofront
  *
- *  @param path  <UIViewController> <NSString>  URLFOR_controller(@"xxx") or @"Main.HMUIStack.DetailBoard" or @"Main.DetailBoard"
- *  @param isnew if created isnew return YES
+ *   path  <UIViewController> <NSString>  URLFOR_controller(@"xxx") or @"Main.HMUIStack.DetailBoard" or @"Main.DetailBoard"
+ *   isnew if created isnew return YES
  *
- *  @return the target
+ *   return the target
  */
 - (HMUIBoard *)putChild:(id)path isNew:(BOOL*)isnew;
 - (HMUIBoard *)putChild:(id)path map:(NSString*)map isNew:(BOOL*)isnew;

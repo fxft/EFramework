@@ -21,6 +21,18 @@ DEF_INT( NSARRAY,		4 )
 DEF_INT( NSDICTIONARY,	5 )
 DEF_INT( NSDATE,		6 )
 DEF_INT( RLMARRAY,		7 )
+DEF_INT( NSNUMBER_INT,  8 )
+DEF_INT( NSNUMBER_UINT, 9 )
+DEF_INT( NSNUMBER_FLOAT, 10 )
+DEF_INT( NSNUMBER_DOUBLE, 11 )
+DEF_INT( NSNUMBER_NSINT,  12 )
+DEF_INT( NSNUMBER_NSUINT, 13 )
+DEF_INT( NSNUMBER_CGFLOAT, 14 )
+DEF_INT( NSNUMBER_LONG,  15 )
+DEF_INT( NSNUMBER_ULONG,  16 )
+DEF_INT( NSNUMBER_SHORT,  17 )
+DEF_INT( NSNUMBER_USHORT,  18 )
+
 
 + (NSUInteger)typeOf:(const char *)attr
 {
@@ -68,7 +80,7 @@ DEF_INT( RLMARRAY,		7 )
         {
             return HMTypeEncoding.RLMARRAY;
         }
-		else
+        else
 		{
 			return HMTypeEncoding.OBJECT;
 		}
@@ -87,21 +99,45 @@ DEF_INT( RLMARRAY,		7 )
 		{
 			return HMTypeEncoding.UNKNOWN;
 		}
-		else if ( type[0] == 'i' || type[0] == 's' || type[0] == 'l' || type[0] == 'q' )
+		else if ( type[0] == 'i' )
 		{
-			return HMTypeEncoding.UNKNOWN;
+			return HMTypeEncoding.NSNUMBER_INT;
 		}
-		else if ( type[0] == 'I' || type[0] == 'S' || type[0] == 'L' || type[0] == 'Q' )
+        else if ( type[0] == 's' )
+        {
+            return HMTypeEncoding.NSNUMBER_SHORT;
+        }
+        else if ( type[0] == 'l' )
+        {
+            return HMTypeEncoding.NSNUMBER_LONG;
+        }
+        else if ( type[0] == 'q' )
+        {
+            return HMTypeEncoding.NSNUMBER_NSINT;
+        }
+		else if ( type[0] == 'I' )
 		{
-			return HMTypeEncoding.UNKNOWN;
+			return HMTypeEncoding.NSNUMBER_UINT;
 		}
+        else if (  type[0] == 'S' )
+        {
+            return HMTypeEncoding.NSNUMBER_USHORT;
+        }
+        else if ( type[0] == 'L' )
+        {
+            return HMTypeEncoding.NSNUMBER_ULONG;
+        }
+        else if ( type[0] == 'Q' )
+        {
+            return HMTypeEncoding.NSNUMBER_NSUINT;
+        }
 		else if ( type[0] == 'f' )
 		{
-			return HMTypeEncoding.UNKNOWN;
+			return HMTypeEncoding.NSNUMBER_FLOAT;
 		}
 		else if ( type[0] == 'd' )
 		{
-			return HMTypeEncoding.UNKNOWN;
+			return HMTypeEncoding.NSNUMBER_DOUBLE;
 		}
 		else if ( type[0] == 'B' )
 		{
@@ -572,6 +608,16 @@ DEF_INT( RLMARRAY,		7 )
 	return [self objectToDictionaryUntilRootClass:nil];
 }
 
+- (id)objectToArray{
+    NSMutableArray *result = [NSMutableArray array];
+    if ([self isKindOfClass:[NSArray class]]) {
+        for (NSObject *obj in (NSArray*)self) {
+            [result addObject:[obj objectToDictionary]];
+        }
+    }
+    return result;
+}
+
 - (id)objectToDictionaryUntilRootClass:(Class)rootClass
 {
 	NSMutableDictionary * result = [NSMutableDictionary dictionary];
@@ -682,7 +728,16 @@ DEF_INT( RLMARRAY,		7 )
             
 			unsigned int		propertyCount = 0;
 			objc_property_t *	properties = class_copyPropertyList( clazzType, &propertyCount );
-			
+            /*获取是否需要名称重定向*/
+            NSMutableSet *propertyIgnores = [NSMutableSet setWithArray:@[@"superclass",@"isa",@"hash",@"debugDescription",@"description"]];//[[NSMutableArray arrayWithArray:@[@"superclass",@"isa",@"hash",@"debugDescription",@"description"]] ];
+            SEL redirectSelector = NSSelectorFromString( @"convertClassPropertyIgnores" );
+            if ( [self respondsToSelector:redirectSelector] )
+            {
+                NSArray *ignores =  [self performSelector:redirectSelector];
+                if (ignores.count) {
+                    [propertyIgnores addObjectsFromArray:ignores];
+                }
+            }
 			for ( NSUInteger i = 0; i < propertyCount; i++ )
 			{
 				const char *	name = property_getName(properties[i]);
@@ -690,9 +745,11 @@ DEF_INT( RLMARRAY,		7 )
 				
 				NSString *		propertyName = [NSString stringWithCString:name encoding:NSUTF8StringEncoding];
 				NSUInteger		propertyType = [HMTypeEncoding typeOf:attr];
-                if ([@[@"superclass",@"isa",@"hash",@"debugDescription",@"description"] containsObject:propertyName]) {
+               
+                if ([propertyIgnores containsObject:propertyName]) {
                     continue;
                 }
+                
 				NSObject * obj = [self valueForKey:propertyName];
 				if ( obj )
 				{
@@ -700,7 +757,21 @@ DEF_INT( RLMARRAY,		7 )
 					{
 						[result setObject:obj forKey:propertyName];
 					}
-					else if ( HMTypeEncoding.NSSTRING == propertyType )
+                    else if ( HMTypeEncoding.NSNUMBER_INT == propertyType ||
+                             HMTypeEncoding.NSNUMBER_NSUINT == propertyType ||
+                             HMTypeEncoding.NSNUMBER_NSINT == propertyType ||
+                             HMTypeEncoding.NSNUMBER_UINT == propertyType ||
+                             HMTypeEncoding.NSNUMBER_FLOAT == propertyType||
+                             HMTypeEncoding.NSNUMBER_CGFLOAT == propertyType||
+                             HMTypeEncoding.NSNUMBER_DOUBLE == propertyType||
+                             HMTypeEncoding.NSNUMBER_LONG == propertyType||
+                             HMTypeEncoding.NSNUMBER_ULONG == propertyType||
+                             HMTypeEncoding.NSNUMBER_SHORT == propertyType||
+                             HMTypeEncoding.NSNUMBER_USHORT == propertyType)
+                    {
+                        [result setObject:obj forKey:propertyName];
+                    }
+                    else if ( HMTypeEncoding.NSSTRING == propertyType )
 					{
 						[result setObject:obj forKey:propertyName];
 					}
@@ -1288,6 +1359,20 @@ DEF_INT( RLMARRAY,		7 )
 				{
 					value = [tempValue asNSNumber];
 				}
+                else if ( HMTypeEncoding.NSNUMBER_INT == type ||
+                         HMTypeEncoding.NSNUMBER_NSUINT == type ||
+                         HMTypeEncoding.NSNUMBER_NSINT == type ||
+                         HMTypeEncoding.NSNUMBER_UINT == type ||
+                         HMTypeEncoding.NSNUMBER_FLOAT == type||
+                         HMTypeEncoding.NSNUMBER_CGFLOAT == type||
+                         HMTypeEncoding.NSNUMBER_DOUBLE == type||
+                         HMTypeEncoding.NSNUMBER_LONG == type||
+                         HMTypeEncoding.NSNUMBER_ULONG == type||
+                         HMTypeEncoding.NSNUMBER_SHORT == type||
+                         HMTypeEncoding.NSNUMBER_USHORT == type)
+                {
+                    value = [tempValue asNSNumber];
+                }
 				else if ( HMTypeEncoding.NSSTRING == type )
 				{
 					value = [tempValue asNSString];

@@ -80,6 +80,11 @@
                                            path:(NSString *)path
                                   signHeaderKey:(NSString **)signHeaderKey;
 
++ (NSString*)prepareIotAPIGatewayForSignWithMethod:(NSString*)HTTPMethod
+                                           headers:(NSDictionary*)Headers
+                                             param:(NSDictionary*)param
+                                              path:(NSString *)path
+                                     signHeaderKey:(NSString **)signHeaderKey;
 @end
 
 

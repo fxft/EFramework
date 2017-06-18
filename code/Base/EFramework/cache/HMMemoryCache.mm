@@ -39,10 +39,11 @@ DEF_SINGLETON( HMMemoryCache );
 		_clearWhenMemoryLow = YES;
 		_maxCacheCount = DEFAULT_MAX_COUNT;
 		_cachedCount = 0;
-
+        WS(weakSelf)
         [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidReceiveMemoryWarningNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * __unused notification) {
             NSLog(@"MemoryCache clearing");
-            [self removeAllObjects];
+            SS(strongSelf)
+            [strongSelf removeAllObjects];
         }];
 	}
 

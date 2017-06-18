@@ -16,9 +16,9 @@
 #import <SDAutoLayout/UIView+SDAutoLayout.h>
 
 
-#import <WeexSDK/WeexSDK.h>
+//#import <WeexSDK/WeexSDK.h>
 #import <SocketRocket/SocketRocket.h>
-#import "WeexExtend.h"
+//#import "WeexExtend.h"
 
 
 #define CURRENT_IP @"your computer device ip"

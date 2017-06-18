@@ -24,6 +24,18 @@ AS_INT( NSARRAY )
 AS_INT( NSDICTIONARY )
 AS_INT( NSDATE )
 AS_INT( RLMARRAY )
+AS_INT( NSNUMBER_INT )
+AS_INT( NSNUMBER_UINT )
+AS_INT( NSNUMBER_FLOAT )
+AS_INT( NSNUMBER_DOUBLE )
+AS_INT( NSNUMBER_NSINT )
+AS_INT( NSNUMBER_NSUINT )
+AS_INT( NSNUMBER_CGFLOAT )
+AS_INT( NSNUMBER_LONG )
+AS_INT( NSNUMBER_ULONG )
+AS_INT( NSNUMBER_SHORT )
+AS_INT( NSNUMBER_USHORT )
+
 
 + (NSUInteger)typeOf:(const char *)attr;
 + (NSUInteger)typeOfAttribute:(const char *)attr;
@@ -67,6 +79,7 @@ AS_INT( RLMARRAY )
  *  对象转成字典、字符串、数据、RLMObject数据库支持
  */
 - (id)objectToDictionary;
+- (id)objectToArray;
 - (id)objectToString;
 - (id)objectToData;
 
@@ -78,9 +91,9 @@ AS_INT( RLMARRAY )
 /**
  *  按本类进行对象声称
  *
- *  @param params 支持数组、字典、Json字符串、Json数据、以上
+ *   params 支持数组、字典、Json字符串、Json数据、以上
  *
- *  @return 常规对象、RLMObject数据库对象支持
+ *   return 常规对象、RLMObject数据库对象支持
  */
 + (id)objectsFromArray:(id)arr;
 + (id)objectFromDictionary:(id)dict;
@@ -94,19 +107,40 @@ AS_INT( RLMARRAY )
 
 @end
 
+/**
+ OBJECT to JSON 不需要转换的属性名
+ 
+ @param property 属性名
+ @param clazz 属性对应类
+ @return
+ */
+#undef DEF_CONVERTCLASS_2_PROPERTY
+#define DEF_CONVERTCLASS_2_PROPERTY(propertys) \
+- (NSArray*)convertClassPropertyIgnores{ \
+return propertys; \
+}
+
+/**
+ JSON to OBJECT 类转换路径设置
+
+ @param property 属性名
+ @param clazz 属性对应类
+ @return
+ */
 #undef DEF_CONVERTPROPERTY_2_CLASS
 #define DEF_CONVERTPROPERTY_2_CLASS(property,clazz) \
 - (Class)convertPropertyClassFor_##property{ \
 return clazz; \
 }
+
 /**
- *  属性同属性不同名称匹配，eg. {"a":1} 》》 objc.b
+ *  JSON to OBJECT 属性同属性不同名称匹配，eg. {"a":1} 》》 objc.b
  *  DEF_REDIRECTPROPERTY_2_ALIAS(b,@[@"a"]),只要其中一个属性符合条件就成立
  *
- *  @param property b
- *  @param alias    a
+ *   property b
+ *   alias    a
  *
- *  @return a
+ *   return a
  */
 #undef DEF_REDIRECTPROPERTY_2_ALIAS
 #define DEF_REDIRECTPROPERTY_2_ALIAS(property,alias) \
@@ -116,14 +150,14 @@ return alias;\
 }
 
 /**
- *  属性同属性不同名称匹配，eg. {"a":1} 》》 objc.b
+ *  JSON to OBJECT 属性同属性不同名称匹配，eg. {"a":1} 》》 objc.b
  *  DEF_REDIRECTPROPERTY_2_ALIAS_FORCE(b,@[@"a"]),只要其中一个属性符合条件就成立
  *  强制进行转换
  *
- *  @param property b
- *  @param alias    a
+ *   property b
+ *   alias    a
  *
- *  @return a
+ *   return a
  */
 #undef DEF_REDIRECTPROPERTY_2_ALIAS_FORCE
 #define DEF_REDIRECTPROPERTY_2_ALIAS_FORCE(property,alias) \
@@ -137,20 +171,20 @@ return alias;\
 /**
  *  从字典创建出类(注意：支持属性名＋“__as”进行别名，支持DEF_REDIRECTPROPERTY_2_ALIAS，DEF_CONVERTPROPERTY_2_CLASS)
  *
- *  @param clazz 类
+ *   clazz 类
  *
- *  @return
+ *   return
  */
 - (id)objectForClass:(Class)clazz;
 
 /**
  *  对象打印，适用于需要使用objectForClass:的数据对象打印到控制台，打印出的结果可复制使用
  *
- *  @param name  第一个类名
- *  @param coding  是否支持<NSCoding>
- *  @param analysis 是否进行number类型转译
+ *   name  第一个类名
+ *   coding  是否支持<NSCoding>
+ *   analysis 是否进行number类型转译
  *
- *  @return 
+ *   return 
  */
 - (BOOL)pritfMemberForClassName:(NSString*)name coding:(BOOL)coding numberAnalysis:(BOOL)analysis;
 

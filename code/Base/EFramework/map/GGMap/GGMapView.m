@@ -234,6 +234,10 @@ calloutCustom = _calloutCustom;
     [_calloutView release];
     [_remark removeFromSuperview];
     [_remark release];
+    [self.container removeFromSuperview];
+    self.container = nil;
+    [_annotation release];
+    _annotation= nil;
     HM_SUPER_DEALLOC();
 }
 -(UIView *)calloutViewCell{
@@ -684,16 +688,17 @@ DEF_NOTIFICATION(ZoomLevelChanged)
                 coor.latitude = [[arr objectAtIndex:0]floatValue];
                 coor.longitude = [[arr objectAtIndex:1]floatValue];
                 NSInteger _zoomlevel = [[arr objectAtIndex:2]integerValue];
-                
+                WS(weakSelf)
                 if (CLLocationCoordinate2DIsValid(coor)) {
+                    SS(strongSelf)
                     [UIView animateWithDuration:.05 animations:^{
                         
                     } completion:^(BOOL finished) {
-                        [self setCenterCoordinate:coor zoomLevel:_zoomlevel animated:NO];
+                        [strongSelf setCenterCoordinate:coor zoomLevel:_zoomlevel animated:NO];
                         [UIView animateWithDuration:.1 animations:^{
                             
                         } completion:^(BOOL finished) {
-                            [self sendSignal:[GGMapView LOADED]];
+                            [strongSelf sendSignal:[GGMapView LOADED]];
                         }];
                     }];
                 }
@@ -703,11 +708,12 @@ DEF_NOTIFICATION(ZoomLevelChanged)
             if (CLLocationCoordinate2DIsValid(self.centerCoordinate)) {
                 [self setCenterCoordinate:self.centerCoordinate zoomLevel:self.zoomLevel animated:NO];
             }
-            
+            WS(weakSelf)
             [UIView animateWithDuration:.1 animations:^{
                 
             } completion:^(BOOL finished) {
-                [self sendSignal:[GGMapView LOADED]];
+                SS(strongSelf)
+                [strongSelf sendSignal:[GGMapView LOADED]];
             }];
         }
     }

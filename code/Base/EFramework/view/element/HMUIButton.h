@@ -79,8 +79,8 @@ AS_SIGNAL( DRAG_EXIT )			// 退出
 /**
  *  设置网络图片
  *
- *  @param url 是完整的地址
- *  @param state 
+ *   url 是完整的地址
+ *   state 
  *  note 注意释放控件前请积极调用 [self disableHttpRespondersByTagString:@"btnTagstring"]
  */
 - (void)setImageWithURLString:(NSString *)url forState:(UIControlState)state;
@@ -95,23 +95,23 @@ AS_SIGNAL( DRAG_EXIT )			// 退出
 /**
  *  设置背景图片，已对图片进行stretched处理
  *
- *  @param name  @"test.png" => @"test_up.png",@"test_down.png",@"test_select.png",@"test_disable.png"
- *  @param title 设置normal的标题
+ *   name  @"test.png" => @"test_up.png",@"test_down.png",@"test_select.png",@"test_disable.png"
+ *   title 设置normal的标题
  */
 - (void)setBackgroundImagePrefixName:(NSString*)name title:(NSString *)title;
 /**
  *  设置前景图片
  *
- *  @param name  @"test.png" => @"test_up.png",@"test_down.png",@"test_select.png",@"test_disable.png"
- *  @param title
+ *   name  @"test.png" => @"test_up.png",@"test_down.png",@"test_select.png",@"test_disable.png"
+ *   title
  */
 - (void)setImagePrefixName:(NSString*)name title:(NSString *)title;
 
 /**
  *  设置字体
  *
- *  @param font  字体
- *  @param state 控制状态
+ *   font  字体
+ *   state 控制状态
  */
 - (void)setTitleFont:(UIFont *)font forState:(UIControlState)state;
 

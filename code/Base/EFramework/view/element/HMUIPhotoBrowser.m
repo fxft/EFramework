@@ -41,6 +41,7 @@
 @property (nonatomic,HM_WEAK) UIView *ssssuperView;
 @property (nonatomic,HM_STRONG) UIView *baseWindow;
 @property (nonatomic,HM_STRONG) UIView *roateWindow;
+@property (nonatomic,HM_STRONG)NSMutableDictionary *clazzes;
 
 @end
 
@@ -83,6 +84,7 @@
     self.photoContentMode = UIViewContentModeScaleAspectFit;
     self.backgroundColor = [UIColor clearColor];
     self.autoresizesSubviews = YES;
+    self.clazzes = [NSMutableDictionary dictionary];
     
     // 1.创建UIScrollView
     [self createScrollView];
@@ -339,6 +341,8 @@
     for (HMPhotoCell *cell in _curViews) {
         cell.dataSource = nil;
     }
+    [self.clazzes removeAllObjects];
+    self.clazzes = nil;
     [_curViews removeAllObjects];
     [_curViews release];
     self.roateWindow = nil;
@@ -785,6 +789,8 @@ ON_NOTIFICATION(__notification){
 {
     if ([self.dataSource respondsToSelector:@selector(photoBrowserNumbers:)]) {
         count = [self.dataSource photoBrowserNumbers:self];
+    }else{
+        count = self.photos.count;
     }
     if (self.allowAutoScroll) {
         if (count<=1) {
@@ -885,15 +891,15 @@ ON_NOTIFICATION(__notification){
 
     
     
-    point = CGPointMake(_photoScrollView.width,0);
+//    point = CGPointMake(_photoScrollView.width,0);
     prePage = 1;
     if (!self.circulation) {//不循环
         if (_currentPhotoIndex==0) {//最前
             point = CGPointZero;
             prePage = 0;
         }else if (_currentPhotoIndex==count-1){//最后
-            point = CGPointMake(2*(photoViewFrame.size.width+2*self.padding), 0);
-            prePage = 2;
+            point = CGPointMake(_currentPhotoIndex*(photoViewFrame.size.width+2*self.padding), 0);
+            prePage = _currentPhotoIndex;
         }
        
     }else{
@@ -976,7 +982,12 @@ ON_NOTIFICATION(__notification){
     photoView = [self dequeueReusableCell];
     
     if (!photoView) {
+#if  __has_feature(objc_arc)
+        photoView = [[HMPhotoCell alloc] init];
+#else
         photoView = [[[HMPhotoCell alloc] init]autorelease];
+#endif
+        
         photoView.dataSource = self;
         photoView.eventReceiver = self;
         [_curViews addObject:photoView];
@@ -1003,6 +1014,32 @@ ON_NOTIFICATION(__notification){
     return photoView;
 }
 
+- (HMPhotoCell *)dequeueReusableCellWithIdentifier:(NSString *)identifier{
+    for (HMPhotoCell *cell in _curViews) {
+        if (cell.superview==nil&&[cell.reuseId isEqualToString:identifier]) {
+            return cell;
+        }
+    }
+    if (identifier) {
+        Class cellClass = [self.clazzes valueForKey:identifier];
+        return [[cellClass alloc]initWithReuseIdentifier:identifier];
+    }
+    
+    return nil;
+}
+
+- (void)registerClass:(Class)cellClass forCellReuseIdentifier:(NSString *)identifier{
+    if (!cellClass||!identifier) {
+        return;
+    }
+    if (![cellClass isSubclassOfClass:[HMPhotoCell class]]) {
+        NSAssert(false, @"must be HMPhotoCell");
+        return;
+    }
+    @synchronized(self.clazzes){
+        [self.clazzes setValue:cellClass forKey:identifier];
+    }
+}
 
 #pragma mark 更新toolbar状态
 - (void)updateTollbarState

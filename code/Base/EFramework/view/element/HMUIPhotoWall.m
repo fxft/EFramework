@@ -149,6 +149,7 @@
     self.floatScreens = nil;
     self.currentCell = nil;
     self.currentFloats = nil;
+    self.perRanks = nil;
     HM_SUPER_DEALLOC();
 }
 
@@ -247,9 +248,9 @@
 /**
  *  获取到屏幕上需要加载的视图
  *
- *  @param offset 视图当前滑动到的偏移
+ *   offset 视图当前滑动到的偏移
  *
- *  @return 需要加载的位置块
+ *   return 需要加载的位置块
  */
 - (NSArray *)firstItemAtOffset:(CGPoint)offset{
     
@@ -331,7 +332,7 @@
             //矫正一下
             BOOL newLine = newPath|item.fullScreen;
             CGFloat maxbottom = self.horizontal?(offset.x+self.frame.size.width):(offset.y+self.frame.size.height);
-            CGRect currentRank = CGRectMake(row%ranks, 0, 0, 0);
+            CGRect currentRank = CGRectMake(row%MAX(ranks, 1), 0, 0, 0);
             //先不记录每组的位置，只记录最后一层的位置
             CGRect templMinMax = [self getMinMax:path pre:prepath newline:newPath unity:newLine maxbottom:maxbottom currentRank:&currentRank];
             CGRect minMax = templMinMax;

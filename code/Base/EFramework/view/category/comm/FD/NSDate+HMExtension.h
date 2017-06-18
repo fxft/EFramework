@@ -33,7 +33,7 @@
 /**
  *  获取今天0点的时间
  *
- *  @return
+ *   return
  */
 + (NSDate *)dateForDawn;
 + (NSTimeInterval)timeIntervalSinceToday;
@@ -45,33 +45,33 @@
 /**
  *  判断是否是同一天
  *
- *  @param date
+ *   date
  *
- *  @return YES 是同一天
+ *   return YES 是同一天
  */
 - (BOOL)isSameDay:(NSDate*)date;
 /**
  *  时间格式化
  *
- *  @param format eg.@"yyyy-MM-dd HH:mm:ss.sss"
+ *   format eg.@"yyyy-MM-dd HH:mm:ss.sss"
  *
- *  @return
+ *   return
  */
 - (NSString *)stringWithDateFormat:(NSString *)format;
 /**
  *  时间格式化
  *
- *  @param format   eg.@"yyyy-MM-dd HH:mm:ss.sss"
- *  @param timezone 时区
+ *   format   eg.@"yyyy-MM-dd HH:mm:ss.sss"
+ *   timezone 时区
  *
- *  @return
+ *   return
  */
 - (NSString *)stringWithDateFormat:(NSString *)format forTimezone:(NSTimeZone*)timezone;
 
 /**
  *  时间表达
  *
- *  @return 刚刚、n分钟前、n小时前、昨天、n个月前、n年前
+ *   return 刚刚、n分钟前、n小时前、昨天、n个月前、n年前
  */
 - (NSString *)timeAgo;
 

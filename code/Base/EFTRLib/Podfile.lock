@@ -10,21 +10,22 @@ PODS:
   - iOS-MagnifyingGlass (0.0.2)
   - JHChainableAnimations (1.3.0)
   - Masonry (1.0.1)
-  - MJRefresh (3.1.10)
+  - MJRefresh (3.1.12)
   - Ono (1.2.2)
+  - pop (1.0.9)
   - Realm (0.102.0):
     - Realm/Headers (= 0.102.0)
   - Realm/Headers (0.102.0)
-  - SDAutoLayout (2.1.3)
+  - SDAutoLayout (2.1.7)
   - SDCycleScrollView (1.64):
     - SDWebImage (~> 3.7)
-  - SDWebImage (3.7.6):
-    - SDWebImage/Core (= 3.7.6)
-  - SDWebImage/Core (3.7.6)
+  - SDWebImage (3.8.2):
+    - SDWebImage/Core (= 3.8.2)
+  - SDWebImage/Core (3.8.2)
   - SocketRocket (0.5.1)
   - SYStickHeaderWaterFall (0.0.2)
   - UITableView+FDTemplateLayoutCell (1.4)
-  - WeexSDK (0.8.0)
+  - wax (1.2.1)
   - ZipArchive (1.4.0)
 
 DEPENDENCIES:
@@ -33,21 +34,22 @@ DEPENDENCIES:
   - iOS-MagnifyingGlass (~> 0.0.2)
   - JHChainableAnimations (~> 1.3.0)
   - Masonry (~> 1.0.1)
-  - MJRefresh (~> 3.1.10)
+  - MJRefresh (~> 3.1.12)
   - Ono (~> 1.2.2)
+  - pop (~> 1.0.9)
   - Realm (<= 0.102.0)
-  - SDAutoLayout (~> 2.1.3)
+  - SDAutoLayout (~> 2.1.7)
   - SDCycleScrollView (~> 1.64)
-  - SDWebImage (~> 3.7.6)
+  - SDWebImage (~> 3.8.1)
   - SocketRocket (~> 0.5.1)
   - SYStickHeaderWaterFall (~> 0.0.2)
   - UITableView+FDTemplateLayoutCell (~> 1.4)
-  - WeexSDK (from `../../../../../../projects/comm/external/weex/sdk`)
+  - wax (from `../../../../../../projects/comm/external/closs/wax/`)
   - ZipArchive (~> 1.4.0)
 
 EXTERNAL SOURCES:
-  WeexSDK:
-    :path: ../../../../../../projects/comm/external/weex/sdk
+  wax:
+    :path: ../../../../../../projects/comm/external/closs/wax/
 
 SPEC CHECKSUMS:
   CocoaAsyncSocket: a18c75dca4b08723628a0bacca6e94803d90be91
@@ -55,18 +57,19 @@ SPEC CHECKSUMS:
   iOS-MagnifyingGlass: b11b7d3e8be7de22c85f0edcaa75538bdf0827dc
   JHChainableAnimations: 22085fcb04ca87349e584573558e637f659fd769
   Masonry: a1a931a0d08870ed8ae415a2ea5ea68ebcac77df
-  MJRefresh: bb72948c985914b0b5cecac573a2c69a8915fb02
+  MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
   Ono: 80b1c686777d3f6d5d5ce6fcac8a74afef4ca197
+  pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
   Realm: 5d219f9037e3ec2019c599b8227bfc95433cb10e
-  SDAutoLayout: ddf39b38dbd793a4802c8feb6429096aea4aa658
+  SDAutoLayout: e9b36d04b8c0b504762a04d76fbbe5108944297a
   SDCycleScrollView: 806fedb9342ab03b58b84442f985517b42c7cbb7
-  SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
+  SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
   SYStickHeaderWaterFall: 6fea7e6705d7b8b1f366912ac5e4e05a1aac7f00
   UITableView+FDTemplateLayoutCell: 234e1582bcc4e18461af91155123bb96538ed030
-  WeexSDK: 1c33583fd85f5448012966f165dbe5e5a56dd38e
+  wax: 85f4b93dbbfa123ee592c458a0ce289d561e4704
   ZipArchive: e25a4373192673e3229ac8d6e9f64a3e5713c966
 
-PODFILE CHECKSUM: e4bab41fe7132b057accd49d8a44893e432e03d9
+PODFILE CHECKSUM: b21bf4156132b331be232579c7c1c9cac8c5dbc6
 
 COCOAPODS: 1.0.0

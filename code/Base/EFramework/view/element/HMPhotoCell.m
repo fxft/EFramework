@@ -176,6 +176,7 @@
     self.showsHorizontalScrollIndicator = NO;
     self.showsVerticalScrollIndicator = NO;
     self.clipsToBounds = YES;
+    _showHighlight = YES;
 }
 
 #pragma mark 调整frame
@@ -268,11 +269,12 @@
     if (self.photo.webUrl) {
         self.imageView.showProgress = YES;
         self.alpha = 1.f;
+        WS(weakSelf)
         [self.imageView setImageWithURLString:self.photo.webUrl placeholderImage:self.defaultImage useCache:YES Success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            
+            SS(strongSelf)
             if (_enableZoom) {
                 
-                [self adjustFrame];
+                [strongSelf adjustFrame];
             }
             
             if (animated) {
@@ -281,9 +283,9 @@
                 basic.toValue = @(1.0f);
                 basic.duration = .15f;
                 basic.removedOnCompletion = YES;
-                [self.imageView.layer addAnimation:basic forKey:@"fadeIn"];
+                [strongSelf.imageView.layer addAnimation:basic forKey:@"fadeIn"];
             }else{
-                [self.imageView.layer removeAnimationForKey:@"fadeIn"];
+                [strongSelf.imageView.layer removeAnimationForKey:@"fadeIn"];
             }
             
             
@@ -465,13 +467,15 @@
         }
         
         if (!_enableZoom) {
-            
-            if ([tt phase] == UITouchPhaseBegan){
-                self.alpha = .6f;
-                
-            }else if (([tt phase] == UITouchPhaseEnded)||([tt phase] == UITouchPhaseCancelled)){
-                self.alpha = 1.f;
+            if (_showHighlight) {
+                if ([tt phase] == UITouchPhaseBegan){
+                    self.alpha = .6f;
+                    
+                }else if (([tt phase] == UITouchPhaseEnded)||([tt phase] == UITouchPhaseCancelled)){
+                    self.alpha = 1.f;
+                }
             }
+            
             
             if ([tt phase] == UITouchPhaseEnded) {
                 
@@ -530,11 +534,12 @@
         }
         return;//处理多点触摸时的纠正中点位置，给捏和旋转提供参考
     }
-    
+    WS(weakSelf)
     [touches enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
+        SS(strongSelf)
         UITouch *touch = (UITouch*)obj;
-        CGPoint touchLocation = [touch locationInView:self];
-        self.touchCenter = CGPointMake(self.touchCenter.x + touchLocation.x, self.touchCenter.y +touchLocation.y);
+        CGPoint touchLocation = [touch locationInView:strongSelf];
+        strongSelf.touchCenter = CGPointMake(strongSelf.touchCenter.x + touchLocation.x, strongSelf.touchCenter.y +touchLocation.y);
         
     }];
     self.touchCenter = CGPointMake(self.touchCenter.x/touches.count, self.touchCenter.y/touches.count);

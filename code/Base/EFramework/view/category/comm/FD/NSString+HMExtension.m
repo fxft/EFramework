@@ -206,7 +206,7 @@
     NSString * MOBILE = @"^1(4[0-9]|3[0-9]|5[0-35-9]|8[0125-9])\\d{8}$";
     NSString * CM = @"^1(34[0-8]|(3[5-9]|5[017-9]|8[278])\\d)\\d{7}$";//移动
     NSString * CU = @"^1(3[0-2]|5[256]|8[56])\\d{8}$";//联通
-    NSString * CT = @"^1((33|53|77|70|8[039])[0-9]|349)\\d{7}$";//电信
+    NSString * CT = @"^1((33|53|77|73|70|8[0139])[0-9]|349)\\d{7}$";//电信
     NSString * PHS = @"^0(10|2[0-5789]|\\d{3})\\d{6,8}$";
     NSString * UNION400 = @"(^\\(?400\\)?-?\\(?\\d{3}\\)?-?\\(?\\d{4}\\)?)|(^100[0-9]{2})";
     NSPredicate *regextestmobile = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", MOBILE];
@@ -393,6 +393,7 @@
 
 + (NSString *)formatVolume:(int64_t)n
 {
+//    return [NSByteCountFormatter stringFromByteCount:n countStyle:NSByteCountFormatterCountStyleFile];
     if ( n < Math_K )
     {
         return [NSString stringWithFormat:@"%lldB", n];
@@ -418,11 +419,11 @@
 /**
  *  替换html中的标签
  *
- *  @param str     需要被替换的字符串
- *  @param tag     替换的标签（span，b，.....）
- *  @param replace 替换成什么
+ *   str     需要被替换的字符串
+ *   tag     替换的标签（span，b，.....）
+ *   replace 替换成什么
  *
- *  @return 去掉标签的字符串
+ *   return 去掉标签的字符串
  */
 - (NSString *)filterHTMLTagReplace:(NSString*)replace
 {

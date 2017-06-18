@@ -60,8 +60,8 @@ typedef void(^PresenterCALLBACK)(Presenter* presenter, NSString* something, NSSt
 /**
  *  输入输出的绑定
  *
- *  @param IO   输入输出的视图对象
- *  @param attribute 对象属性别名
+ *   IO   输入输出的视图对象
+ *   attribute 对象属性别名
  */
 - (void)bindInputOutput:(UIView*)IOput forAttribute:(NSString*)attribute;
 - (void)bindInput:(UIView*)Input forAttribute:(NSString*)attribute;
@@ -71,8 +71,8 @@ typedef void(^PresenterCALLBACK)(Presenter* presenter, NSString* something, NSSt
 /**
  *  绑定试图后告诉适配器填充默认值
  *
- *  @param attributeBinded 需要填充的属性别名
- *  @param something       需要填充的业务名
+ *   attributeBinded 需要填充的属性别名
+ *   something       需要填充的业务名
  */
 - (void)fillThem:(NSArray*)attributeBinded forSomething:(NSString*)something;
 
@@ -80,8 +80,8 @@ typedef void(^PresenterCALLBACK)(Presenter* presenter, NSString* something, NSSt
 /**
  *  校验
  *
- *  @param attributeBinded 需要填充的属性别名
- *  @param something       需要填充的业务名
+ *   attributeBinded 需要填充的属性别名
+ *   something       需要填充的业务名
  */
 - (BOOL)verityThem:(NSArray*)attributeBinded forSomething:(NSString*)something;
 
@@ -89,10 +89,10 @@ typedef void(^PresenterCALLBACK)(Presenter* presenter, NSString* something, NSSt
 /**
  *  能力接口
  *
- *  @param something       双方约定的关键字规则
- *  @param attributeBinded 需要获取数据时告诉我需要使用的IO属性,或者直接传入参数,可为空；需要根据相应的事务进行约定
- *  @param callback        数据返回，过程反馈 请设置delegate
- *  @param return        同步获取时可以马上数据返回
+ *   something       双方约定的关键字规则
+ *   attributeBinded 需要获取数据时告诉我需要使用的IO属性,或者直接传入参数,可为空；需要根据相应的事务进行约定
+ *   callback        数据返回，过程反馈 请设置delegate
+ *   return        同步获取时可以马上数据返回
  */
 
 - (id)doSomething:(NSString*)something attributes:(NSArray*)attributeBinded;
@@ -101,9 +101,9 @@ typedef void(^PresenterCALLBACK)(Presenter* presenter, NSString* something, NSSt
 /**
  *  能力接口
  *
- *  @param something       双方约定的关键字规则
- *  @param attributeBinded 存储的数据
- *  @param return        数据返回
+ *   something       双方约定的关键字规则
+ *   attributeBinded 存储的数据
+ *   return        数据返回
  */
 
 - (void)doStore:(NSString*)something attributes:(id)attributeBinded;

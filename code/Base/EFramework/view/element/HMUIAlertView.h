@@ -44,9 +44,9 @@ NS_CLASS_AVAILABLE_IOS(8_0) @interface HMUIAlertView : UIAlertController
 /**
  *  定时关闭
  *
- *  @param interval 倒计时，单位秒
- *  @param index    默认点击按钮
- *  @param animated     是否在标题动态显示读秒
+ *   interval 倒计时，单位秒
+ *   index    默认点击按钮
+ *   animated     是否在标题动态显示读秒
  */
 - (void)timeoutSec:(NSInteger)interval toClick:(NSInteger)index animated:(BOOL)animated;
 
@@ -78,9 +78,9 @@ typedef void (^Alert7ViewClicked)(HMUIAlert7View *alert,NSInteger index);
 /**
  *  定时关闭
  *
- *  @param interval 倒计时，单位秒
- *  @param index    默认点击按钮
- *  @param animated     是否在标题动态显示读秒
+ *   interval 倒计时，单位秒
+ *   index    默认点击按钮
+ *   animated     是否在标题动态显示读秒
  */
 - (void)timeoutSec:(NSInteger)interval toClick:(NSInteger)index animated:(BOOL)animated;
 
@@ -90,10 +90,10 @@ typedef void (^Alert7ViewClicked)(HMUIAlert7View *alert,NSInteger index);
 /**
  *  兼容版
  *
- *  @param title   标题
- *  @param message 信息
+ *   title   标题
+ *   message 信息
  *
- *  @return 对应的数据对象(8.0:HMUIAlertView，7.0:HMUIAlert7View)
+ *   return 对应的数据对象(8.0:HMUIAlertView，7.0:HMUIAlert7View)
  */
 + (instancetype)alertViewWithTitle:(NSString*)title message:(NSString *)message;
 

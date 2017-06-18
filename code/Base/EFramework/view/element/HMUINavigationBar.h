@@ -36,7 +36,7 @@ AS_NOTIFICATION( STATUS_CHANGED )
 /**
  *  没有什么鸟用
  *
- *  @return
+ *   return
  */
 + (CGSize)buttonSize;
 + (void)setButtonSize:(CGSize)size;
@@ -44,13 +44,13 @@ AS_NOTIFICATION( STATUS_CHANGED )
 + (void)setTitleColor:(UIColor *)color;
 + (void)setTitleFont:(UIFont *)font;
 /*带模糊的背景色*/
-+ (void)setBackgroundColor:(UIColor *)color NS_DEPRECATED_IOS(2_0, 2_0, "使用-[UIViewController setNav****]");
++ (void)setBackgroundColor:(UIColor *)color;
 /*不带模糊的背景色*/
 + (void)setBackgroundOriginalColor:(UIColor *)color NS_DEPRECATED_IOS(2_0, 2_0, "使用-[UIViewController setNav****]");
 /**
  *  64高度
  *
- *  @param image
+ *   image
  */
 + (void)setBackgroundImage:(UIImage *)image NS_DEPRECATED_IOS(2_0, 2_0, "使用-[UIViewController setNav****]");
 + (void)setShadowImage:(UIImage *)image NS_DEPRECATED_IOS(2_0, 2_0, "使用-[UIViewController setNav****]");
@@ -113,6 +113,7 @@ AS_NOTIFICATION( STATUS_CHANGED )
  show title activity action is true start loading,else stop loading.tag is 120120
  */
 - (UIActivityIndicatorView *)showTitleActivity:(BOOL)action;
+- (UIActivityIndicatorView *)showTitleGrayActivity:(BOOL)action;
 /**
  button tagString is "rightBtn"
  */

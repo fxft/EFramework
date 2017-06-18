@@ -327,7 +327,7 @@
 
 @end
 
-@interface HMUIProgressView ()
+@interface HMUIProgressView ()<CAAnimationDelegate>
 
 @property (nonatomic,HM_STRONG) CALayer<ProgressLayerProtocal> *progressLayer;
 
@@ -571,11 +571,14 @@
 }
 
 - (void)hideSelf{
+    WS(weakSelf)
     [UIView animateWithDuration:.25f animations:^{
-        self.alpha=0.f;
+        SS(strongSelf)
+        strongSelf.alpha=0.f;
     } completion:^(BOOL finished) {
-        self.alpha=1.f;
-        self.hidden = YES;
+        SS(strongSelf)
+        strongSelf.alpha=1.f;
+        strongSelf.hidden = YES;
     }];
 }
 

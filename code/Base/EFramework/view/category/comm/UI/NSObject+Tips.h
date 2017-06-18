@@ -61,24 +61,24 @@ typedef NS_ENUM(NSUInteger, TouchRange) {
 /**
  *  支持多种配置
  *
- *  @param string    标题
- *  @param detail    副标题
- *  @param custom    自定义视图
- *  @param mode      详见 MBProgressHUDMode
- *  @param interval  超时时间（-1表示无限时间）
- *  @param touchView 允许点击的位置
+ *   string    标题
+ *   detail    副标题
+ *   custom    自定义视图
+ *   mode      详见 MBProgressHUDMode
+ *   interval  超时时间（-1表示无限时间）
+ *   touchView 允许点击的位置
  *
- *  @return HMMBProgressHUD
+ *   return HMMBProgressHUD
  */
 - (HMMBProgressHUD *)showModeTip:(NSString *)string detail:(NSString*)detail custom:(UIView*)custom mode:(MBProgressHUDMode)mode timeOut:(NSTimeInterval)interval touchView:(UIView *)touchView;
 
 /**
  *  实例化一个HUD，不是共享的
  *
- *  @param animated
- *  @param touchView 可点击区域，可为空
+ *   animated
+ *   touchView 可点击区域，可为空
  *
- *  @return
+ *   return
  */
 - (HMMBProgressHUD *)showHUDViewAnimated:(BOOL)animated touchView:(UIView *)touchView;
 - (HMMBProgressHUD *)hideHUDViewAnimated:(BOOL)animated;

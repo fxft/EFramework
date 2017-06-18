@@ -71,7 +71,7 @@
 /**
  *  前提enableTags 设置为YES
  *
- *  @param format eg:@"INFO",@"TEST"  则只显示INFO TEST
+ *   format eg:@"INFO",@"TEST"  则只显示INFO TEST
  */
 + (void)showCustom:(NSString *)format, ...;
 + (void)showCustomAndSystem:(NSString *)format, ...;//INFO WARN ERROR PROGRESS

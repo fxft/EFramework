@@ -88,7 +88,7 @@ typedef NS_ENUM(NSUInteger, BadgeType) {
 /**
  *  根据view的类名加载xib文件
  *
- *  @return 最后一个
+ *   return 最后一个
  */
 + (instancetype)viewFromXib;
 
@@ -96,22 +96,22 @@ typedef NS_ENUM(NSUInteger, BadgeType) {
 /**
  *  获取view归属的controller
  *
- *  @return 
+ *   return 
  */
 - (UIViewController *)viewController;
 /**
  *  debug模式下 需要显示视图的frame信息，会在视图左上角显示
  *
- *  @param yesOrNo
+ *   yesOrNo
  *
- *  @return 
+ *   return 
  */
 - (UILabel *)showFrameText:(BOOL)yesOrNo;
 /**
  *  在视图中间显示holder
  *
- *  @param holder  需要显示的holder 只需要关心大小
- *  @param yesOrNo 显示或隐藏
+ *   holder  需要显示的holder 只需要关心大小
+ *   yesOrNo 显示或隐藏
  */
 - (void)showHolder:(UIView *)holder show:(BOOL)yesOrNo animated:(BOOL)animated;
 - (void)showHolder:(UIView *)holder show:(BOOL)yesOrNo center:(CGPoint)center animated:(BOOL)animated;

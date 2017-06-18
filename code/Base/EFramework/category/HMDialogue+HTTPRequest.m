@@ -20,6 +20,7 @@
 	}
 	else if ( request.sending )
 	{
+        [self internalNotifyActive];
       if ( request.sendProgressed )
       {
           [self internalNotifyProgressUpdated];
@@ -27,6 +28,7 @@
 	}
 	else if ( request.recving )
 	{
+        [self internalNotifyActive];
       if ( request.recvProgressed )
       {
           [self internalNotifyProgressUpdated];

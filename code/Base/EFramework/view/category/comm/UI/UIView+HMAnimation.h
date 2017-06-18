@@ -24,9 +24,9 @@
 /**
  *  视图晃动
  *
- *  @param durantion
+ *   durantion
  *
- *  @return
+ *   return
  */
 - (CABasicAnimation*)animationShakeDurantion:(CGFloat)durantion;
 /**

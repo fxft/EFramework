@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		047686671E0A74FC0071EB6B /* EncryptionURI.h in Headers */ = {isa = PBXBuildFile; fileRef = 047686651E0A74FC0071EB6B /* EncryptionURI.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		047686681E0A74FC0071EB6B /* EncryptionURI.m in Sources */ = {isa = PBXBuildFile; fileRef = 047686661E0A74FC0071EB6B /* EncryptionURI.m */; };
 		049B62711CE19953002F6DA2 /* HMAutoloader.h in Headers */ = {isa = PBXBuildFile; fileRef = 049B62591CE19953002F6DA2 /* HMAutoloader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		049B62721CE19953002F6DA2 /* HMAutoloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 049B625A1CE19953002F6DA2 /* HMAutoloader.m */; };
 		049B62731CE19953002F6DA2 /* HMDialogue.h in Headers */ = {isa = PBXBuildFile; fileRef = 049B625B1CE19953002F6DA2 /* HMDialogue.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -277,6 +279,8 @@
 
 /* Begin PBXFileReference section */
 		041312421BEC85F00038A49E /* commit.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = commit.sh; sourceTree = "<group>"; };
+		047686651E0A74FC0071EB6B /* EncryptionURI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EncryptionURI.h; sourceTree = "<group>"; };
+		047686661E0A74FC0071EB6B /* EncryptionURI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EncryptionURI.m; sourceTree = "<group>"; };
 		049B62591CE19953002F6DA2 /* HMAutoloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMAutoloader.h; sourceTree = "<group>"; };
 		049B625A1CE19953002F6DA2 /* HMAutoloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMAutoloader.m; sourceTree = "<group>"; };
 		049B625B1CE19953002F6DA2 /* HMDialogue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMDialogue.h; sourceTree = "<group>"; };
@@ -768,6 +772,8 @@
 		04B1C83E1C06C30300D6F7D3 /* FD */ = {
 			isa = PBXGroup;
 			children = (
+				047686651E0A74FC0071EB6B /* EncryptionURI.h */,
+				047686661E0A74FC0071EB6B /* EncryptionURI.m */,
 				04B1C83F1C06C30300D6F7D3 /* CryptLib.h */,
 				04B1C8401C06C30300D6F7D3 /* CryptLib.m */,
 				04B1C8411C06C30300D6F7D3 /* NSArray+HMExtension.h */,
@@ -1189,6 +1195,7 @@
 				04B1C9791C06C30600D6F7D3 /* UIImage+HMExtension.h in Headers */,
 				04B1C9B51C06C30900D6F7D3 /* HMUILinearGradientBorderStyle.h in Headers */,
 				04B1C9811C06C30600D6F7D3 /* UIView+HMExtension.h in Headers */,
+				047686671E0A74FC0071EB6B /* EncryptionURI.h in Headers */,
 				04B1C9071C06C30300D6F7D3 /* NSObject+HMUserDefaults.h in Headers */,
 				04B1CA051C06C30F00D6F7D3 /* HMUITextField.h in Headers */,
 			);
@@ -1388,6 +1395,7 @@
 				04B1C9AC1C06C30800D6F7D3 /* HMUIBoxStyle.m in Sources */,
 				04B1C95E1C06C30500D6F7D3 /* NSData+HMExtension.m in Sources */,
 				04B1C9B21C06C30900D6F7D3 /* HMUIInnerShadowStyle.m in Sources */,
+				047686681E0A74FC0071EB6B /* EncryptionURI.m in Sources */,
 				04B1C99E1C06C30800D6F7D3 /* HMUIRoundedLeftArrowShape.m in Sources */,
 				04B1C9721C06C30600D6F7D3 /* NSObject+Tips.m in Sources */,
 				04B1C9561C06C30500D6F7D3 /* Presenter.m in Sources */,
